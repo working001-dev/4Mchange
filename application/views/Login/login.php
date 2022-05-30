@@ -45,11 +45,36 @@
                 display: flex;
             }
             .block-login button{
+				/* display: flex; */
+				/* align-items: center; */
+				/* justify-content: flex-end;  */
+				/* flex-wrap: nowrap; */
+				width:46px;
+				height: 48px;
                 font-size: 24px;
-                border-radius: 12px;
-                transition: width 1.4s;
+                border-radius: 12px; 
+				text-align:end;
+                transition: width 1.4s, text-align 1s, visibility 1s, opacity 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
             }
-            
+			.block-login button:focus, .block-login button:active, .block-login button:focus:active{
+				outline:none;  
+				width: 150px;
+			}
+            .block-login button:hover{  
+				width: 150px;
+			}
+			.block-login button:hover>span{   
+				opacity: 1;
+			}
+			.block-login button>span{
+				display: block;
+				position: absolute;
+    			left: 3px;
+				font-size: 16px;
+				font-weight: 100; 
+				opacity: 0;
+				transition: opacity 1.2s;
+			}
         </style>
 	</head>
 
@@ -78,7 +103,7 @@
 									<div class="widget-body">
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
-												<i class="ace-icon fa fa-coffee green"></i>
+												<i class="ace-icon fa fa-exclamation-circle green"></i>
 												Please Enter Your Information
 											</h4>
 
@@ -104,8 +129,8 @@
 
 													<div class="block-login clearfix">  
 														<button type="button" class="btn btn-sm btn-primary">
-															<i class="ace-icon fa fa-arrow-circle-right"></i>
-															<!-- <span class="bigger-110">Login</span> -->
+															<span class="">Login</span>
+															<i class="ace-icon fa fa-arrow-circle-right"></i> 
 														</button>
 													</div>
 
