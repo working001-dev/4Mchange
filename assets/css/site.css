@@ -1,0 +1,56 @@
+@font-face {
+    font-family:"AlfaSlabOne-Regular";
+    src: url("../fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf") format("truetype");
+}
+
+.head-project{
+    display: flex;
+    padding: 8px 0;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    font-family: 'AlfaSlabOne-Regular', cursive;
+    position: relative;
+    z-index: 3;
+}
+
+.head-project>span.h-text{
+    font-family: 'AlfaSlabOne-Regular', cursive;
+    display: block;
+    font-size: 48px;
+    padding: 12px 5px 2px;
+    background: #f9f9f9;
+    color: #394557;
+    border: 5px solid #394557;
+    z-index: 1;
+}
+.head-project>span.c-text{
+    padding: 2px 8px;
+    font-size: 24px;
+    background: #f6f6f600;
+    color: #394557;
+    z-index: 1;
+}
+.head-project>span.i-text{
+    font-size: 44px;
+    position: absolute;
+    top: 38px;
+    /* color: #394557; */
+    left: 0px;
+    transform: rotate(0deg);
+    animation-name: example;
+    animation-duration: 1.2s;   
+    animation-fill-mode: both; 
+    opacity: 0;
+}
+/* The animation code */
+@keyframes example {
+    /* from {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;} */
+    /* to {left: 300px; transform: rotate(720deg); opacity: 2; color: #394557;} */
+    0%   {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;}
+    25%  {left: 100px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;}
+    50%  {left: 200px; transform: rotate(360deg); opacity: 0; color:#f6f6f6;}
+    80%  {left: 230px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;}
+    100% {left: 280px; transform: rotate(720deg); opacity: 1; color:#394557;}
+}
+ 
