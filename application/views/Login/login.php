@@ -54,7 +54,7 @@
                 font-size: 24px;
                 border-radius: 12px; 
 				text-align:end;
-                transition: width 1.4s, text-align 1s, visibility 1s, opacity 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+                transition: width 0.6s, text-align 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
             }
 			.block-login button:focus, .block-login button:active, .block-login button:focus:active{
 				outline:none;  
@@ -63,17 +63,27 @@
             .block-login button:hover{  
 				width: 150px;
 			}
-			.block-login button:hover>span{   
+			.block-login button:hover>span,.block-login button:focus>span, .block-login button:active>span, .block-login button:focus:active>span{   
 				opacity: 1;
+				animation-name: loging;
+    			animation-duration: 1.2s; 
 			}
+ 
 			.block-login button>span{
 				display: block;
 				position: absolute;
-    			left: 3px;
+    			top: 8px;
+    			left: 10px;
 				font-size: 16px;
 				font-weight: 100; 
 				opacity: 0;
-				transition: opacity 1.2s;
+				transition: opacity 1s;
+			}
+			.social-or-login:before { 
+				border-top: 1px solid #394557;
+			}
+			.social-or-login :first-child { 
+				color: #394557; 
 			}
         </style>
 	</head>
@@ -98,7 +108,7 @@
 
 							<div class="space-6"></div>
 
-							<div class="position-relative" style="box-shadow: 3px 5px 8px 2px #464646b5;">
+							<div class="position-relative" style="box-shadow: 3px 5px 8px 2px #949292b5;">
 								<div id="login-box" class="login-box visible widget-box no-border">
 									<div class="widget-body">
 										<div class="widget-main">
@@ -181,7 +191,7 @@
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
- 
+			
  
 		</script>
 	</body>

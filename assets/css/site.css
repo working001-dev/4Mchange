@@ -2,26 +2,32 @@
     font-family:"AlfaSlabOne-Regular";
     src: url("../fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf") format("truetype");
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+body{
+    font-family: 'Quicksand', sans-serif;
+}
 .head-project{
     display: flex;
     padding: 8px 0;
     justify-content: flex-start;
     flex-wrap: nowrap;
     align-items: baseline;
-    font-family: 'AlfaSlabOne-Regular', cursive;
+    /* font-family: 'AlfaSlabOne-Regular', cursive; */
+    font-family: 'Quicksand', sans-serif;
     position: relative;
     z-index: 3;
 }
 
 .head-project>span.h-text{
-    font-family: 'AlfaSlabOne-Regular', cursive;
+    /* font-family: 'AlfaSlabOne-Regular', cursive; */
+    font-family: 'Quicksand', sans-serif;
+
     display: block;
-    font-size: 48px;
-    padding: 12px 5px 2px;
+    font-size: 42px;
+    padding: 2px 2px 2px;
     background: #f9f9f9;
     color: #394557;
-    border: 5px solid #394557;
+    border: 3px solid #394557;
     z-index: 1;
 }
 .head-project>span.c-text{
@@ -34,23 +40,33 @@
 .head-project>span.i-text{
     font-size: 44px;
     position: absolute;
-    top: 38px;
+    top: 32px;
     /* color: #394557; */
     left: 0px;
     transform: rotate(0deg);
-    animation-name: example;
+    animation-name: moveCog;
     animation-duration: 1.2s;   
     animation-fill-mode: both; 
     opacity: 0;
 }
 /* The animation code */
-@keyframes example {
+@keyframes moveCog {
     /* from {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;} */
     /* to {left: 300px; transform: rotate(720deg); opacity: 2; color: #394557;} */
     0%   {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;}
-    25%  {left: 100px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;}
-    50%  {left: 200px; transform: rotate(360deg); opacity: 0; color:#f6f6f6;}
-    80%  {left: 230px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;}
-    100% {left: 280px; transform: rotate(720deg); opacity: 1; color:#394557;}
+    25%  {left: 50px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;}
+    50%  {left: 100px; transform: rotate(360deg); opacity: 0; color:#f6f6f6;}
+    80%  {left: 150px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;}
+    100% {left: 200px; transform: rotate(720deg); opacity: 1; color:#394557;}
+}
+
+@keyframes loging {
+    /* from {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;} */
+    /* to {left: 300px; transform: rotate(720deg); opacity: 2; color: #394557;} */
+    0%   {content: "Login.";}
+    /* 25%  {left: 50px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;} */
+    50%  {content: "Login..";}
+    /* 80%  {left: 150px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;} */
+    100% {content: "Login..";}
 }
  
