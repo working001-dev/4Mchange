@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
 		<title>Login Page - Ace Admin</title>
-
+		<link rel="icon" href="<?=base_url()?>assets/images/logo/4mlogo.ico" type="image/ico">
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
@@ -52,21 +52,19 @@
 				width:46px;
 				height: 48px;
                 font-size: 24px;
-                border-radius: 12px; 
+                border-radius: 0px; 
 				text-align:end;
-                transition: width 0.6s, text-align 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+                transition: width 0.8s, text-align 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
             }
 			.block-login button:focus, .block-login button:active, .block-login button:focus:active{
 				outline:none;  
-				width: 150px;
+				width: 100%;
 			}
             .block-login button:hover{  
-				width: 150px;
+				width: 100%;
 			}
 			.block-login button:hover>span,.block-login button:focus>span, .block-login button:active>span, .block-login button:focus:active>span{   
-				opacity: 1;
-				animation-name: loging;
-    			animation-duration: 1.2s; 
+				opacity: 1; 
 			}
  
 			.block-login button>span{
@@ -77,13 +75,27 @@
 				font-size: 16px;
 				font-weight: 100; 
 				opacity: 0;
-				transition: opacity 1s;
+				transition: opacity 0.5s;
 			}
 			.social-or-login:before { 
 				border-top: 1px solid #394557;
 			}
 			.social-or-login :first-child { 
 				color: #394557; 
+			}
+			.loging-btn{
+				width: 100% !important; 
+			}
+			.loging-btn>span{
+				opacity: 1 !important;
+			}
+			.loging-btn>span:after{ 
+				content: ' ';
+				font-family: 'Glyphicons Halflings';
+				animation-name: loging;
+    			animation-duration: 2s; 
+				animation-iteration-count: infinite; 
+				font-size: 10px;
 			}
         </style>
 	</head>
@@ -98,7 +110,7 @@
 								<div class="head-project">
 									<!-- <i class="ace-icon fa fa-leaf green"></i> -->
 									<span class="h-text">4M</span>
-									<span class="c-text" id="id-text2">Application</span>
+									<span class="c-text" id="id-text2">CHANGE CONTROL SYSTEM</span>
                                     <span class="c-text"></span>
                                     <span class="fa fa-cog i-text"></span>
                                     
@@ -138,7 +150,7 @@
 													<div class="space"></div>
 
 													<div class="block-login clearfix">  
-														<button type="button" class="btn btn-sm btn-primary">
+														<button type="button" class="btn btn-sm btn-primary btn-login">
 															<span class="">Login</span>
 															<i class="ace-icon fa fa-arrow-circle-right"></i> 
 														</button>
@@ -188,11 +200,20 @@
 		<script type="text/javascript">
 			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
+			$(document).on("click", ".btn-login", function(){
+				let btn = $(this);
+				let input = $(this).closest("fieldset").find("input");
+				let checkEmpty= input.toArray().filter( f => !$(f).val() ).map( e => { $(e).css({"border": "2px solid red"}); return e });
+				if( !checkEmpty[0] ){
+					$(this).addClass("loging-btn").attr("disabled", "true");
+					$(this).closest("fieldset").find("input").attr("readonly", "true")					
+				}
+
+			})
 			
- 
 		</script>
 	</body>
 </html>

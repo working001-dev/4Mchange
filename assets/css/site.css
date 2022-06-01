@@ -23,7 +23,7 @@ body{
     font-family: 'Quicksand', sans-serif;
 
     display: block;
-    font-size: 42px;
+    font-size: 36px;
     padding: 2px 2px 2px;
     background: #f9f9f9;
     color: #394557;
@@ -32,7 +32,7 @@ body{
 }
 .head-project>span.c-text{
     padding: 2px 8px;
-    font-size: 24px;
+    font-size: 18px;
     background: #f6f6f600;
     color: #394557;
     z-index: 1;
@@ -40,12 +40,12 @@ body{
 .head-project>span.i-text{
     font-size: 44px;
     position: absolute;
-    top: 32px;
+    top: 24px;
     /* color: #394557; */
     left: 0px;
     transform: rotate(0deg);
     animation-name: moveCog;
-    animation-duration: 1.2s;   
+    animation-duration: 2.8s;   
     animation-fill-mode: both; 
     opacity: 0;
 }
@@ -54,19 +54,24 @@ body{
     /* from {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;} */
     /* to {left: 300px; transform: rotate(720deg); opacity: 2; color: #394557;} */
     0%   {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;}
-    25%  {left: 50px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;}
-    50%  {left: 100px; transform: rotate(360deg); opacity: 0; color:#f6f6f6;}
-    80%  {left: 150px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;}
-    100% {left: 200px; transform: rotate(720deg); opacity: 1; color:#394557;}
+    25%  {left: 100px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;}
+    50%  {left: 200px; transform: rotate(360deg); opacity: 0; color:#f6f6f6;}
+    80%  {left: 334px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;}
+    100% {left: 322px; transform: rotate(720deg); opacity: 1; color:#394557;}
 }
 
 @keyframes loging {
-    /* from {left: 0px; transform: rotate(0deg); opacity: 0; color:#f6f6f6;} */
-    /* to {left: 300px; transform: rotate(720deg); opacity: 2; color: #394557;} */
-    0%   {content: "Login.";}
-    /* 25%  {left: 50px; transform: rotate(180deg); opacity: 0; color:#f6f6f6;} */
-    50%  {content: "Login..";}
-    /* 80%  {left: 150px; transform: rotate(560deg); opacity: 0.1; color:#f6f6f6;} */
-    100% {content: "Login..";}
+    /* from {content: ".";}
+    to {content: "..";} */
+    0%   {content: "\e258";}
+    25%  {content: "\e258\e258";}
+    50%  {content: "\e258\e258\e258";}
+    80%  {content: "\e258\e258\e258\e258";}
+    100% {content: "\e258\e258\e258\e258\e258";}
 }
- 
+
+@media only screen and (max-width: 764px) { 
+    body {
+        background-image: linear-gradient(280deg, #fefff6, #fff, #e9f6ff) !important;
+    }    
+}
