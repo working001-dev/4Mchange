@@ -3,36 +3,18 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Login Page - Ace Admin</title>
+		<title>Login Page - 4M Change</title>
 		<link rel="icon" href="<?=base_url()?>assets/images/logo/4mlogo.ico" type="image/ico">
 		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
-
-		<!-- text fonts -->
-		<link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
-
+		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />  
 		<!-- ace styles -->
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" />
-		<![endif]-->
+		<link rel="stylesheet" href="assets/css/ace.min.css" /> 
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
         <link rel="stylesheet" href="assets/css/site.css" />
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-		<!--[if lte IE 8]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+		 
         <style>
             body{
                 background-image: url("<?=base_url()?>assets/images/vector_2620.jpg");
@@ -113,9 +95,7 @@
 									<span class="c-text" id="id-text2">CHANGE CONTROL SYSTEM</span>
                                     <span class="c-text"></span>
                                     <span class="fa fa-cog i-text"></span>
-                                    
-								</h1>
-								
+								</div>
 							</div>
 
 							<div class="space-6"></div>
@@ -135,14 +115,18 @@
 												<fieldset>
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+															<input type="text" class="form-control" placeholder="Username" name="userName"
+															onblur="if($(this).val() != '') $(this).css('border','1px solid #D5D5D5')"
+															/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
 													</label>
 
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="Password" />
+															<input type="password" class="form-control" placeholder="Password" name="passWord"
+															onblur="if($(this).val() != '') $(this).css('border','1px solid #D5D5D5')"
+															/>
 															<i class="ace-icon fa fa-lock"></i>
 														</span>
 													</label>
@@ -188,19 +172,11 @@
 		</div><!-- /.main-container -->
 
 		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
+ 
 		<script src="assets/js/jquery-2.1.4.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-            <script src="assets/js/jquery-1.11.3.min.js"></script>
-        <![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="assets/js/project/site.js"></script>		 
+ 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			$(document).on("click", ".btn-login", function(){
@@ -209,7 +185,11 @@
 				let checkEmpty= input.toArray().filter( f => !$(f).val() ).map( e => { $(e).css({"border": "2px solid red"}); return e });
 				if( !checkEmpty[0] ){
 					$(this).addClass("loging-btn").attr("disabled", "true");
-					$(this).closest("fieldset").find("input").attr("readonly", "true")					
+					$(this).closest("fieldset").find("input").attr("readonly", "true");
+					let $_u = $(this).closest("fieldset").find("input[name=userName]");		
+					let $_p = $(this).closest("fieldset").find("input[name=passWord]");
+				}else{
+					Toast.fire({ icon: 'error', title: 'Please fill out the information completely.' })
 				}
 
 			})
