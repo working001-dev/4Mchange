@@ -8,12 +8,12 @@
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> 
 		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />  
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/font-awesome/4.5.0/css/font-awesome.min.css" />  
 		<!-- ace styles -->
-		<link rel="stylesheet" href="assets/css/ace.min.css" /> 
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-        <link rel="stylesheet" href="assets/css/site.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace.min.css" /> 
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-rtl.min.css" />
+        <link rel="stylesheet" href="<?=base_url()?>assets/css/site.css" />
 		 
         <style>
             body{
@@ -173,9 +173,9 @@
 
 		<!-- basic scripts -->
  
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
+		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="assets/js/project/site.js"></script>		 
+		<script src="<?=base_url()?>assets/js/project/site.js"></script>		 
  
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
@@ -186,8 +186,13 @@
 				if( !checkEmpty[0] ){
 					$(this).addClass("loging-btn").attr("disabled", "true");
 					$(this).closest("fieldset").find("input").attr("readonly", "true");
-					let $_u = $(this).closest("fieldset").find("input[name=userName]");		
-					let $_p = $(this).closest("fieldset").find("input[name=passWord]");
+					let $_u = $(this).closest("fieldset").find("input[name=userName]").val();		
+					let $_p = $(this).closest("fieldset").find("input[name=passWord]").val();
+					setTimeout( function(){
+						$.post( `${_UrlProject}`,{userName:$_u, passWord:$_p},function( data ) {
+							console.log( JSON.parse( data ) );
+						});
+					}, 1500);
 				}else{
 					Toast.fire({ icon: 'error', title: 'Please fill out the information completely.' })
 				}

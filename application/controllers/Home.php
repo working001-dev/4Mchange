@@ -20,6 +20,21 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('login/login');
+		if(!is_null($this->session->user)){
+			$data["content"] = "dashboard/dashboard_view";
+			//$data["styles"]  = "project/home.css";
+			$data["scripts"] = "dashboard/dashboard_script";
+			$this->load->view('home/home_view', $data); 	
+			return;
+		} 
+
+		if(!is_null($this->input->post('userName')) && !is_null($this->input->post('passWord'))){
+			$this->session->user = $this->input->post('userName');
+			//$this->session->pass = $this->input->post('passWord');
+			echo json_encode( array("status" => "200", "message" => "success!") );
+		}else{
+			$this->load->view('login/login');	
+		}
+		
 	}
 }
