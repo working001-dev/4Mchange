@@ -1,5 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
 
@@ -18,8 +17,17 @@ class Home extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
+	public function __construct() {
+        parent::__construct(); 
+		$this->load->model('User_model', "umd");
+		$this->load->helper('sys_helper');
+    }
 	public function index()
 	{
+		
+
+		
+
 		if(!is_null($this->session->user)){
 			$data["content"] = "dashboard/dashboard_view";
 			//$data["styles"]  = "project/home.css";
@@ -29,9 +37,12 @@ class Home extends CI_Controller {
 		} 
 
 		if(!is_null($this->input->post('userName')) && !is_null($this->input->post('passWord'))){
-			$this->session->user = $this->input->post('userName');
-			//$this->session->pass = $this->input->post('passWord');
-			echo json_encode( array("status" => "200", "message" => "success!") );
+			if( !empty($this->umd->getting_login_system())){
+				$this->session->user = $this->input->post('userName');
+				//$this->session->pass = $this->input->post('passWord');
+				echo json_encode( array("status" => "200", "message" => "success!") );				
+			}else echo json_encode( array("status" => "403", "message" => "not permission accress!") );
+
 		}else{
 			$this->load->view('login/login');	
 		}

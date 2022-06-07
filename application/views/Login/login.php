@@ -190,15 +190,21 @@
 					let $_p = $(this).closest("fieldset").find("input[name=passWord]").val();
 					setTimeout( function(){
 						$.post( `${_UrlProject}`,{userName:$_u, passWord:$_p},function( data ) {
-							console.log( JSON.parse( data ) );
+							try{
+								let $_d = JSON.parse(data);
+								if($_d.status == "200"){
+									location.reload();
+								}else Toast.fire({ icon: 'error', title: $_d?.message || "accress fail." });
+							}catch( e ){ Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); }
+						})
+						.fail(function() {
+							Toast.fire({ icon: 'error', title: 'Error request please contact admin.' });
 						});
 					}, 1500);
 				}else{
-					Toast.fire({ icon: 'error', title: 'Please fill out the information completely.' })
-				}
-
-			})
-			
+					Toast.fire({ icon: 'error', title: 'Please fill out the information completely.' });
+				} 
+			}); 
 		</script>
 	</body>
 </html>
