@@ -194,11 +194,15 @@
 								let $_d = JSON.parse(data);
 								if($_d.status == "200"){
 									location.reload();
-								}else Toast.fire({ icon: 'error', title: $_d?.message || "accress fail." });
+								}else{
+									Toast.fire({ icon: 'error', title: $_d?.message || "accress fail." });	
+									btn.removeClass("loging-btn").removeAttr("disabled");
+									btn.closest("fieldset").find("input").removeAttr("readonly");
+								} 
 							}catch( e ){ Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); }
 						})
 						.fail(function() {
-							Toast.fire({ icon: 'error', title: 'Error request please contact admin.' });
+							Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); 
 						});
 					}, 1500);
 				}else{

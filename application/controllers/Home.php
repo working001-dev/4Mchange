@@ -24,10 +24,7 @@ class Home extends CI_Controller {
     }
 	public function index()
 	{
-		
-
-		
-
+		 
 		if(!is_null($this->session->user)){
 			$data["content"] = "dashboard/dashboard_view";
 			//$data["styles"]  = "project/home.css";
