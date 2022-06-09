@@ -11,11 +11,11 @@
             $_u = ($_POST['userName'] ?? ""); // please read the below note
             $_p = md5($_POST['passWord'] ?? "");
 
-            $this->db->select('tbuser_login.userFullName, tbuser_login.userFirstName, tbrole.roleName');
+            $this->db->select('tbuser_login.fullName, tbuser_login.firstName, tbrole.roleName');
             $this->db->from('tbuser_login');
             $this->db->join('tbrole', 'tbuser_login.roleId = tbrole.roleId'); 
-            $this->db->where('userName', $_u);
-            $this->db->where('passWord', $_p);
+            $this->db->where('userLoginName', $_u);
+            $this->db->where('userLoginPass', $_p);
             $query = $this->db->get();
             return $query->result();
         }

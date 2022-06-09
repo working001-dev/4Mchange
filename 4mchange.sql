@@ -234,7 +234,7 @@ CREATE TABLE `tbmenu`
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 
 
-select * from tbuser_login;
+#select * from tbuser_login;
 #select * from tbrole;
 #select * from tbgroup_menu;
 #select * from tbmenu;

@@ -116,7 +116,7 @@
 													<label class="block clearfix">
 														<span class="block input-icon input-icon-right">
 															<input type="text" class="form-control" placeholder="Username" name="userName"
-															onblur="if($(this).val() != '') $(this).css('border','1px solid #D5D5D5')"
+															onblur="if($(this).val() != '') $(this).css('border','1px solid #D5D5D5')" 
 															/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
@@ -209,6 +209,11 @@
 					Toast.fire({ icon: 'error', title: 'Please fill out the information completely.' });
 				} 
 			}); 
+			$(document).on("keypress", ".block.input-icon.input-icon-right input", function(e){
+				switch(e.keyCode){
+					case 13: $(".btn-login").click(); break;
+				}
+			});
 		</script>
 	</body>
 </html>
