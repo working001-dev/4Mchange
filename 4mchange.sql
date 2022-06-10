@@ -274,3 +274,37 @@ values
 ('Monthly', 'changes/report/monthly'),
 ('Case status', 'changes/status'); 
 
+INSERT into tbrole_menu (roleId, groupMenuId, menuId)
+VALUES
+( 1, 1, 1 ),
+( 1, 2, 2 ),
+( 1, 2, 3 ),
+( 1, 3, 4 ),
+( 1, 3, 5 ),
+( 1, 4, 6 ),
+( 1, 5, 7 ),
+( 1, 5, 8 ),
+( 1, 6, 9 ),
+( 1, 6, 10),
+( 1, 7, 11),
+( 1, 7, 12),
+( 1, 7, 13),
+( 1, 7, 14)
+
+select u.fullName, u.userLoginId, u.userLoginName, u.firstName, u.lastName, u.fullName, u.email, u.roleId, r.roleName
+from tbuser_login u
+inner join tbrole r on u.roleId = r.roleId
+where u.userLoginName = 'admins' and u.userLoginPass = '2243044f5454a38b60d9bc9194672803' and u.isActive = 1;
+
+select distinct mr.roleId, r.roleName, g.groupMenuId, g.groupMenuName
+from tbrole_menu mr
+inner join tbrole r on mr.roleId = r.roleId
+inner join tbgroup_menu g on mr.groupMenuId = g.groupMenuId
+where mr.isActive = 1 and mr.roleId = 1;
+
+select mr.roleMenuId, r.roleName, g.groupMenuName, m.menuName, m.menuLink
+from tbrole_menu mr
+inner join tbrole r on mr.roleId = r.roleId
+inner join tbgroup_menu g on mr.groupMenuId = g.groupMenuId
+inner join tbmenu m on mr.menuId = m.menuId
+where mr.isActive = 1 and mr.roleId = 1
