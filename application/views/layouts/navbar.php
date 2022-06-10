@@ -22,7 +22,7 @@
                         <li><a href="#"><i class="ace-icon fa fa-cog"></i>Settings</a></li>
                         <li><a href="profile.html"><i class="ace-icon fa fa-user"></i>Profile</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
+                        <li><a href="<?=base_url()?>home/logout"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
                     </ul>
                 </li>
             </ul>

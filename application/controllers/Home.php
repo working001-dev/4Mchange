@@ -37,13 +37,24 @@ class Home extends CI_Controller {
 			$info = $this->umd->getting_login_system();
 			if( !empty($info)){
 				$this->session->user = $this->input->post('userName');
-				$this->session->info = $info;
-				echo json_encode( array("status" => "200", "message" => "success!", "info"=>$info) );				
+				$this->session->info = array
+				(
+					"info" => $info,
+					"groupMenu" => $this->umd->getting_group_menu($info[0]->roleId),
+					"menu" => $this->umd->getting_menu($info[0]->roleId)
+				);
+				
+				echo json_encode( array("status" => "200", "message" => "success!", "info"=>$this->session->info) );				
 			}else echo json_encode( array("status" => "403", "message" => "not permission accress!") );
 
 		}else{
 			$this->load->view('login/login');	
-		}
-		
+		} 
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/', 'refresh');
 	}
 }

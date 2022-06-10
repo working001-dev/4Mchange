@@ -21,22 +21,38 @@
             return $query->result();
         }
 
-        public function insert_entry()
+        public function getting_group_menu($_roleId)
         {
-                $this->title    = $_POST['title']; // please read the below note
-                $this->content  = $_POST['content'];
-                $this->date     = time();
-
-                $this->db->insert('entries', $this);
+            $this->db->select('distinct mr.roleId, r.roleName, g.groupMenuId, g.groupMenuName');
+            $this->db->from('tbrole_menu mr');
+            $this->db->join('tbrole r', 'mr.roleId = r.roleId');
+            $this->db->join('tbgroup_menu g', 'mr.groupMenuId = g.groupMenuId'); 
+            $this->db->where('mr.userLoginName', $_roleId); 
+            $this->db->where('mr.isActive', 1);
+            $query = $this->db->get();
+            return $query->result();
         }
 
-        public function update_entry()
+        public function getting_menu($_roleId)
         {
-                $this->title    = $_POST['title'];
-                $this->content  = $_POST['content'];
-                $this->date     = time();
+            $this->db->select('mr.roleMenuId, r.roleName, g.groupMenuId, g.groupMenuName, m.menuName, m.menuLink');
+            $this->db->from('tbrole_menu mr');
+            $this->db->join('tbrole r', 'mr.roleId = r.roleId');
+            $this->db->join('tbgroup_menu g', 'mr.groupMenuId = g.groupMenuId');
+            $this->db->join('tbmenu m', 'mr.menuId = m.menuId');  
+            $this->db->where('mr.userLoginName', $_roleId); 
+            $this->db->where('mr.isActive', 1);
+            $query = $this->db->get();
+            return $query->result();
+        }
 
-                $this->db->update('entries', $this, array('id' => $_POST['id']));
-        } 
+        // public function update_entry()
+        // {
+        //         $this->title    = $_POST['title'];
+        //         $this->content  = $_POST['content'];
+        //         $this->date     = time();
+
+        //         $this->db->update('entries', $this, array('id' => $_POST['id']));
+        // } 
     }
 ?>

@@ -193,7 +193,8 @@
 							try{
 								let $_d = JSON.parse(data);
 								if($_d.status == "200"){
-									location.reload();
+									console.log($_d);
+									// location.reload();
 								}else{
 									Toast.fire({ icon: 'error', title: $_d?.message || "accress fail." });	
 									btn.removeClass("loging-btn").removeAttr("disabled");
