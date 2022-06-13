@@ -16,7 +16,7 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-rtl.min.css" /> 
 
-		<link rel="stylesheet" href="<?=base_url()?>assets/css/site.css" />
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/project/site.css" />
 		<!-- <script src="assets/js/ace-extra.min.js"></script>  -->
 	</head>
 
@@ -38,7 +38,7 @@
 							<h1>Dashboard<small><i class="ace-icon fa fa-angle-double-right"></i> overview &amp; stats</small></h1>
 						</div><!-- /.page-header -->
 
-						<div class="row">
+						<div class="section-content">
 							<?php include $contents["content"] ?>
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
@@ -71,7 +71,8 @@
  
 		<script src="<?=base_url()?>assets/js/ace-elements.min.js"></script>
 		<script src="<?=base_url()?>assets/js/ace.min.js"></script>
-		<script src="<?=base_url()?>assets/js/sweetalert2@11.js"></script> 
+		<script src="<?=base_url()?>assets/js/sweetalert2@11.js"></script>
+		<script type="text/javascript">var __u = "<?=base64_encode(base_url())?>";</script> 
 		<script src="<?=base_url()?>assets/js/project/site.js"></script>
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">

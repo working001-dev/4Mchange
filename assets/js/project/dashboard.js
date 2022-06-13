@@ -1,3 +1,4 @@
-$(document).ready(function(){
-  setTimeout( ()=>{Toast.fire({ icon: 'success', title: 'login success!' })}, 2000);
+$(document).ready(async function(){
+  //setTimeout( ()=>{Toast.fire({ icon: 'success', title: 'login success!' })}, 2000);
+  console.log(await MemberInfo());
 });

@@ -93,8 +93,8 @@
 									<!-- <i class="ace-icon fa fa-leaf green"></i> -->
 									<span class="h-text">4M</span>
 									<span class="c-text" id="id-text2">CHANGE CONTROL SYSTEM</span>
-                                    <span class="c-text"></span>
-                                    <span class="fa fa-cog i-text"></span>
+                           <span class="c-text"></span>
+                           <span class="fa fa-cog i-text"></span>
 								</div>
 							</div>
 
@@ -138,19 +138,18 @@
 															<span class="">Login</span>
 															<i class="ace-icon fa fa-arrow-circle-right"></i> 
 														</button>
-													</div>
-
+													</div> 
 													<div class="space-4"></div>
 												</fieldset>
 											</form>
 
 											<div class="social-or-login center">
 												<span class="bigger-110">
-                                                    <i class="glyphicon glyphicon-user"></i>
-                                                    <i class="glyphicon glyphicon-cog"></i>
-                                                    <i class="glyphicon glyphicon-wrench"></i>
-                                                    <i class="glyphicon glyphicon-random"></i>
-                                                </span>
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="glyphicon glyphicon-cog"></i>
+                                    <i class="glyphicon glyphicon-wrench"></i>
+                                    <i class="glyphicon glyphicon-random"></i>
+                                    </span>
 											</div>
 
 											<div class="space-6"></div>
@@ -194,7 +193,11 @@
 								let $_d = JSON.parse(data);
 								if($_d.status == "200"){
 									console.log($_d);
-									// location.reload();
+                           localStorage.setItem("info", JSON.stringify($_d.info["info"]));
+                           localStorage.setItem("groupMenu", JSON.stringify($_d.info["groupMenu"]));
+                           localStorage.setItem("menu", JSON.stringify($_d.info["menu"]));
+                           localStorage.setItem("actived", JSON.stringify($_d.info["menu"][0]));
+									location.reload();
 								}else{
 									Toast.fire({ icon: 'error', title: $_d?.message || "accress fail." });	
 									btn.removeClass("loging-btn").removeAttr("disabled");

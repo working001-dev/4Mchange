@@ -1,10 +1,10 @@
 @font-face {
     font-family:"AlfaSlabOne-Regular";
-    src: url("../fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf") format("truetype");
+    src: url("../../fonts/Alfa_Slab_One/AlfaSlabOne-Regular.ttf") format("truetype");
 }
 @font-face {
     font-family:"Quicksand";
-    src: url("../fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
+    src: url("../../fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
 } 
 body{
     font-family: 'Quicksand', sans-serif;
@@ -90,4 +90,24 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 6px;
     padding-right: 6px;
     padding-top: 3px;
+}
+.section-content{
+    position: relative;
+}
+
+.coming-soon{ 
+    width: 40vw;
+    position: relative; 
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border: 2px solid #2679B5;
+    letter-spacing: 18px;
+}
+.coming-soon::after{
+    content:'COMING SOON'; 
+    font-size: 40px;
+    color: #2679B5;
 }

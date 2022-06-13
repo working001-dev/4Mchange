@@ -1,1 +1,2 @@
-<h2>TEST !</h2>
+
+<span class="coming-soon"></span>

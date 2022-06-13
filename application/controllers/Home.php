@@ -42,8 +42,7 @@ class Home extends CI_Controller {
 					"info" => $info,
 					"groupMenu" => $this->umd->getting_group_menu($info[0]->roleId),
 					"menu" => $this->umd->getting_menu($info[0]->roleId)
-				);
-				
+				); 
 				echo json_encode( array("status" => "200", "message" => "success!", "info"=>$this->session->info) );				
 			}else echo json_encode( array("status" => "403", "message" => "not permission accress!") );
 
@@ -56,5 +55,10 @@ class Home extends CI_Controller {
 	{
 		$this->session->sess_destroy();
 		redirect('/', 'refresh');
+	}
+
+	public function infoMember()
+	{
+		echo json_encode($this->session->info);
 	}
 }
