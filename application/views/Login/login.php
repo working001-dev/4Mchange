@@ -13,7 +13,7 @@
 		<!-- ace styles -->
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace.min.css" /> 
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-rtl.min.css" />
-        <link rel="stylesheet" href="<?=base_url()?>assets/css/site.css" />
+        <link rel="stylesheet" href="<?=base_url()?>assets/css/project/site.css" />
 		 
         <style>
             body{

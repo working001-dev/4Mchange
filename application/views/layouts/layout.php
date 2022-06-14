@@ -17,6 +17,7 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-rtl.min.css" /> 
 
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/project/site.css" />
+		<link style-section />
 		<!-- <script src="assets/js/ace-extra.min.js"></script>  -->
 	</head>
 
@@ -25,24 +26,7 @@
 		<div class="main-container ace-save-state" id="main-container">  
             <?php include dirname(__FILE__).'/sidebar.php' ?>  
 			<div class="main-content">
-				<div class="main-content-inner">
-					<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-						<ul class="breadcrumb">
-							<li><i class="ace-icon fa fa-home home-icon"></i><a href="#">Home</a></li>
-							<li class="active">Dashboard</li>
-						</ul><!-- /.breadcrumb --> 
-					</div>
-
-					<div class="page-content">  
-						<div class="page-header">
-							<h1>Dashboard<small><i class="ace-icon fa fa-angle-double-right"></i> overview &amp; stats</small></h1>
-						</div><!-- /.page-header -->
-
-						<div class="section-content">
-							<?php include $contents["content"] ?>
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div>
+				<?php include $contents["content"] ?> 
 			</div><!-- /.main-content -->
 
 			<div class="footer">
@@ -75,9 +59,11 @@
 		<script type="text/javascript">var __u = "<?=base64_encode(base_url())?>";</script> 
 		<script src="<?=base_url()?>assets/js/project/site.js"></script>
 		<!-- inline scripts related to this page -->
+		<script script-section></script>
 		<script type="text/javascript">
  
 		</script>  
+
 		<?php include $contents["scripts"] ?>	 
 		
 	</body>

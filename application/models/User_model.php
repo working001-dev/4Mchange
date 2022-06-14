@@ -36,7 +36,7 @@
 
         public function getting_menu($_roleId)
         {
-            $this->db->select('mr.roleMenuId, r.roleName, g.groupMenuId, g.groupMenuName, m.menuId, m.menuName, m.menuLink');
+            $this->db->select('mr.roleMenuId, r.roleName, g.groupMenuId, g.groupMenuName, g.icon, m.menuId, m.menuName, m.menuLink, m.menuDescription');
             $this->db->from('tbrole_menu mr');
             $this->db->join('tbrole r', 'mr.roleId = r.roleId');
             $this->db->join('tbgroup_menu g', 'mr.groupMenuId = g.groupMenuId');
