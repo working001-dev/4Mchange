@@ -308,3 +308,15 @@ inner join tbrole r on mr.roleId = r.roleId
 inner join tbgroup_menu g on mr.groupMenuId = g.groupMenuId
 inner join tbmenu m on mr.menuId = m.menuId
 where mr.isActive = 1 and mr.roleId = 1
+
+
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'overview & status' WHERE (`menuId` = '1');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'add new user' WHERE (`menuId` = '2');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'manage user on system' WHERE (`menuId` = '3');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'manage permission user' WHERE (`menuId` = '4');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'manage permission for group' WHERE (`menuId` = '5');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'change password' WHERE (`menuId` = '7');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'edit user data' WHERE (`menuId` = '8');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'report for weekly' WHERE (`menuId` = '12');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'report for monthly' WHERE (`menuId` = '13');
+UPDATE `4mchange`.`tbmenu` SET `menuDescription` = 'monitor status 4m change case' WHERE (`menuId` = '14');

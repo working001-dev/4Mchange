@@ -14,7 +14,8 @@ var _UrlProject = typeof __u ? `${window.location.origin}/${window.location.path
 var MemberInfo = JSON.parse(localStorage?.info || "{}");
 var GroupMenu = JSON.parse(localStorage?.groupMenu || "{}");
 var Menu = JSON.parse(localStorage?.menu || "{}");
-var ActivedMenu  = JSON.parse(localStorage?.actived || "{}");
+var ActivedMenu = JSON.parse(localStorage?.actived || "{}");
+var LoadingPage = $(".main-content-load"); 
 var setGroupMenu = (g, active) => (
   `<li class="${active}" id="g___${g.groupMenuId}">
     <a href="#" class="dropdown-toggle">
@@ -63,7 +64,7 @@ var GenarateBodypage = async (u) =>{
   let _b = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"body"});
   let _s = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"script"});
   let _c = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"style"});
-  $("#main-container .main-content").html(_b); 
+  $("#main-container .main-content .main-content-inner").html(_b); 
   $("link[style-section]~style").toArray().forEach( f =>{ f.remove() } );
   $("link[style-section]~link").toArray().forEach( f =>{ f.remove() } );
   $("script[script-section]~script").toArray().forEach( f =>{ f.remove() } );
@@ -79,31 +80,33 @@ var PostRequest = async (u, s) => {
 
 
 
-$(document).on("click", "#sidebar-4m .nav.nav-list a", function(event){
+$(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
   event.preventDefault();
   // debugger;
   let alink = $(this);
   let parentList = $(this).closest('li');
   if( !(ActivedMenu?.roleMenuId == parentList.attr('roleMenuId')) ){
+    LoadingPage.show();
+    $("#sidebar-4m li").removeClass("active");
+    $(`#g___${ActivedMenu?.roleMenuId}>a`).click();
+    $(`#g___${parentList.attr('roleMenuId')}`).addClass("open active");
+    parentList.addClass("active");
+
     let _menuClick = Menu.filter( f => f.roleMenuId == parentList.attr('roleMenuId') );
     localStorage.setItem("actived", JSON.stringify(_menuClick[0]));
     ActivedMenu  = JSON.parse(localStorage?.actived || "{}");
-    $("#sidebar-4m li").removeClass("active");
-    $(`#g___${ActivedMenu?.roleMenuId}`).removeClass("open").removeClass("active");;
-    $(`#g___${parentList.attr('roleMenuId')}`).addClass("active");
-    parentList.addClass("active");
-    GenarateBodypage(ActivedMenu);
+    await GenarateBodypage(ActivedMenu);
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
-    
+    setTimeout( ()=>LoadingPage.hide(330), 2000);
   }else return false;
 })
-window.onload = function(){
+window.onload = async function(){
   GenarateMenu();
-  GenarateBodypage(ActivedMenu);
+  await GenarateBodypage(ActivedMenu);
   GenarateHeadTitle(ActivedMenu);
   GenarateHeadPage(ActivedMenu); 
-  
+  setTimeout( ()=>LoadingPage.hide(330), 2000);
 }
 
 

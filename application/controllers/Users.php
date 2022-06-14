@@ -32,16 +32,22 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body" :
-					$this->load->view('users/add/add_view');	
-					break;
-				case "script" :
-					$this->load->view('users/add/add_script');
-					break;
+				case "body" : $this->load->view('users/add/add_view'); break;
+				case "script" : $this->load->view('users/add/add_script'); break;
+				case "script" : $this->load->view('users/add/add_style'); break;
 			}
 		} 
 	}
-
+	public function manage()
+	{
+		if( !is_null($this->input->post('content')) ){
+			switch($this->input->post('content')){
+				case "body" : $this->load->view('users/manage/manage_view'); break;
+				case "script" : $this->load->view('users/manage/manage_script'); break;
+				case "script" : $this->load->view('users/manage/manage_style'); break;
+			}
+		} 
+	}
 	public function infoMember()
 	{
 		echo json_encode($this->session->info);

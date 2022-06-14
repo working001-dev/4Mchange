@@ -26,10 +26,10 @@ class Home extends CI_Controller {
 	{
 		 
 		if(!is_null($this->session->user)){
-			$data["content"] = "dashboard/dashboard_view";
-			//$data["styles"]  = "project/home.css";
-			$data["scripts"] = "dashboard/dashboard_script";
-			$this->load->view('home/home_view', $data); 	
+			$data["content"] = "home/home_view";
+			$data["styles"]  = "home/home_style.css";
+			$data["scripts"] = "home/home_script";
+			$this->load->view('home/home_views', $data); 	
 			return;
 		} 
 
