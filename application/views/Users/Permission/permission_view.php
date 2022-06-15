@@ -6,6 +6,6 @@
     <div class="page-header"> 
     </div><!-- /.page-header -->
     <div class="section-content">
-        <span class="coming-soon">Add user</span>
+        <span class="coming-soon">Permission user</span>
     </div><!-- /.row -->
 </div><!-- /.page-content -->

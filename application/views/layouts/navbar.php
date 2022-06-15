@@ -7,14 +7,14 @@
             <span class="icon-bar"></span>
         </button>
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand"><small><i class="fa fa-leaf"></i>Ace Admin</small></a>
+            <a href="#" class="navbar-brand"><small>4M Change Control</small></a>
         </div>
 
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
             <ul class="nav ace-nav">
                 <li class="light-blue dropdown-modal">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="assets/images/avatars/user.jpg" alt="Jason's Photo" />
+                        <img class="nav-user-photo" src="assets/images/avatars/admin.png" alt="Jason's Photo" style="width:36x;  height: 36px; "/>
                         <span class="user-info"><small>Welcome,</small>Jason</span>
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a> 

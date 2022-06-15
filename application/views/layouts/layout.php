@@ -4,7 +4,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
 		
-		<title>4M Change</title>
+		<title>Change Control</title>
 
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -30,19 +30,20 @@
 					<?php include $contents["content"] ?>
 				</div> 
 			</div><!-- /.main-content -->
-			<div class="main-content-load"><span class="wait-load-page"></span></div>
+			<div class="main-content-load" data-text="WAITING LOADING PAGE"><span class="wait-load-page"></span></div>
 			<div class="footer">
 				<div class="footer-inner">
 					<div class="footer-content">
 						<span class="bigger-120">
-							<span class="blue bolder">Ace</span>
-							Application &copy; 2013-2014
+							<span class="blue bolder">4M</span>
+							Change Control &copy; 2022
 						</span> 
 						&nbsp; &nbsp;
 						<span class="action-buttons">
-							<a href="#"> <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i></a> 
-							<a href="#"><i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i></a> 
-							<a href="#"><i class="ace-icon fa fa-rss-square orange bigger-150"></i></a>
+							<a href="#"> <i class="ace-icon glyphicon glyphicon-user light-blue bigger-90"></i></a> 
+							<a href="#"><i class="ace-icon glyphicon glyphicon-cog text-primary bigger-90"></i></a> 
+							<a href="#"><i class="ace-icon glyphicon glyphicon-wrench orange bigger-90"></i></a>
+							<a href="#"><i class="ace-icon glyphicon glyphicon-random red bigger-90"></i></a>
 						</span>
 					</div>
 				</div>

@@ -6,6 +6,6 @@
     <div class="page-header"> 
     </div><!-- /.page-header -->
     <div class="section-content">
-        <span class="coming-soon">Manage user</span>
+        <span class="coming-soon">Group user</span>
     </div><!-- /.row -->
 </div><!-- /.page-content -->

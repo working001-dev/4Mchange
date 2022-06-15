@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, h6 {
     background: #f6f6f600;
     color: #394557;
     z-index: 1;
+    letter-spacing: 1px;
 }
 .head-project>span.i-text{
     font-size: 44px;
@@ -54,6 +55,11 @@ h1, h2, h3, h4, h5, h6 {
     animation-duration: 2.8s;   
     animation-fill-mode: both; 
     opacity: 0;
+}
+.navbar-brand>small{
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-shadow: 2px 0px 5px black;
 }
 /* The animation code */
 @keyframes moveCog {
@@ -97,6 +103,8 @@ h1, h2, h3, h4, h5, h6 {
     .main-content-load>span.wait-load-page::after{ 
         max-width: 380px;
     }
+    .coming-soon{ width: 90vw !important; font-size: 10px;}
+    .coming-soon::before{ font-size: 14px !important; }
 }
 
 .main-content{
@@ -126,14 +134,27 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     flex-direction: column; 
-    top: 15vh;
+    top: 21vh;
     left: 30vw;
+}
+.main-content-load>span.wait-load-page.page-error{
+    border: 2px solid #d82323;
 }
 .main-content-load>span.wait-load-page::before{
     content:'WAITING LOADING PAGE'; 
     color: #2679B5;
     display: inline-block;
     width: 100%;
+}
+.main-content-load>span.wait-load-page.page-error{
+    border: 2px solid #d82323 !important;
+}
+.main-content-load>span.wait-load-page.page-error::before{
+    content:'ERROR LOADING PAGE';
+    color: #d82323;
+}
+.main-content-load>span.wait-load-page.page-error::after{
+    animation:unset !important;
 }
 .main-content-load>span.wait-load-page::after{ 
     content:' ';  
@@ -147,6 +168,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 0px;
     transition: all 0.4s ease-in-out;
 }
+.menu-text{letter-spacing: 2px;}
 .no-skin .nav-list>li.active:after { 
     right: -1px;
     top: 0px; 

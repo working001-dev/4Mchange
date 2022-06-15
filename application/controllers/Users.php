@@ -42,9 +42,59 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body" : $this->load->view('users/manage/manage_view'); break;
+				case "body"   : $this->load->view('users/manage/manage_view'); break;
 				case "script" : $this->load->view('users/manage/manage_script'); break;
 				case "script" : $this->load->view('users/manage/manage_style'); break;
+			}
+		} 
+	}
+	public function permission()
+	{
+		if( !is_null($this->input->post('content')) ){
+			switch($this->input->post('content')){
+				case "body"   : $this->load->view('users/permission/permission_view'); break;
+				case "script" : $this->load->view('users/permission/permission_script'); break;
+				case "script" : $this->load->view('users/permission/permission_style'); break;
+			}
+		} 
+	}
+	public function permissiongroup()
+	{
+		if( !is_null($this->input->post('content')) ){
+			switch($this->input->post('content')){
+				case "body"   : $this->load->view('users/permissiongroup/permissiongroup_view'); break;
+				case "script" : $this->load->view('users/permissiongroup/permissiongroup_script'); break;
+				case "script" : $this->load->view('users/permissiongroup/permissiongroup_style'); break;
+			}
+		} 
+	}
+	public function group()
+	{
+		if( !is_null($this->input->post('content')) ){
+			switch($this->input->post('content')){
+				case "body"   : $this->load->view('users/group/group_view'); break;
+				case "script" : $this->load->view('users/group/group_script'); break;
+				case "script" : $this->load->view('users/group/group_style'); break;
+			}
+		} 
+	}
+	public function changepass()
+	{
+		if( !is_null($this->input->post('content')) ){
+			switch($this->input->post('content')){
+				case "body"   : $this->load->view('users/changepass/changepass_view'); break;
+				case "script" : $this->load->view('users/changepass/changepass_script'); break;
+				case "script" : $this->load->view('users/changepass/changepass_style'); break;
+			}
+		} 
+	}
+	public function edit()
+	{
+		if( !is_null($this->input->post('content')) ){
+			switch($this->input->post('content')){
+				case "body"   : $this->load->view('users/edit/edit_view'); break;
+				case "script" : $this->load->view('users/edit/edit_script'); break;
+				case "script" : $this->load->view('users/edit/edit_style'); break;
 			}
 		} 
 	}

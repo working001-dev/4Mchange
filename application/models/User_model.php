@@ -11,7 +11,7 @@
             $_u = ($_POST['userName'] ?? ""); // please read the below note
             $_p = md5($_POST['passWord'] ?? "");
 
-            $this->db->select('u.fullName, u.userLoginId, u.userLoginName, u.firstName, u.lastName, u.fullName, u.email, u.roleId, r.roleName');
+            $this->db->select('u.fullName, u.userLoginId, u.userLoginName, u.firstName, u.lastName, u.fullName, u.email, u.roleId, r.roleName, u.userImg');
             $this->db->from('tbuser_login u');
             $this->db->join('tbrole r', 'u.roleId = r.roleId'); 
             $this->db->where('u.userLoginName', $_u);

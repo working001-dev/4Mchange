@@ -28,7 +28,7 @@ var setGroupMenu = (g, active) => (
 );
 
 var setMenu = (m, active) => (
-  `<li class="${active}" roleMenuId=${m.roleMenuId}>
+  `<li class="${active}" groupMenuId=${m.groupMenuId} roleMenuId=${m.roleMenuId} >
       <a href="${_UrlProject}${m.menuLink}">
           <i class="menu-icon fa fa-caret-right"></i>
           ${m.menuName}
@@ -36,6 +36,11 @@ var setMenu = (m, active) => (
       <b class="arrow"></b>
   </li>`
 ); 
+
+var GeneateNavUserInfo = () => {
+  $(".user-info").html(`<small>Welcome,</small>${MemberInfo[0]?.firstName}`);
+  $(".nav-user-photo").attr("src", `${_UrlProject}assets/images/avatars/${MemberInfo[0]?.userImg}.png`);
+}; 
 var GenarateMenu = () => {
   let $_sidebar = $("#sidebar-4m .nav.nav-list");
   $_sidebar.html('');
@@ -75,6 +80,7 @@ var PostRequest = async (u, s) => {
   return await $.post( u, s )
   .fail(function() {
     Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); 
+    LoadingPage.find(".wait-load-page").addClass("page-error")
   });
 };
 
@@ -86,16 +92,17 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
   let alink = $(this);
   let parentList = $(this).closest('li');
   if( !(ActivedMenu?.roleMenuId == parentList.attr('roleMenuId')) ){
-    LoadingPage.show();
+    LoadingPage.show(0, ()=>{LoadingPage.find(".wait-load-page").removeClass("page-error")});
     $("#sidebar-4m li").removeClass("active");
-    $(`#g___${ActivedMenu?.roleMenuId}>a`).click();
-    $(`#g___${parentList.attr('roleMenuId')}`).addClass("open active");
+    if(parentList.attr('groupMenuId') != ActivedMenu?.groupMenuId ) $(`#g___${ActivedMenu?.groupMenuId}>a`).click();
+    $(`#g___${parentList.attr('groupMenuId')}`).addClass("open active");
     parentList.addClass("active");
 
     let _menuClick = Menu.filter( f => f.roleMenuId == parentList.attr('roleMenuId') );
     localStorage.setItem("actived", JSON.stringify(_menuClick[0]));
     ActivedMenu  = JSON.parse(localStorage?.actived || "{}");
     await GenarateBodypage(ActivedMenu);
+    //GeneateNavUserInfo();
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
     setTimeout( ()=>LoadingPage.hide(330), 2000);
@@ -104,6 +111,7 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
 window.onload = async function(){
   GenarateMenu();
   await GenarateBodypage(ActivedMenu);
+  GeneateNavUserInfo();
   GenarateHeadTitle(ActivedMenu);
   GenarateHeadPage(ActivedMenu); 
   setTimeout( ()=>LoadingPage.hide(330), 2000);
