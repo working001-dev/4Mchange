@@ -105,7 +105,7 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
     //GeneateNavUserInfo();
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
-    setTimeout( ()=>LoadingPage.hide(330), 2000);
+    setTimeout( ()=>LoadingPage.hide(280), 2000);
   }else return false;
 })
 window.onload = async function(){
@@ -114,7 +114,7 @@ window.onload = async function(){
   GeneateNavUserInfo();
   GenarateHeadTitle(ActivedMenu);
   GenarateHeadPage(ActivedMenu); 
-  setTimeout( ()=>LoadingPage.hide(330), 2000);
+  setTimeout( ()=>LoadingPage.hide(280), 2000);
 }
 
 
