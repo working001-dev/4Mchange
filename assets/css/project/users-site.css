@@ -24,5 +24,18 @@
 .u-content{
     display: flex;
     position: relative;
-    height: 25vh;
+    height: calc(26vh - 2px);
+    padding-top: calc(4vh - 5px);
+}
+.u-box{
+    display: flex;
+    min-height: 10vh;
+    width: 100%;
+    background: blanchedalmond;
+}
+.u-sticky{
+    position: sticky;
+    bottom: 0px;
+    /* background: white; */
+    margin: 9px 0px 0px 0px;
 }

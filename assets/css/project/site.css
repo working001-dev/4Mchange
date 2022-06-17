@@ -215,10 +215,40 @@ h1, h2, h3, h4, h5, h6 {
     padding-right: 6px;
     padding-top: 3px;
 }
-.section-content{
-    position: relative;
+.page-content {
     max-height: 80vh;
     overflow: auto;
+    min-height: 80vh;
+}
+.page-content {
+    background-color: #FFF;
+    position: relative;
+    margin: 0;
+    padding: 8px 20px 0px;
+}
+.widget-box { 
+    margin-bottom: 0px !important;
+}
+.widget-main {
+    padding: 12px 12px 0px 12px;
+}
+.footer {
+    padding-top: 0px !important;
+    height: 0;
+    width: 0;
+}
+.footer .footer-inner .footer-content {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 4px;
+    padding: 0px 8px 8px 8px;
+    line-height: 36px;
+    border-top: 2px double #E5E5E5;
+}
+.section-content{
+    position: relative;
+
 }
 
 .coming-soon{ 

@@ -42,8 +42,8 @@
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <div>
-
+                                <div class="u-content">
+                                    <div class="u-box"></div>
                                 </div>                                  
                             </div>
 
@@ -80,15 +80,15 @@
                                     </span>
                                 </label>                                   
                             </div>
-							<div class="space-24"></div>
+							<!-- <div class="space-24"></div> -->
 
-							<div class="clearfix">
-								<button type="reset" class="width-30 pull-left btn btn-sm">
+							<div class="u-sticky col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<button type="reset" class="width-45 pull-left btn btn-sm" style="background: #333;">
 									<i class="ace-icon fa fa-refresh"></i>
 									<span class="bigger-110">Reset</span>
 								</button>
 
-								<button type="button" class="width-65 pull-right btn btn-sm btn-success">
+								<button type="button" class="width-45 pull-right btn btn-sm btn-success" style="background: green;">
 									<span class="bigger-110">Register</span>
 
 									<i class="ace-icon fa fa-arrow-right icon-on-right"></i>

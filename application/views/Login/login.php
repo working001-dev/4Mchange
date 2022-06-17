@@ -245,6 +245,8 @@
 									icon: 'error',
 									title: 'Error request please contact admin.'
 								});
+								btn.removeClass("loging-btn").removeAttr("disabled");
+								btn.closest("fieldset").find("input").removeAttr("readonly");
 							}
 						})
 						.fail(function() {
@@ -252,6 +254,8 @@
 								icon: 'error',
 								title: 'Error request please contact admin.'
 							});
+							btn.removeClass("loging-btn").removeAttr("disabled");
+							btn.closest("fieldset").find("input").removeAttr("readonly");
 						});
 				}, 1500);
 			} else {
@@ -259,6 +263,8 @@
 					icon: 'error',
 					title: 'Please fill out the information completely.'
 				});
+				btn.removeClass("loging-btn").removeAttr("disabled");
+				btn.closest("fieldset").find("input").removeAttr("readonly");
 			}
 		});
 		$(document).on("keypress", ".block.input-icon.input-icon-right input", function(e) {
