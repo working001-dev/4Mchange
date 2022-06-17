@@ -8,10 +8,31 @@
 } 
 body{
     font-family: 'Quicksand', sans-serif;
+    overflow: hidden !important;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: "Quicksand",sans-serif;
 }
+
+/* [class*=col] [class*=col]:last-child{
+    padding-right: 0 !important; 
+} */
+.flex{
+    display: flex;
+}
+.btn-selected{ 
+    -webkit-box-shadow: inset 1px 1px 10px #545353b5  !important;;
+    -moz-box-shadow:    inset 1px 1px 10px #545353b5  !important;;
+    box-shadow:         inset 1px 1px 10px #545353b5  !important;;
+    background: #3f97e4 !important;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+    outline: none !important;
+}
+.clearfix>label{
+    font-size: 10px;
+}
+.header{ margin-top: 0px !important;}
 .head-project{
     display: flex;
     padding: 8px 0;
@@ -60,6 +81,21 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 1px;
     font-weight: 500;
     text-shadow: 2px 0px 5px black;
+}
+@media (min-width: 1200px){
+    label[class*=col]{
+        padding-left: 0 !important;
+    }
+}
+@media (min-width: 992px) and (max-width: 1200px){
+    label[class*=col]{
+        padding: 0 !important;
+    } 
+}
+@media (max-width: 992px){
+    label[class*=col]{
+        padding: 0 !important;
+    } 
 }
 /* The animation code */
 @keyframes moveCog {
@@ -121,6 +157,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    overflow: visible !important;
 }
 .main-content-load>span.wait-load-page{
     width: 50vw;
@@ -180,6 +217,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .section-content{
     position: relative;
+    max-height: 80vh;
+    overflow: auto;
 }
 
 .coming-soon{ 

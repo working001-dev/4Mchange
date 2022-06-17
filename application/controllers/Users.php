@@ -34,7 +34,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body" : $this->load->view('users/add/add_view'); break;
 				case "script" : $this->load->view('users/add/add_script'); break;
-				case "script" : $this->load->view('users/add/add_style'); break;
+				case "style" : $this->load->view('users/add/add_style'); break;
 			}
 		} 
 	}
@@ -44,7 +44,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body"   : $this->load->view('users/manage/manage_view'); break;
 				case "script" : $this->load->view('users/manage/manage_script'); break;
-				case "script" : $this->load->view('users/manage/manage_style'); break;
+				case "style" : $this->load->view('users/manage/manage_style'); break;
 			}
 		} 
 	}
@@ -54,7 +54,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body"   : $this->load->view('users/permission/permission_view'); break;
 				case "script" : $this->load->view('users/permission/permission_script'); break;
-				case "script" : $this->load->view('users/permission/permission_style'); break;
+				case "style" : $this->load->view('users/permission/permission_style'); break;
 			}
 		} 
 	}
@@ -64,7 +64,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body"   : $this->load->view('users/permissiongroup/permissiongroup_view'); break;
 				case "script" : $this->load->view('users/permissiongroup/permissiongroup_script'); break;
-				case "script" : $this->load->view('users/permissiongroup/permissiongroup_style'); break;
+				case "style" : $this->load->view('users/permissiongroup/permissiongroup_style'); break;
 			}
 		} 
 	}

@@ -1,0 +1,28 @@
+.i-show-gender{
+    font-size: 26px;
+    padding: 4px 20px 4px 50px;
+    font-weight: 800;
+    max-width: 90px;
+}
+.btn-switch{
+    border: none;
+    color: white !important;
+    max-width: 140px;
+}
+.btn-switch[value="Male"]{
+    background: rgb(75, 119, 228) !important;
+}
+.btn-switch[value="Female"]{
+    background: rgb(219, 76, 205) !important;
+}
+.form-control:focus.btn {
+    color: #696969;
+    border-color: #e1dfde;
+    background-color: #FFF;
+    outline: 0;
+}
+.u-content{
+    display: flex;
+    position: relative;
+    height: 25vh;
+}

@@ -92,7 +92,7 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
   let alink = $(this);
   let parentList = $(this).closest('li');
   if( !(ActivedMenu?.roleMenuId == parentList.attr('roleMenuId')) ){
-    LoadingPage.show(0, ()=>{LoadingPage.find(".wait-load-page").removeClass("page-error")});
+    LoadingPage.show(10, ()=>{LoadingPage.find(".wait-load-page").removeClass("page-error")});
     $("#sidebar-4m li").removeClass("active");
     if(parentList.attr('groupMenuId') != ActivedMenu?.groupMenuId ) $(`#g___${ActivedMenu?.groupMenuId}>a`).click();
     $(`#g___${parentList.attr('groupMenuId')}`).addClass("open active");
