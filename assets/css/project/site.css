@@ -24,13 +24,19 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-box-shadow: inset 1px 1px 10px #545353b5  !important;;
     -moz-box-shadow:    inset 1px 1px 10px #545353b5  !important;;
     box-shadow:         inset 1px 1px 10px #545353b5  !important;;
-    background: #3f97e4 !important;
+    /* background: #3f97e4 !important; */
 }
-.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+.btn-unselected{ 
+    background: rgb(206, 205, 205) !important;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus,.bootstrap-select .dropdown-toggle:focus{
     outline: none !important;
 }
 .clearfix>label{
     font-size: 10px;
+}
+.clearfix>button[data-toggle="dropdown"]{
+    height: 24px;
 }
 .header{ margin-top: 0px !important;}
 .head-project{
@@ -82,8 +88,46 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
     text-shadow: 2px 0px 5px black;
 }
+button[data-toggle="dropdown"]{
+    border-radius: 0!important;
+    color: #858585 !important;
+    background-color: #FFF !important;
+    border: 1px solid #D5D5D5 !important;
+    padding: 5px 4px 6px;
+    font-size: 14px;
+    font-family: inherit;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    -webkit-transition-duration: .1s;
+    transition-duration: .1s;
+    text-shadow: none !important;
+}
+.open>.btn-default.dropdown-toggle, .open>.btn-default.dropdown-toggle{
+    background-color: #FFF !important;
+    border-color: #ABBAC3 !important    ;    
+}
+.open>.btn.dropdown-toggle:hover, 
+.open>.btn.dropdown-toggle:focus, 
+.open>.btn.dropdown-toggle:active:hover, 
+.open>.btn.dropdown-toggle:focus:active, 
+.open>.btn.dropdown-toggle:focus:hover,
+button.btn.dropdown-toggle:hover, 
+button.btn.dropdown-toggle:focus, 
+button.btn.dropdown-toggle:active:hover, 
+button.btn.dropdown-toggle:focus:active, 
+button.btn.dropdown-toggle:focus:hover
+{ 
+    background: white !important;
+    border-color: #b5b5b5 !important;
+}
+.btn-default.focus:hover, .btn-default:active:hover, .btn-default:focus:active, .btn-default:focus:hover, .btn-default:hover, .btn.focus:hover, .btn:active:hover, .btn:focus:active, .btn:focus:hover, .btn:hover, .open>.btn-default.dropdown-toggle, .open>.btn-default.dropdown-toggle.focus, .open>.btn-default.dropdown-toggle:active, .open>.btn-default.dropdown-toggle:focus, .open>.btn-default.dropdown-toggle:hover, .open>.btn.dropdown-toggle {
+ 
+    /* background: white !important; */
+    border-color: #b5b5b5 !important;
+}
+
 @media (min-width: 1200px){
-    label[class*=col]{
+    label[class*=col], .p-md-0{
         padding-left: 0 !important;
     }
 }
@@ -207,7 +251,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .menu-text{letter-spacing: 2px;}
 .no-skin .nav-list>li.active:after { 
-    right: -1px;
+    right: -1px !important;
     top: 0px; 
 }
 .nav-list a .badge, .nav-list a .label { 

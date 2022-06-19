@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-rtl.min.css" /> 
 
+		<link rel="stylesheet" href="<?=base_url()?>assets/libs/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css" />	
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/project/site.css" />
 		<link style-section />
 		<!-- <script src="assets/js/ace-extra.min.js"></script>  -->
@@ -55,10 +56,12 @@
 		<!--[if !IE]> -->
 		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script> 
 		<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>  
- 
+		<script src="<?=base_url()?>assets/js/jquery-ui.min.js"></script> 
+		<script src="<?=base_url()?>assets/js/sweetalert2@11.js"></script>
+		<script src="<?=base_url()?>assets/libs/bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js"></script>
 		<script src="<?=base_url()?>assets/js/ace-elements.min.js"></script>
 		<script src="<?=base_url()?>assets/js/ace.min.js"></script>
-		<script src="<?=base_url()?>assets/js/sweetalert2@11.js"></script>
+
 		<script type="text/javascript">var __u = "<?=base64_encode(base_url())?>";</script> 
 		<script src="<?=base_url()?>assets/js/project/site.js"></script>
 		<!-- inline scripts related to this page -->

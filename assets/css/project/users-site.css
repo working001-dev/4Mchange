@@ -10,10 +10,10 @@
     max-width: 140px;
 }
 .btn-switch[value="Male"]{
-    background: rgb(75, 119, 228) !important;
+    background: rgb(75, 119, 228);
 }
 .btn-switch[value="Female"]{
-    background: rgb(219, 76, 205) !important;
+    background: rgb(219, 76, 205);
 }
 .form-control:focus.btn {
     color: #696969;
@@ -25,17 +25,84 @@
     display: flex;
     position: relative;
     height: calc(26vh - 2px);
-    padding-top: calc(4vh - 5px);
+    flex-direction: row; 
 }
 .u-box{
     display: flex;
     min-height: 10vh;
     width: 100%;
-    background: blanchedalmond;
+    border: 2px solid #393939;
+    box-sizing: border-box;
+    padding: 5px; 
+    /* background: blanchedalmond; */
 }
 .u-sticky{
     position: sticky;
     bottom: 0px;
     /* background: white; */
     margin: 9px 0px 0px 0px;
+    z-index: 3;
+}
+.u-action-info{
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    /* min-height: 90px; */
+}
+.u-action-info>span{
+    padding-right: 10px;
+}
+.u-action-info>div{
+    padding-right: 5px;
+    position: relative;
+    flex: 100%;
+}
+.u-action-info>div pre{
+    min-height: calc(90px + 2vh);
+    background-color: #e8f5f9c7;
+    border: 1px solid #f9f9f9fa;
+    padding: 5px 5px 8px !important;
+    margin-bottom: 0px !important;
+    border: 2px solid #393939;
+    border-radius: 0px !important;
+}
+.u-action-info div::before{ 
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    content: "\e251";
+    position: absolute;
+    top: -4px;
+    left: -9px;
+}
+.u-btn-reset{
+    background: rgb(215 52 100) !important;
+    border: none !important;
+}
+.u-btn-register{
+    background:rgb(75, 119, 228) !important;
+    border: none !important;
+}
+.u-btn-reset:hover, 
+.u-btn-reset:focus, 
+.u-btn-reset:active, 
+.u-btn-reset:focus:active, 
+.u-btn-reset:hover:active,
+.u-btn-reset:hover:focus{
+    background: rgb(238, 141, 124) !important;
+    border: none !important;
+    /* border: 3px solid #e3a8a8 !important; */
+}
+.u-btn-register:hover, 
+.u-btn-register:focus, 
+.u-btn-register:active, 
+.u-btn-register:focus:active, 
+.u-btn-register:hover:active,
+.u-btn-register:hover:focus{
+    background:rgb(155, 176, 228) !important;
+    border: none !important;
+    /* border: 3px solid #bab9e6 !important; */
+}
+button.btn:active {
+    top: 0px !important;
 }

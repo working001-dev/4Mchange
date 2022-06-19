@@ -41,9 +41,21 @@
                                 </label>                                 
                             </div>
 
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-md-0">
                                 <div class="u-content">
-                                    <div class="u-box"></div>
+                                    <div class="u-box">
+                                        <div style="flex:10%;"><img class="" src="assets/images/avatars/take-a-photo.png" style="width:160px;  height: 160px; "/></div>
+                                        <div class="clearfix" style="flex:60%;">
+                                            <label for="role">User action</label>
+                                            <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="role"></select> 
+                                            <div class="u-action-info">
+                                                <span class="fa fa-exclamation-circle"></span>
+                                                <div>
+                                                    <pre class="upre"></pre>     
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>                                  
                             </div>
 
@@ -77,18 +89,18 @@
                                     <span class="block input-icon input-icon-right">
                                         <input type="email" class="form-control" placeholder="Last name" name="u-lastName" />
                                         <i class="ace-icon fa fa-address-card-o"></i>
-                                    </span>
+                                    </span> 
                                 </label>                                   
                             </div>
 							<!-- <div class="space-24"></div> -->
 
 							<div class="u-sticky col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<button type="reset" class="width-45 pull-left btn btn-sm" style="background: #333;">
+								<button type="reset" class="width-45 pull-left btn btn-sm u-btn-reset" style="background: #333;">
 									<i class="ace-icon fa fa-refresh"></i>
 									<span class="bigger-110">Reset</span>
 								</button>
 
-								<button type="button" class="width-45 pull-right btn btn-sm btn-success" style="background: green;">
+								<button type="button" class="width-45 pull-right btn btn-sm btn-success u-btn-register" style="background: green;">
 									<span class="bigger-110">Register</span>
 
 									<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
