@@ -351,3 +351,21 @@ button.btn.dropdown-toggle:focus:hover
 @media (min-width: 990px) {    
 
 }
+.top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.tbox{
+    padding: 10px 2px;
+}
+.bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.dataTables_paginate .pagination {
+    margin: 0 0px;
+}

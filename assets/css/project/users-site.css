@@ -106,3 +106,53 @@
 button.btn:active {
     top: 0px !important;
 }
+
+.panel-list{
+    padding: 8px 0px;
+}
+.addClick{
+    padding: 0px !important;
+    position: relative;
+    display: flex;
+    /* justify-content: flex-start;  */
+    height: 25px;
+    align-items: center;
+}
+button.per-click-add{
+    display: block;
+    width: 190px;
+    background: #4cc24c;
+    padding: 5px 8px;
+    border-radius: 0px 0px 0px 15px;
+    position: relative;
+    color: #ffe9e9;
+    border: none !important;
+    font-weight: 600;
+    /* transition: all 2s cubic-bezier(0.68, 0.39, 0.48, 0.86); */
+    position: absolute;
+    /* right: unset; */
+    left: 7px;
+    transition: all 1.4s cubic-bezier(0.68, 0.39, 0.48, 0.86);;
+}
+button.per-click-add::after{
+    content: ' ';
+    width: 20px;
+    background: #4cc24c;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -10px;
+    height: 29px;
+    border-bottom: 14px solid #ffffff;
+    border-right: 16px solid #ffffff;
+    border-top: 14px solid #ffffff;
+    border-left: 4px solid #4cc24c;
+}
+.per-click-add:hover{
+    left: 50%; 
+    /* right: 0px; */
+}
+.addClick i{
+    margin-left: 5px;
+    color: #393939;
+}

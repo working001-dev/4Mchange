@@ -116,7 +116,7 @@ window.onload = async function(){
   GenarateHeadPage(ActivedMenu); 
   setTimeout( ()=>LoadingPage.hide(280), 2000);
   //$(".nav.ace-nav").slideDown("slow");
-  $(".nav.ace-nav").show("slide", { direction: "right" }, 1200);
+  $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
 }
 
 
