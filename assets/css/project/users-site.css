@@ -131,7 +131,7 @@ button.per-click-add{
     /* transition: all 2s cubic-bezier(0.68, 0.39, 0.48, 0.86); */
     position: absolute;
     /* right: unset; */
-    left: 7px;
+    left: 0px;
     transition: all 1.4s cubic-bezier(0.68, 0.39, 0.48, 0.86);;
 }
 button.per-click-add::after{
@@ -148,11 +148,24 @@ button.per-click-add::after{
     border-top: 14px solid #ffffff;
     border-left: 4px solid #4cc24c;
 }
-.per-click-add:hover{
-    left: 50%; 
-    /* right: 0px; */
+.open-add{
+    left: calc(100% - 190px) !important;
+    border-radius: 0px 0px 0px 15px !important; 
 }
+.panel-add{
+    position: relative;
+}
+/* .per-click-add:focus:active{
+    left: 50%;  
+} */
 .addClick i{
     margin-left: 5px;
     color: #393939;
+}
+.comp-add{
+    position: absolute;
+    background: #e2f5e2;
+    height: 20vh;
+    top: -5px;
+    left: 0;    
 }

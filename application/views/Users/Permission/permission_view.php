@@ -11,15 +11,15 @@
                     <h4 class="header green lighter bigger"><i class="ace-icon fa fa-key blue"></i>Permission list</h4>
 
                     <div class="space-6"></div>
-                    <div class="addClick col-lg-12 col-ms-12 col-sm-12">
+                    <div class="addClick col-lg-6 col-md-6 col-sm-12 col-sx-12"> 
                         <button class="per-click-add"> 
                             Click for add permission: 
                             <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        </button>    
+                        </button> 
                     </div>  
                     <div class="panel-list col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="panel-add" style="display:none;">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-sx-12">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-sx-12 comp-add">
 
                             </div>
                         </div>
