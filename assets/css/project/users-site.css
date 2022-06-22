@@ -123,7 +123,7 @@ button.per-click-add{
     width: 190px;
     background: #4cc24c;
     padding: 5px 8px;
-    border-radius: 0px 0px 0px 15px;
+    border-top-right-radius: 15px;
     position: relative;
     color: #ffe9e9;
     border: none !important;
@@ -132,9 +132,23 @@ button.per-click-add{
     position: absolute;
     /* right: unset; */
     left: 0px;
-    transition: all 1.4s cubic-bezier(0.68, 0.39, 0.48, 0.86);;
+    transition: all 0.734s cubic-bezier(0.68, 0.39, 0.48, 0.86);;
 }
-button.per-click-add::after{
+/* button.per-click-add::before{
+    content: ' ';
+    width: 20px;
+    background: #4cc24c;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -10px;
+    height: 29px;
+    border-bottom: 14px solid #ffffff;
+    border-right: 4px solid #4cc24c;
+    border-top: 14px solid #ffffff;
+    border-left: 16px solid #ffffff;
+} */
+/* button.per-click-add::after{
     content: ' ';
     width: 20px;
     background: #4cc24c;
@@ -147,13 +161,16 @@ button.per-click-add::after{
     border-right: 16px solid #ffffff;
     border-top: 14px solid #ffffff;
     border-left: 4px solid #4cc24c;
-}
+} */
 .open-add{
     left: calc(100% - 190px) !important;
-    border-radius: 0px 0px 0px 15px !important; 
+    border-top-right-radius: 0px !important;
+    border-bottom-left-radius: 15px !important;
+    /* border-radius: 15px 0px 0px 0px !important;  */
 }
 .panel-add{
     position: relative;
+    z-index: 5;
 }
 /* .per-click-add:focus:active{
     left: 50%;  
@@ -164,8 +181,30 @@ button.per-click-add::after{
 }
 .comp-add{
     position: absolute;
-    background: #e2f5e2;
-    height: 20vh;
+    background: #ececec;
+    min-height: 40vh;
     top: -5px;
-    left: 0;    
+    left: 0; 
+    padding: 10px;
+    border: 3px solid #16394d;
+    transform: translate(-110%);
+    visibility: hidden;
+    opacity: 0.2;
+    transition: all 0.6s ease-in;
+    
+}
+.comp-add-show{
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0%); 
+}
+.comp-add *{
+    font-size: 11px !important;
+}
+.comp-add input{
+    width: 100%;
+}
+.comp-add textarea{
+    width: 100% !important; 
+    height: 140px !important;
 }
