@@ -74,7 +74,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body"   : $this->load->view('users/group/group_view'); break;
 				case "script" : $this->load->view('users/group/group_script'); break;
-				case "script" : $this->load->view('users/group/group_style'); break;
+				case "style" : $this->load->view('users/group/group_style'); break;
 			}
 		} 
 	}
@@ -84,7 +84,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body"   : $this->load->view('users/changepass/changepass_view'); break;
 				case "script" : $this->load->view('users/changepass/changepass_script'); break;
-				case "script" : $this->load->view('users/changepass/changepass_style'); break;
+				case "style" : $this->load->view('users/changepass/changepass_style'); break;
 			}
 		} 
 	}
@@ -94,7 +94,7 @@ class Users extends CI_Controller {
 			switch($this->input->post('content')){
 				case "body"   : $this->load->view('users/edit/edit_view'); break;
 				case "script" : $this->load->view('users/edit/edit_script'); break;
-				case "script" : $this->load->view('users/edit/edit_style'); break;
+				case "style" : $this->load->view('users/edit/edit_style'); break;
 			}
 		} 
 	}

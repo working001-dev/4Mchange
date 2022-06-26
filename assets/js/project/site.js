@@ -42,45 +42,63 @@ var GeneateNavUserInfo = () => {
   $(".nav-user-photo").attr("src", `${_UrlProject}assets/images/avatars/${MemberInfo[0]?.userImg}.png`);
 }; 
 var GenarateMenu = () => {
-  let $_sidebar = $("#sidebar-4m .nav.nav-list");
-  $_sidebar.html('');
-  GroupMenu.forEach( g => {
-      $_sidebar.append(setGroupMenu(g, g.groupMenuId == ActivedMenu?.groupMenuId ? "open active" : "" ));
-      let _menu = Menu.filter( f => f.groupMenuId == g.groupMenuId );
-      if( _menu[0] ){
-          let _l = $(`#g___${g.groupMenuId}`);
-          _l.append(`<ul class="submenu"></ul>`);
-          _menu.forEach( m => { _l.find("ul.submenu").append(setMenu(m, m.roleMenuId == ActivedMenu?.roleMenuId ? "active" : "")); });
-      }
-  });
+  try{
+    let $_sidebar = $("#sidebar-4m .nav.nav-list");
+    $_sidebar.html('');
+    GroupMenu.forEach( g => {
+        $_sidebar.append(setGroupMenu(g, g.groupMenuId == ActivedMenu?.groupMenuId ? "open active" : "" ));
+        let _menu = Menu.filter( f => f.groupMenuId == g.groupMenuId );
+        if( _menu[0] ){
+            let _l = $(`#g___${g.groupMenuId}`);
+            _l.append(`<ul class="submenu"></ul>`);
+            _menu.forEach( m => { _l.find("ul.submenu").append(setMenu(m, m.roleMenuId == ActivedMenu?.roleMenuId ? "active" : "")); });
+        }
+    });    
+  }catch{
+    throw "Generate error"
+  }
+
 };
 var GenarateHeadTitle = (t) => {
-  let headTitle = $("#breadcrumbs ul.breadcrumb");
-  headTitle.html(
-    `<li><i class="ace-icon ${t.icon} home-icon"></i><a href="#">${t.groupMenuName?.toUpperCase()}</a></li>
-     <li class="active">${t.menuName}</li>`
-  )
+  try{
+    let headTitle = $("#breadcrumbs ul.breadcrumb");
+    headTitle.html(
+      `<li><i class="ace-icon ${t.icon} home-icon"></i><a href="#">${t.groupMenuName?.toUpperCase()}</a></li>
+      <li class="active">${t.menuName}</li>`
+    );
+  }catch{
+    throw "Generate error"
+  }
 };
 var GenarateHeadPage = (t) => {
-  let headTitle = $(".page-content .page-header");
-  headTitle.html(`<h1>${t.menuName}<small><i class="ace-icon fa fa-angle-double-right"></i> ${t.menuDescription}</small></h1>`)
+  try{
+    let headTitle = $(".page-content .page-header");
+    headTitle.html(`<h1>${t.menuName}<small><i class="ace-icon fa fa-angle-double-right"></i> ${t.menuDescription}</small></h1>`);
+  }catch{
+    throw "Generate error"
+  }
 };
 var GenarateBodypage = async (u) =>{
-  let _b = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"body"});
-  let _s = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"script"});
-  let _c = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"style"});
-  $("#main-container .main-content .main-content-inner").html(_b); 
-  $("link[style-section]~style").toArray().forEach( f =>{ f.remove() } );
-  $("link[style-section]~link").toArray().forEach( f =>{ f.remove() } );
-  $("script[script-section]~script").toArray().forEach( f =>{ f.remove() } );
-  $("body").append(_s);
-  $("head").append(_c);
-}
+  try{
+    let _b = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"body"});
+    let _s = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"script"});
+    let _c = await PostRequest(`${_UrlProject}${u.menuLink}`, {content:"style"});
+    $("#main-container .main-content .main-content-inner").html(_b); 
+    for( f of $("link[style-section]~style").toArray() ){ f.remove() } ;
+    for( f of $("link[style-section]~link").toArray() ){ f.remove() } ;
+    for( f of $("script[script-section]~script").toArray() ){ f.remove() } ;
+  
+    $("body").append(_s);
+    $("head").append(_c);
+  }catch{
+    throw "Generate error"
+  }
+};
 var PostRequest = async (u, s) => {
   return await $.post( u, s )
   .fail(function() {
     Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); 
-    LoadingPage.find(".wait-load-page").addClass("page-error")
+    LoadingPage.find(".wait-load-page").addClass("page-error");
   });
 };
 
@@ -90,6 +108,8 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
   event.preventDefault();
   // debugger;
   let alink = $(this);
+
+
   let parentList = $(this).closest('li');
   if( !(ActivedMenu?.roleMenuId == parentList.attr('roleMenuId')) ){
     LoadingPage.show(10, ()=>{LoadingPage.find(".wait-load-page").removeClass("page-error")});
@@ -105,22 +125,39 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
     //GeneateNavUserInfo();
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
+    
     setTimeout( ()=>LoadingPage.hide(280), 2000);
+    //location.reload();
+    eval($("script[local-section=reeval]").html());
+    window.history.replaceState("object or string", "Title", `${_UrlProject}#/${alink.text()}`);
   }else return false;
 })
 window.onload = async function(){
-  GenarateMenu();
-  await GenarateBodypage(ActivedMenu);
-  GeneateNavUserInfo();
-  GenarateHeadTitle(ActivedMenu);
-  GenarateHeadPage(ActivedMenu); 
-  setTimeout( ()=>LoadingPage.hide(280), 2000);
-  //$(".nav.ace-nav").slideDown("slow");
-  $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
+  try{
+    GenarateMenu();
+    await GenarateBodypage(ActivedMenu);
+    GeneateNavUserInfo();
+    GenarateHeadTitle(ActivedMenu);
+    GenarateHeadPage(ActivedMenu); 
+    setTimeout( ()=>LoadingPage.hide(280), 2000);
+    //$(".nav.ace-nav").slideDown("slow");
+    $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
+  }catch{
+    await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
+    location.href = `${_UrlProject}home/logout`
+  }
+    
 }
 
 
+function shotcutMenu(sel){ 
+  var _a = $(sel).closest("li[id^='g__']")[0];
+  if( !$(_a).hasClass("open active")) $(_a).find(".dropdown-toggle").click();
+  
+  setTimeout( ()=>{ $(sel).click() }, 400);    
+  //}
 
+}
 
 function utf8_to_b64( str ) {
   return window.btoa(unescape(encodeURIComponent( str )));

@@ -119,11 +119,12 @@ button.btn:active {
     align-items: center;
 }
 button.per-click-add{
-    display: block;
+    display: flex;
     width: 190px;
     background: #4cc24c;
     padding: 5px 8px;
-    border-top-right-radius: 15px;
+    border-top-right-radius: 15px; 
+    border-bottom-left-radius: 0px;
     position: relative;
     color: #ffe9e9;
     border: none !important;
@@ -132,7 +133,9 @@ button.per-click-add{
     position: absolute;
     /* right: unset; */
     left: 0px;
-    transition: all 0.734s cubic-bezier(0.68, 0.39, 0.48, 0.86);;
+    transition: all 0.734s cubic-bezier(0.68, 0.39, 0.48, 0.86);
+    align-items: center;
+    justify-content: space-between;
 }
 /* button.per-click-add::before{
     content: ' ';
@@ -181,22 +184,24 @@ button.per-click-add{
 }
 .comp-add{
     position: absolute;
-    background: #ececec;
-    min-height: 40vh;
-    top: -5px;
+    background: #fff;
+    min-height: 310px;
+    top: -6px;
     left: 0; 
     padding: 10px;
     border: 3px solid #16394d;
-    transform: translate(-110%);
+    transform: translate(-200%);
     visibility: hidden;
-    opacity: 0.2;
-    transition: all 0.6s ease-in;
+    opacity: 1;
+    box-shadow: 8px 5px 5px 0px #9f9e9e00;
+    transition: all 0.734s cubic-bezier(0.68, 0.39, 0.48, 0.86);
     
 }
 .comp-add-show{
     visibility: visible;
     opacity: 1;
     transform: translate(0%); 
+    box-shadow: 8px 5px 5px 0px #9f9e9e;
 }
 .comp-add *{
     font-size: 11px !important;
@@ -207,4 +212,10 @@ button.per-click-add{
 .comp-add textarea{
     width: 100% !important; 
     height: 140px !important;
+}
+
+.widget-main>ul{
+    min-height: calc(45vh + 2vh);
+    max-height: calc(45vh + 2vh);
+    margin: 0 0 10px 25px;
 }

@@ -19,8 +19,8 @@
                         <i class="ace-icon fa fa-caret-down"></i>
                     </a> 
                     <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                        <li><a href="#"><i class="ace-icon fa fa-cog"></i>Settings</a></li>
-                        <li><a href="profile.html"><i class="ace-icon fa fa-user"></i>Profile</a></li>
+                        <li><a href="#" onclick='shotcutMenu("a[href=\"http://localhost/4Mchange/users/changepass\"]");'><i class="ace-icon fa fa-unlock-alt"></i>Change Password</a></li>
+                        <li><a href="#" onclick='shotcutMenu("a[href=\"http://localhost/4Mchange/users/edit\"]");'><i class="ace-icon fa fa-user"></i>Profile</a></li>
                         <li class="divider"></li>
                         <li><a href="<?=base_url()?>home/logout"><i class="ace-icon fa fa-power-off"></i>Logout</a></li>
                     </ul>
