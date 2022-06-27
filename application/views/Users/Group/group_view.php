@@ -8,7 +8,7 @@
         <div id="signup-box" class="signup-box widget-box no-border">
             <div class="widget-body">
                 <div class="widget-main">
-                    <h4 class="header green lighter bigger"><i class="ace-icon fa fa-key blue"></i>Group list</h4>
+                    <h4 class="header green lighter bigger"><i class="ace-icon fa fa-users blue"></i>Group list</h4>
 
                     <div class="space-6"></div>
                     <div class="addClick col-lg-6 col-md-6 col-sm-12 col-sx-12"> 

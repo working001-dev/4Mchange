@@ -39,6 +39,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 24px;
 }
 .header{ margin-top: 0px !important;}
+.header>.ace-icon {
+    margin-right: 10px;
+}
 .head-project{
     display: flex;
     padding: 8px 0;
@@ -250,6 +253,7 @@ button.btn.dropdown-toggle:focus:hover
     transition: all 0.4s ease-in-out;
 }
 .menu-text{letter-spacing: 2px;}
+
 .no-skin .nav-list>li.active:after { 
     right: -1px !important;
     top: 0px; 
@@ -272,6 +276,10 @@ button.btn.dropdown-toggle:focus:hover
 }
 .widget-box { 
     margin-bottom: 0px !important;
+}
+.login-layout .widget-box .widget-main {
+    padding: 16px 26px 36px;
+    background: #F7F7F7;
 }
 .widget-main {
     padding: 12px 12px 0px 12px;

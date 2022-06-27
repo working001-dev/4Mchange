@@ -152,11 +152,8 @@ window.onload = async function(){
 
 function shotcutMenu(sel){ 
   var _a = $(sel).closest("li[id^='g__']")[0];
-  if( !$(_a).hasClass("open active")) $(_a).find(".dropdown-toggle").click();
-  
+  if( !$(_a).hasClass("open active")) $(_a).find("a.dropdown-toggle").click(); 
   setTimeout( ()=>{ $(sel).click() }, 400);    
-  //}
-
 }
 
 function utf8_to_b64( str ) {

@@ -107,12 +107,12 @@
 							<!-- <div class="space-24"></div> -->
 
 							<div class="u-sticky col-lg-12 col-md-12 col-sm-12 col-xs-12">
-								<button type="reset" class="width-45 pull-left btn btn-sm u-btn-reset" style="background: #333;">
+								<button type="reset" class="width-25 pull-left btn btn-sm u-btn-reset" style="background: #333;">
 									<i class="ace-icon fa fa-refresh"></i>
 									<span class="bigger-110">Reset</span>
 								</button>
 
-								<button type="button" class="width-45 pull-right btn btn-sm btn-success u-btn-register" style="background: green;">
+								<button type="button" class="width-25 pull-right btn btn-sm btn-success u-btn-register" style="background: green;">
 									<span class="bigger-110">Register</span>
 
 									<i class="ace-icon fa fa-arrow-right icon-on-right"></i>

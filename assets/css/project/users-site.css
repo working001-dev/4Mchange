@@ -219,3 +219,10 @@ button.per-click-add{
     max-height: calc(45vh + 2vh);
     margin: 0 0 10px 25px;
 }
+input[type=radio].ace+.lbl::before { 
+    line-height: 16px !important;
+}
+input[type=radio].ace+.lbl>i { 
+    margin-left: 10px;
+    margin-right: 25px;
+}

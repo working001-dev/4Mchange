@@ -11,7 +11,7 @@
                 let btnGender = $(this);
                 btnGender.addClass("btn-selected");//.addClass("btn-primary");
                 $("input[name=u-gender]+i").removeClass("fa-venus-mars"); 
-                console.log(btnGender.attr("gen-flag"));
+                //console.log(btnGender.attr("gen-flag"));
                 if( btnGender.attr("gen-flag") == "1" ){
                     $("input[name=u-gender]+i").removeClass("fa-venus").addClass("fa-mars");
                     $("input[name=u-gender][gen-flag=2]").addClass("btn-unselected");
