@@ -22,24 +22,5 @@ class Dashboard extends CI_Controller {
 					break;                    
 			}
 		} 
-	}
-
-	public function add()
-	{
-		if( !is_null($this->input->post('content')) ){
-			switch($this->input->post('content')){
-				case "body" :
-					$this->load->view('users/add/add_view');	
-					break;
-				case "script" :
-					$this->load->view('users/add/add_script');
-					break;
-			}
-		} 
-	}
-
-	public function infoMember()
-	{
-		echo json_encode($this->session->info);
-	}
+	} 
 }

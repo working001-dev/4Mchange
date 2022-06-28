@@ -20,9 +20,9 @@
                                             <h4 class="widget-title lighter smaller">Permission</h4>    
                                         </div>
                                         <div>
-                                            <span class="block input-icon input-icon-left">
+                                            <span class="flex input-icon input-icon-left" style="align-items: center;">
                                                 <input type="text" class="form-control" placeholder="enter permission name" name="roleSearch"/>
-                                                <i class="ace-icon fa fa-search"></i>
+                                                <i class="ace-icon-permission fa fa-search"></i>
                                             </span>                                            
                                         </div>
 
