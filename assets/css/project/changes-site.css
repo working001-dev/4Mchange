@@ -1,0 +1,56 @@
+.btn-change-add{
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 20px 50px;
+    flex-direction: column;
+    border: 2px solid #2679b5;
+    font-size: 24px;
+    transition: all 0.5s ease;
+    box-shadow: 5px 5px 6px -1px #a9a5a5;
+    letter-spacing: 1.4px;
+}
+.btn-change-add>span{
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+.btn-change-add:active:focus, .btn-change-add:active, .btn-change-add:focus {
+    box-shadow: 0px 0px 0px 0px #a9a5a5; 
+}
+.modal-change-add{
+    padding: 2vh 2vw !important;
+    background-image: linear-gradient(180deg, black, #3e3e3e7a, transparent) !important;
+}
+.modal-change-add-header{
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8px;
+    border-bottom: 0px solid #e5e5e5;
+}
+.modal-change-add-header>button{
+    position: absolute;
+    right: -12px;
+    top: -12px;
+    font-size: 24px;
+    border: 2px solid #000000 !important;
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 2px 2px 3px;    
+}
+.modal-change-add .modal-dialog{
+    margin: 0px !important;
+    width: 100%;
+    height: 100%;
+    max-width: 98vw;
+    max-height: 98vh;
+}
+.close:focus, .close:hover { 
+    opacity: 1; 
+}

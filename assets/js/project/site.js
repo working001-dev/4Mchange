@@ -126,7 +126,7 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
     
-    setTimeout( ()=>LoadingPage.hide(280), 2000);
+    setTimeout( ()=>LoadingPage.hide(280), 800);
     //location.reload();
     eval($("script[local-section=reeval]").html());
     window.history.replaceState("object or string", "Title", `${_UrlProject}#/${alink.text()}`);
@@ -139,7 +139,7 @@ window.onload = async function(){
     GeneateNavUserInfo();
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
-    setTimeout( ()=>LoadingPage.hide(280), 2000);
+    setTimeout( ()=>LoadingPage.hide(280), 1000);
     //$(".nav.ace-nav").slideDown("slow");
     $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
   }catch{

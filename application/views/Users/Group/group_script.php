@@ -29,7 +29,7 @@
         }
         a = 3
         $(".panel-add .comp-add").toggleClass("comp-add-show");
-        console.log(parseInt(Math.random() * 100) + a);
+        //console.log(parseInt(Math.random() * 100) + a);
 
         return false;
     }
