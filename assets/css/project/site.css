@@ -453,3 +453,24 @@ button[data-toggle="dropdown"]{
 .widget-headers h4{
     letter-spacing: 2px !important;
 }
+.customscroll::-webkit-scrollbar {
+    width: 15px;
+} /* this targets the default scrollbar (compulsory) */
+.customscroll::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.2); 
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+.customscroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); 
+} /* this will style the thumb, ignoring the track */
+
+.customscroll::-webkit-scrollbar-button {
+    background-color: rgba(0, 0, 0, 0.2); 
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+
+/* .customscroll::-webkit-scrollbar-corner {
+    background-color: #706f6f;
+} if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
+.customscroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(137, 137, 137, 0.704); 
+}

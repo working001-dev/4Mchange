@@ -31,3 +31,9 @@ function setting_search($this, url, pla = "please choose item", tags = false){
         // }
       });
 }
+function upload() {
+  var imgcanvas = document.getElementById("can");
+  var fileinput = document.getElementById("finput");
+  var image = new SimpleImage (fileinput);
+  image.drawTo(imgcanvas);
+}

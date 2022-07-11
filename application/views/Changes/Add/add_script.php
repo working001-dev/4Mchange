@@ -1,4 +1,6 @@
+<script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"> </script>
 <script src="<?= base_url() ?>assets/js/project/changes-site.js"></script>
+
 <script type="text/javascript" local-section="true">
     var request = {}
     $(document).ready(function(){

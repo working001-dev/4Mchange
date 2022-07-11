@@ -22,7 +22,7 @@
 	</div><!-- /.row -->
 </div><!-- /.page-content -->
 
-<div class="modal fade modal-change-add" id="modal-sheet-add"  role="dialog" aria-labelledby="modal-sheet-addLabel" aria-hidden="true" data-backdrop="false">
+<div class="modal fade modal-change-add customscroll" id="modal-sheet-add"  role="dialog" aria-labelledby="modal-sheet-addLabel" aria-hidden="true" data-backdrop="false">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header modal-change-add-header">
@@ -116,7 +116,7 @@
 								<div class="container-row">
 									<span class="title-subject">1. สาเหตุ / ความจำเป็นในการเปลี่ยนแปลง</span>	
 								</div>
-								<div class="container-row req-dubdetail">
+								<div class="container-row req-subdetail">
 									<div class="container-ctype">
 										<label style="min-width:150px; margin-bottom:0px;"><span class="lbl" >รูปแบบการเปลี่ยนแปลง</span></label> 
 										<ul>
@@ -137,27 +137,147 @@
 										</ul>
 									</div>									
 								</div>
-								<div class="container-row req-dubdetail">
+								<div class="container-row req-subdetail">
 									<div class="req-input flex aligns-center">
 										<span class="req-title flex">สาเหตุ</span>
 										<select class="from-control width-100" name="req-cuase" style="width: 60%"></select>
 									</div>									
 								</div>	
 							</div>
-							<div class="flex flex-column width-100">
+							<div class="flex flex-column width-50">
 								<div class="container-row">
 									<span class="title-subject">2. รายละเอียดการเปลี่ยนแปลง</span>	
 								</div>
-								<div class="container-row req-dubdetail">
-									<label for="form-field-8">รายละเอียด</label>
-                                    <textarea class="form-control req-textarea" name="req-description" placeholder="รายละเอียด การเปลี่ยนแปลง" rows="6"></textarea> 
+								<div class="container-row req-subdetail">
+									<div class="req-input flex flex-column">
+										<span class="req-title flex">รายละเอียด</span>
+										<textarea class="form-control req-textarea" name="req-description" placeholder="รายละเอียด การเปลี่ยนแปลง" rows="6"></textarea> 
+									</div> 
 								</div>
-								<div class="container-row req-dubdetail">
-									<div class="req-input flex aligns-center">
-										<span class="req-title flex">สาเหตุ</span>
-										<select class="from-control width-100" name="req-cuase" style="width: 60%"></select>
+								<div class="container-row req-subdetail">
+									<div class="req-input flex flex-column">
+										<span class="req-title flex">สภาพก่อนเปลี่ยนแปลง / สภาพปกติ</span>
+										<label for="file-beforechange" class="attach-component width-100">
+											<input type="file" name="file-beforechange" style="display: none;"/>
+											<span class="sp-filename">กรุณาแนบไฟล์</span>
+											<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+										</label>
+									</div>									
+								</div>
+								<div class="container-row req-subdetail">
+									<div class="req-input flex flex-column">
+										<span class="req-title flex">สภาพที่จะเปลี่ยนแปลง</span>
+										<label for="file-tochange" class="attach-component width-100">
+											<input type="file" name="file-tochange" style="display: none;"/>
+											<span class="sp-filename">กรุณาแนบไฟล์</span>
+											<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+										</label>
 									</div>									
 								</div>	
+								<div class="container-row req-subdetail">
+									<div class="req-input flex flex-column width-100">
+										<span class="req-title flex">เอกสารแนบเพื่อการอนุมัติ</span>
+										<div class="container-row req-child">
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">ใบแจ้งซ่อม (คืนสภาพแล้ว หรือชั่วคราว)</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">Revised 3M Conditions</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">ECR , ใบขอใช้กรณีพิเศษ (Special Use ทั้งภายนอกและภายใน)</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">EWR (Material : นำงาน Rework มาเข้ากระบวนการ)</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">ผลการตรวจสอบ,ผลการ Sorting</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">ใบประเมินพนักงาน,รายงานการทดลองผลิต</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>
+											<div class="req-input flex flex-column">
+												<span class="req-title flex">อื่น</span>
+												<label for="file-tochange" class="attach-component">
+													<input type="file" name="file-tochange" style="display: none;"/>
+													<span class="sp-filename">กรุณาแนบไฟล์</span>
+													<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+												</label>
+											</div>									
+										</div>	
+									</div> 
+								</div>	
+							</div>
+							<div class="flex flex-column width-50">
+								<div class="container-row">
+									<span class="title-subject">3. การตรวจสอบเบื้องต้น</span>	
+								</div>
+								<div class="container-row req-subdetail">
+									<div class="req-input flex flex-column">
+										<span class="req-title flex">ภาพร่าง ตำแหน่งชิ้นงานที่มีผลกระทบจากการเปลี่ยนแปลง</span>
+										<label for="file-imagechange" class="attach-component width-100">
+											<input type="file" name="file-imagechange" onchange="upload()" id="finput" style="display: none;" />
+											<span class="sp-filename">กรุณาแนบไฟล์</span>
+											<button class="btn-attach" onclick="$('input[name=file-imagechange]').click()">
+												<i class="fa fa-paperclip" aria-hidden="true"></i>
+											</button> 
+										</label> 
+										
+									</div> 
+								</div>
+								<div class="container-row req-subdetail">
+									<div class="req-input flex justify-center">
+										<canvas id="can" class="" style="max-width: 100%;max-height: 100%; overflow:auto;"></canvas>
+									</div> 
+								</div>
+								<div class="container-row req-subdetail flex">
+									<div class="req-input flex flex-column width-100">
+										<span class="req-title flex">ตรวจสอบจุดเปลี่ยนแปลง</span>
+										<table class="table table-striped table-bordered table-hover dataTable no-footer" id="reviewList" style="width:100%; margin-top:8px; z-index:1;"> 
+										<thead>
+											<tr>
+												<th>จุดตรวจสอบ</th>
+												<th>ค่าควบคุม</th>
+												<th>ผลการตรวจวัด</th> 
+											</tr>                    
+										</thead>
+										<tbody>
+											<tr><td colspan="3">คลิกปุ่ม + เพื่อเพิ่มข้อมูล</td></tr>
+										</tbody> 
+										</table> 
+									</div> 
+									<button type="button" class="btn-add-review"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+								</div>
 							</div>
 						</div>
 					</div>
