@@ -2,7 +2,7 @@ const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 3000,
+    timer: 6000,
     timerProgressBar: true,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -109,28 +109,33 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
   // debugger;
   let alink = $(this);
 
+  try{
+    let parentList = $(this).closest('li');
+    if( !(ActivedMenu?.roleMenuId == parentList.attr('roleMenuId')) ){
+      LoadingPage.show(10, ()=>{LoadingPage.find(".wait-load-page").removeClass("page-error")});
+      $("#sidebar-4m li").removeClass("active");
+      if(parentList.attr('groupMenuId') != ActivedMenu?.groupMenuId ) $(`#g___${ActivedMenu?.groupMenuId}>a`).click();
+      $(`#g___${parentList.attr('groupMenuId')}`).addClass("open active");
+      parentList.addClass("active");
 
-  let parentList = $(this).closest('li');
-  if( !(ActivedMenu?.roleMenuId == parentList.attr('roleMenuId')) ){
-    LoadingPage.show(10, ()=>{LoadingPage.find(".wait-load-page").removeClass("page-error")});
-    $("#sidebar-4m li").removeClass("active");
-    if(parentList.attr('groupMenuId') != ActivedMenu?.groupMenuId ) $(`#g___${ActivedMenu?.groupMenuId}>a`).click();
-    $(`#g___${parentList.attr('groupMenuId')}`).addClass("open active");
-    parentList.addClass("active");
+      let _menuClick = Menu.filter( f => f.roleMenuId == parentList.attr('roleMenuId') );
+      localStorage.setItem("actived", JSON.stringify(_menuClick[0]));
+      ActivedMenu  = JSON.parse(localStorage?.actived || "{}");
+      await GenarateBodypage(ActivedMenu);
+      //GeneateNavUserInfo();
+      GenarateHeadTitle(ActivedMenu);
+      GenarateHeadPage(ActivedMenu); 
+      
+      setTimeout( ()=>LoadingPage.hide(280), 800);
+      //location.reload();
+      eval($("script[local-section=reeval]").html());
+      window.history.replaceState("object or string", "Title", `${_UrlProject}#/${alink.text()}`);
+    }else return false;    
+  }catch{
+    await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
+    //setTimeout( () => { location.href = `${_UrlProject}home/logout` }, 3000 );
+  }
 
-    let _menuClick = Menu.filter( f => f.roleMenuId == parentList.attr('roleMenuId') );
-    localStorage.setItem("actived", JSON.stringify(_menuClick[0]));
-    ActivedMenu  = JSON.parse(localStorage?.actived || "{}");
-    await GenarateBodypage(ActivedMenu);
-    //GeneateNavUserInfo();
-    GenarateHeadTitle(ActivedMenu);
-    GenarateHeadPage(ActivedMenu); 
-    
-    setTimeout( ()=>LoadingPage.hide(280), 800);
-    //location.reload();
-    eval($("script[local-section=reeval]").html());
-    window.history.replaceState("object or string", "Title", `${_UrlProject}#/${alink.text()}`);
-  }else return false;
 })
 window.onload = async function(){
   try{
@@ -144,7 +149,7 @@ window.onload = async function(){
     $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
   }catch{
     await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
-    location.href = `${_UrlProject}home/logout`
+    //setTimeout( () => { location.href = `${_UrlProject}home/logout` }, 3000 );
   }
     
 }

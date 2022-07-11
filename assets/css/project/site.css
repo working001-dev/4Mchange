@@ -6,6 +6,10 @@
     font-family:"Quicksand";
     src: url("../../fonts/Quicksand-VariableFont_wght.ttf") format("truetype");
 } 
+@font-face {
+    font-family:"Sarabun";
+    src: url("../../fonts/Sarabun/Sarabun-Thin.ttf") format("truetype");
+} 
 body{
     font-family: 'Quicksand', sans-serif;
     overflow: hidden !important;
@@ -21,6 +25,15 @@ h1, h2, h3, h4, h5, h6 {
 } */
 .flex{
     display: flex !important;
+}
+.flex-column{
+    flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
+}
+.flex-wrap{
+    flex-wrap: wrap;
 }
 .btn-selected{ 
     -webkit-box-shadow: inset 1px 1px 10px #545353b5  !important;;

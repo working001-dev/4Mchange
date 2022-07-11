@@ -19,7 +19,7 @@ class Changes extends CI_Controller {
 	 */
 	public function __construct() {
         parent::__construct(); 
-		$this->load->model('User_model', "umd");
+		$this->load->model('change_model', "chn");
 		$this->load->helper('sys_helper');
     }
 	public function index()
@@ -59,8 +59,21 @@ class Changes extends CI_Controller {
 			}
 		} 
 	}
-	public function infoMember()
+	public function getting_select_line()
 	{
-		echo json_encode($this->session->info);
+		echo json_encode($this->chn->getting_line());
 	}
+	public function getting_select_partnumber()
+	{
+		echo json_encode($this->chn->getting_partnumber());
+	}
+	public function getting_select_partname()
+	{
+		echo json_encode($this->chn->getting_partname());
+	}
+	public function getting_select_process()
+	{
+		echo json_encode($this->chn->getting_process());
+	}
+	public function getting_select_cuase(){ echo json_encode($this->chn->getting_cuase()); }
 }
