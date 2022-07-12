@@ -18,6 +18,14 @@
 .btn-change-add:active:focus, .btn-change-add:active, .btn-change-add:focus {
     box-shadow: 0px 0px 0px 0px #a9a5a5; 
 }
+.modal-content{
+    padding: 30px 6vw;
+    background: #00000005;
+    border: none; 
+}
+.modal-box{
+    border: 4px solid #909090;
+}
 .modal-change-add{
     padding: 2vh 2vw !important;
     background-image: linear-gradient(180deg, black, #3e3e3e7a, transparent) !important;
@@ -26,18 +34,20 @@
     display: flex;
     align-items: center;
     position: relative;
-    padding: 15px 10vw;
+    padding: 15px 2vw;
     border-bottom: 0px solid #e5e5e5;
+    background: white;
 }
 .modal-change-add-body{
     display: flex;
     /* align-items: center; */
     position: relative;
-    padding: 15px 10vw; 
+    padding: 15px 2vw; 
     /* min-height: 80vh; */
     /* max-height: 80vh; */
     /* overflow: auto;  */
     font-family: 'Sarabun', sans-serif;
+    background: white;
     /* font-family: 'Sarabun', sans-serif */
 }
 .modal-change-add-header>button{
@@ -45,7 +55,7 @@
     right: -12px;
     top: -12px;
     font-size: 24px;
-    border: 2px solid #000000 !important;
+    border: 3px solid #919191 !important;
     width: 24px;
     height: 24px;
     opacity: 1;
@@ -322,9 +332,9 @@ h2 {
     height: 100% !important;
     z-index: 2;
 }
-canvas {
+canvas.showpic {
     height:200px;
-    border:1px solid lightgray;
+    /* border:1px solid lightgray; */
 }
 .btn-add-review{
     outline: none !important;
@@ -341,6 +351,15 @@ canvas {
 .btn-add-review:hover{
     bottom: -3px;
 }
-  .btn-add-review:focus:active{
+.btn-add-review:focus:active{
     box-shadow: inset 0px 0px 4px 1px #b5abab;
+}
+#reviewList thead tr th:nth-child(1){
+    width: 50%;
+}
+#reviewList thead tr th:nth-child(2){
+    width: 25%;
+}
+#reviewList thead tr th:nth-child(3){
+    width: 25%;
 }
