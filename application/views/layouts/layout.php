@@ -12,6 +12,7 @@
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/font-awesome/4.7.0/css/font-awesome.min.css" />  
+		<link rel="stylesheet" href="<?=base_url()?>assets/css/jquery-ui.min.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" /> 
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/ace-rtl.min.css" /> 

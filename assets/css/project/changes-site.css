@@ -24,38 +24,41 @@
     border: none; 
 }
 .modal-box{
-    border: 4px solid #909090;
+    border: 2px solid #000000;
 }
 .modal-change-add{
     padding: 2vh 2vw !important;
-    background-image: linear-gradient(180deg, black, #3e3e3e7a, transparent) !important;
+    background-image: linear-gradient(180deg, black, #3e3e3e7a, #3e3e3e44) !important;
 }
 .modal-change-add-header{
     display: flex;
     align-items: center;
     position: relative;
-    padding: 15px 2vw;
+    padding: 12px 2vw 1px;
     border-bottom: 0px solid #e5e5e5;
     background: white;
 }
 .modal-change-add-body{
-    display: flex;
-    /* align-items: center; */
+    display: flex; 
     position: relative;
-    padding: 15px 2vw; 
-    /* min-height: 80vh; */
-    /* max-height: 80vh; */
-    /* overflow: auto;  */
+    padding: 2px 2vw 1px; 
     font-family: 'Sarabun', sans-serif;
-    background: white;
-    /* font-family: 'Sarabun', sans-serif */
+    background: white; 
+}
+.modal-change-add-footer{
+    display: flex; 
+    position: relative;
+    padding: 16px 2vw 16px; 
+    font-family: 'Sarabun', sans-serif;
+    background: white; 
+    border: none;
 }
 .modal-change-add-header>button{
     position: absolute;
     right: -12px;
     top: -12px;
-    font-size: 24px;
-    border: 3px solid #919191 !important;
+    font-size: 15px;
+    border: 2px solid #000000 !important;
     width: 24px;
     height: 24px;
     opacity: 1;
@@ -244,6 +247,9 @@ h2 {
 .justify-center{
     justify-content: center;
 }
+.justify-end{
+    justify-content: flex-end;
+}
 .aligns-center{ align-items: center;}
 .sp-between{
     justify-content: space-between;
@@ -256,7 +262,7 @@ h2 {
     padding-top: 15px;
 }
 .req-section{
-    border-bottom: 2px solid #333;
+    /* border-bottom: 2px solid rgb(0, 0, 0); */
     
 }
 .req-title{
@@ -362,4 +368,49 @@ canvas.showpic {
 }
 #reviewList thead tr th:nth-child(3){
     width: 25%;
+}
+table.table-input{
+    width:100%; 
+    margin-top:8px; 
+    margin-bottom: 0px;
+    z-index:2;
+    background-color: white;
+}
+table.table-input tr td input{
+    width: 100%;
+}
+.btn-confirm-group{
+    display: flex;
+    align-items: center;
+    height: 33px;
+    justify-content: space-around;
+}
+.section-input-request{
+    padding: 16px 16px 0px 8px;
+    border: 2px solid #000000;
+}
+.btn--in--table::after{
+    content: "\e072";
+    position: absolute;
+    top: -11px;
+    left: 5px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    transform: rotate(270deg);
+    color: black;
+}
+.ui-tooltip {
+    background-color: #fff;
+    color: #000;
+    height: 22px;
+    padding: 3px 12px;
+    min-width: 38px;
+    display: flex !important;
+    align-items: center;
+    border: 1px solid #000 !important;
+    border-radius: 4px;
 }

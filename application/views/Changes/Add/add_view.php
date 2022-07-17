@@ -8,10 +8,10 @@
 		<div id="signup-box" class="signup-box widget-box no-border">
 			<div class="widget-body">
 				<div class="widget-main">
-					<h4 class="header green lighter bigger"><i class="ace-icon fa fa-info-circle blue"></i>Change Request</h4>
+					<h4 class="header green lighter bigger"><i class="ace-icon fa fa-info-circle blue"></i>4M Change Request</h4>
 					<div class="space-6"></div>
 					<div>
-						<button type="button" class="btn-change-add" onclick="$(`#modal-sheet-add`).modal('show');">
+						<button type="button" class="btn-change-add" onclick="$(`#modal-sheet-add`).modal('show');" title="TEST DATA">
 							<span>Add new change request</span>
 							<i class="fa fa-plus-square" aria-hidden="true"></i>
 						</button>
@@ -113,7 +113,7 @@
 					<div class="content-request">
 						<div class="request-box">
 							<div class="flex flex-row flex-wrap">
-								<div class="flex flex-column width-100">
+								<div class="flex flex-column width-100 section-input-request">
 									<div class="container-row">
 										<span class="title-subject">1. สาเหตุ / ความจำเป็นในการเปลี่ยนแปลง</span>	
 									</div>
@@ -145,7 +145,7 @@
 										</div>									
 									</div>	
 								</div>
-								<div class="flex flex-column width-50">
+								<div class="flex flex-column width-50 section-input-request">
 									<div class="container-row">
 										<span class="title-subject">2. รายละเอียดการเปลี่ยนแปลง</span>	
 									</div>
@@ -159,7 +159,7 @@
 										<div class="req-input flex flex-column">
 											<span class="req-title flex">สภาพก่อนเปลี่ยนแปลง / สภาพปกติ</span>
 											<label for="file-beforechange" class="attach-component width-100">
-												<input type="file" name="file-beforechange" style="display: none;"/>
+												<input type="file" name="file-beforechange" style="display: none;" attach-request/>
 												<span class="sp-filename">กรุณาแนบไฟล์</span>
 												<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 											</label>
@@ -169,7 +169,7 @@
 										<div class="req-input flex flex-column">
 											<span class="req-title flex">สภาพที่จะเปลี่ยนแปลง</span>
 											<label for="file-tochange" class="attach-component width-100">
-												<input type="file" name="file-tochange" style="display: none;"/>
+												<input type="file" name="file-tochange" style="display: none;" attach-request/>
 												<span class="sp-filename">กรุณาแนบไฟล์</span>
 												<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 											</label>
@@ -182,7 +182,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">ใบแจ้งซ่อม (คืนสภาพแล้ว หรือชั่วคราว)</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -190,7 +190,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">Revised 3M Conditions</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -198,7 +198,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">ECR , ใบขอใช้กรณีพิเศษ (Special Use ทั้งภายนอกและภายใน)</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -206,7 +206,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">EWR (Material : นำงาน Rework มาเข้ากระบวนการ)</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -214,7 +214,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">ผลการตรวจสอบ,ผลการ Sorting</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -222,7 +222,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">ใบประเมินพนักงาน,รายงานการทดลองผลิต</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -230,7 +230,7 @@
 												<div class="req-input flex flex-column">
 													<span class="req-title flex">อื่น</span>
 													<label for="file-tochange" class="attach-component">
-														<input type="file" name="file-tochange" style="display: none;"/>
+														<input type="file" name="file-tochange" style="display: none;" attach-request/>
 														<span class="sp-filename">กรุณาแนบไฟล์</span>
 														<button class="btn-attach"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 													</label>
@@ -239,7 +239,7 @@
 										</div> 
 									</div>	
 								</div>
-								<div class="flex flex-column width-50">
+								<div class="flex flex-column width-50 section-input-request">
 									<div class="container-row">
 										<span class="title-subject">3. การตรวจสอบเบื้องต้น</span>	
 									</div>
@@ -247,24 +247,23 @@
 										<div class="req-input flex flex-column">
 											<span class="req-title flex">ภาพร่าง ตำแหน่งชิ้นงานที่มีผลกระทบจากการเปลี่ยนแปลง</span>
 											<label for="file-imagechange" class="attach-component width-100">
-												<input type="file" name="file-imagechange" onchange="upload()" id="finput" style="display: none;" />
+												<input type="file" name="file-imagechange" onchange="upload()" id="finput" style="display: none;" attach-request/>
 												<span class="sp-filename">กรุณาแนบไฟล์</span>
-												<button class="btn-attach" onclick="$('input[name=file-imagechange]').click()">
+												<button class="btn-attach">
 													<i class="fa fa-paperclip" aria-hidden="true"></i>
 												</button> 
-											</label> 
-											
+											</label>  
 										</div> 
 									</div>
 									<div class="container-row req-subdetail">
-										<div class="req-input flex justify-center" style="border: 1px solid #c2c2c2;"> 
-											<canvas id="can" class="showpic" style="max-width: 100%;max-height: 100%; overflow:auto;"></canvas>
+										<div class="req-input flex justify-center" style="border: 1px solid #c2c2c2; height: 40vh;"> 
+											<canvas id="can" class="showpic" style="max-width: 100%;height: 100%; overflow:auto;"></canvas>
 										</div> 
 									</div>
-									<div class="container-row req-subdetail flex">
+									<div class="container-row req-subdetail flex ">
 										<div class="req-input flex flex-column width-100">
 											<span class="req-title flex">ตรวจสอบจุดเปลี่ยนแปลง</span>
-											<table class="table table-striped table-bordered table-hover dataTable no-footer" id="reviewList" style="width:100%; margin-top:8px; z-index:1;"> 
+											<table class="table table-striped table-bordered table-hover table-input" id="reviewList" style=""> 
 											<thead>
 												<tr>
 													<th>จุดตรวจสอบ</th>
@@ -272,24 +271,22 @@
 													<th>ผลการตรวจวัด</th> 
 												</tr>                    
 											</thead>
-											<tbody>
-												<tr>
-													<td><input type="text" class="from-coltrol"/></td>
-													<td><input type="text" class="from-coltrol"/></td>
-													<td>คลิกปุ่ม + เพื่อเพิ่มข้อมูล</td>
-												</tr>
-												<tr><td colspan="3">คลิกปุ่ม + เพื่อเพิ่มข้อมูล</td></tr>
+											<tbody> 
+												
 											</tbody> 
+											<tfoot>
+												<tr><td colspan="3">คลิกปุ่ม + เพื่อเพิ่มข้อมูล</td></tr>
+											</tfoot>
 											</table> 
 										</div> 
-										<button type="button" class="btn-add-review"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
+										<button type="button" class="btn-add-review" onclick="addReview('#reviewList', this)"><i class="fa fa-plus-square-o" aria-hidden="true"></i></button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
+				<div class="modal-footer modal-change-add-footer justify-end">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>				
@@ -297,3 +294,22 @@
 		</div>
 	</div>
 </div>
+
+<template for-site="add-button--intable"> 
+	<tr>
+		<td><input type="text" class="from-coltrol"/></td>
+		<td><input type="text" class="from-coltrol"/></td>
+		<td>
+			<div class="btn-confirm-group">
+				<button class="btn btn-sm btn-success" title="ผ่าน" data--tooltip="tooltip-table"><i class="fa fa-check-circle" aria-hidden="true" ></i></button>
+				<button class="btn btn-sm btn-danger" title="ไม่ผ่าน" data--tooltip="tooltip-table"><i class="fa fa-times-circle" aria-hidden="true" ></i></button>
+				<button class="btn btn-sm btn-warning" onclick="removeRow(this)" title="ยกเลิก" data--tooltip="tooltip-table"><i class="fa fa-minus-circle" aria-hidden="true" ></i></button>
+			</div> 
+		</td>
+	</tr> 
+</template>
+
+<template for-site="toottip--template"> 
+	<div class="tooltip" role="tooltip"><div class="arrow" style="z-index:9999; background:red;"></div><div class="tooltip-inner"></div></div> 
+</template>
+ 
