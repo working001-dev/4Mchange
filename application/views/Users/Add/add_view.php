@@ -23,22 +23,21 @@
                                         <i class="ace-icon fa fa-user"></i>
                                     </span>
                                 </label>
-
-                                <label class="block clearfix">
-                                    <label for="u-passWord">Password</label>
+                                <label class="block clearfix ">
+                                    <label for="u-firstName">First Name</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="Password" name="u-passWord"/>
-                                        <i class="ace-icon fa fa-lock"></i>
+                                        <input type="email" class="form-control" placeholder="First name" name="u-firstName" />
+                                        <i class="ace-icon fa fa-address-card-o"></i>
                                     </span>
                                 </label>
-
-                                <label class="block clearfix">
-                                    <label for="u-repassWord">Repeat password</label>
+                                <label class="block clearfix ">
+                                    <label for="u-lastName">Last Name</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="Repeat password"  name="u-repassWord" />
-                                        <i class="ace-icon fa fa-retweet"></i>
-                                    </span>
-                                </label>                                 
+                                        <input type="email" class="form-control" placeholder="Last name" name="u-lastName" />
+                                        <i class="ace-icon fa fa-address-card-o"></i>
+                                    </span> 
+                                </label>  
+                                
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-md-0">
@@ -47,13 +46,14 @@
                                     <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="role"></select> 
                                 </label>
                                 <label class="block clearfix">
+                                    <label for="role">User group</label>
+                                    <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="userGroup"></select> 
+                                </label>                                
+                                <label class="block clearfix">
                                     <label for="role">User action</label>
                                     <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="roleAction"></select> 
                                 </label>
-                                <label class="block clearfix">
-                                    <label for="role">User group</label>
-                                    <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="userGroup"></select> 
-                                </label>
+
                                 <!-- <div class="u-content">
                                     <div class="u-box">
                                         <div style="flex:10%;"><img class="" src="assets/images/avatars/take-a-photo.png" style="width:160px;  height: 160px; "/></div>
@@ -79,7 +79,7 @@
                                         <i class="ace-icon fa fa-envelope"></i>
                                     </span>
                                 </label>
-                                <label class="block clearfix col-lg-6">
+                                <label class="block clearfix col-lg-6" for="u-gender">
                                     <label for="#">Gender</label>
                                     <span class="flex">
                                         <input type="button" class="form-control btn-switch" name="u-gender" gen-flag = "1" value="Male"/>
@@ -90,19 +90,20 @@
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <label class="block clearfix col-lg-6">
-                                    <label for="u-firstName">First Name</label>
+                                    <label for="u-passWord">Password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="email" class="form-control" placeholder="First name" name="u-firstName" />
-                                        <i class="ace-icon fa fa-address-card-o"></i>
+                                        <input type="password" class="form-control" placeholder="Password" name="u-passWord"/>
+                                        <i class="ace-icon fa fa-lock"></i>
                                     </span>
                                 </label>
+
                                 <label class="block clearfix col-lg-6">
-                                    <label for="u-lastName">Last Name</label>
+                                    <label for="u-repassWord">Repeat password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="email" class="form-control" placeholder="Last name" name="u-lastName" />
-                                        <i class="ace-icon fa fa-address-card-o"></i>
-                                    </span> 
-                                </label>                                   
+                                        <input type="password" class="form-control" placeholder="Repeat password"  name="u-repassWord" />
+                                        <i class="ace-icon fa fa-retweet"></i>
+                                    </span>
+                                </label>                                  
                             </div>
 							<!-- <div class="space-24"></div> -->
 

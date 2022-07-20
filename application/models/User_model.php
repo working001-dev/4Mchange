@@ -46,7 +46,56 @@
             $query = $this->db->get();
             return $query->result();
         }
-
+        
+        public function getting_role_group($id = 0){
+            $this->db->select('rog.roleGroupId, rog.roleGroupName, rog.description, rog.isActive');
+            $this->db->from('tbrole_group rog');
+            $this->db->where('rog.isDeleted', 0);    
+            if( $id != 0 ){
+                $this->db->where('rog.roleGroupId', $id); 
+            }
+            $query = $this->db->get();
+            return $query->result();            
+        }
+        public function setting_role_group($data){
+            $id = 0;
+            $query = $this->db->insert_batch('tbrole_group', $data);
+            if( $query == 1){ 
+                $id = $this->db->insert_id(); 
+            } 
+            return $this->getting_role_group($id); 
+        }
+        public function updating_role_group_data($id, $userId, $value){
+            $dateTime = date('Y-m-d H:i:s'); 
+ 
+            $this->db->set('roleGroupName', "'{$value["groupName"]}'", FALSE);
+            $this->db->set('description', "'{$value["description"]}'", FALSE);
+            $this->db->set('isActive', 0, FALSE); 
+            $this->db->set('updateDate', "'{$dateTime}'", FALSE);
+            $this->db->set('updateBy', $userId, FALSE);
+            $this->db->where('roleGroupId', $id);
+            $query = $this->db->update('tbrole_group');
+            return $query; 
+        }
+        public function updating_role_group_acitve($id, $status, $userId){
+            $dateTime = date('Y-m-d H:i:s'); 
+            $this->db->set('isActive', $status, FALSE);
+            $this->db->set('updateDate', "'{$dateTime}'", FALSE);
+            $this->db->set('updateBy', $userId, FALSE);
+            $this->db->where('roleGroupId', $id);
+            $query = $this->db->update('tbrole_group');
+            return $query; 
+        }
+        public function updating_role_group_deleted($id, $userId){
+            $dateTime = date('Y-m-d H:i:s'); 
+            $this->db->set('isActive', 0, FALSE);
+            $this->db->set('isDeleted', 1, FALSE);
+            $this->db->set('updateDate', "'{$dateTime}'", FALSE);
+            $this->db->set('updateBy', $userId, FALSE);
+            $this->db->where('roleGroupId', $id);
+            $query = $this->db->update('tbrole_group');
+            return $query; 
+        }
         // public function update_entry()
         // {
         //         $this->title    = $_POST['title'];

@@ -54,7 +54,8 @@ var GenarateMenu = () => {
             _menu.forEach( m => { _l.find("ul.submenu").append(setMenu(m, m.roleMenuId == ActivedMenu?.roleMenuId ? "active" : "")); });
         }
     });    
-  }catch{
+  }catch(e){
+    console.log(e)
     throw "Generate error"
   }
 
@@ -66,7 +67,8 @@ var GenarateHeadTitle = (t) => {
       `<li><i class="ace-icon ${t.icon} home-icon"></i><a href="#">${t.groupMenuName?.toUpperCase()}</a></li>
       <li class="active">${t.menuName}</li>`
     );
-  }catch{
+  }catch(e){
+    console.log(e)
     throw "Generate error"
   }
 };
@@ -74,7 +76,8 @@ var GenarateHeadPage = (t) => {
   try{
     let headTitle = $(".page-content .page-header");
     headTitle.html(`<h1>${t.menuName}<small><i class="ace-icon fa fa-angle-double-right"></i> ${t.menuDescription}</small></h1>`);
-  }catch{
+  }catch(e){
+    console.log(e)
     throw "Generate error"
   }
 };
@@ -90,7 +93,8 @@ var GenarateBodypage = async (u) =>{
   
     $("body").append(_s);
     $("head").append(_c);
-  }catch{
+  }catch(e){
+    console.log(e)
     throw "Generate error"
   }
 };
@@ -131,7 +135,8 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
       eval($("script[local-section=reeval]").html());
       window.history.replaceState("object or string", "Title", `${_UrlProject}#/${alink.text()}`);
     }else return false;    
-  }catch{
+  }catch(e){
+    console.log(e)
     await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
     //setTimeout( () => { location.href = `${_UrlProject}home/logout` }, 3000 );
   }
@@ -144,10 +149,11 @@ window.onload = async function(){
     GeneateNavUserInfo();
     GenarateHeadTitle(ActivedMenu);
     GenarateHeadPage(ActivedMenu); 
-    setTimeout( ()=>LoadingPage.hide(280), 1000);
+    setTimeout(()=>LoadingPage.hide(280), 1000);
     //$(".nav.ace-nav").slideDown("slow");
     $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
-  }catch{
+  }catch(e){
+    console.log(e)
     await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
     //setTimeout( () => { location.href = `${_UrlProject}home/logout` }, 3000 );
   }

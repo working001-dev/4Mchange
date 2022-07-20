@@ -9,8 +9,13 @@
 				<div class="widget-main">
 					<h4 class="header green lighter bigger"><i class="ace-icon fa fa-info-circle blue"></i>4M Change Manage</h4>
 					<div class="space-6"></div>
-					<div>
-
+					<div class="seection-actions">
+						<div class="actions-header">
+							<h4>Wait actions</h4>
+						</div>
+						<div class="actions-body">
+							<table class="table" id="tb-wait--action" style="width:100%"></table>
+						</div>
 					</div>
 				</div>
 			</div>

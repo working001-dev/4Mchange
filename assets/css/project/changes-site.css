@@ -414,3 +414,22 @@ table.table-input tr td input{
     border: 1px solid #000 !important;
     border-radius: 4px;
 }
+
+#tb-wait--action thead>tr th:nth-child(1),
+#tb-wait--action thead>tr th:nth-child(3),
+#tb-wait--action thead>tr th:nth-child(4),
+#tb-wait--action thead tr>th:nth-child(5){
+    min-width: 80px !important;
+    max-width: 80px !important; 
+}
+#tb-wait--action thead tr>th:nth-child(2){
+    min-width: 500px !important;
+    max-width: 500px !important; 
+}
+/* 
+#tb-wait--action thead tr>th:nth-child(1){
+    min-width: 80px;
+}
+#tb-wait--action thead tr>th:nth-child(1){
+    min-width: 80px;
+} */
