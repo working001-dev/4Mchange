@@ -15,7 +15,7 @@
 					<form>
 					    <fieldset> 
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="userName">Username</label>
                                     <span class="block input-icon input-icon-right">
                                         <input type="text" class="form-control" placeholder="Username" name="userName" value="<?=$this->session->user?>" readonly/>
@@ -23,33 +23,33 @@
                                     </span>
                                 </label>
 
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="old-passWord">Old Password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="Old Password" name="u-passWord"/>
+                                        <input type="password" class="form-control" placeholder="Old Password" name="old-passWord" vali="true" vali--message="Please input old password" add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-lock"></i>
                                     </span>
                                 </label>
 
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="new-passWord">New password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="New password"  name="new-passWord" />
+                                        <input type="password" class="form-control" placeholder="New password"  name="new-passWord" vali="true" vali--message="Please input new password" add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-retweet"></i>
                                     </span>
                                 </label> 
 
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="new-repassWord">Repeat password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="Repeat password"  name="new-repassWord" />
+                                        <input type="password" class="form-control" placeholder="Repeat password"  name="new-repassWord" vali="true" vali--message="Please confirm password" add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-retweet"></i>
                                     </span>
                                 </label>                                 
                             </div> 
 							<!-- <div class="space-24"></div> --> 
 							<div class="u-sticky col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2"> 
-								<button type="button" class="width-20 pull-center btn btn-sm btn-success u-btn-register" style="background: green; margin-top: 15px;min-width: 160px; max-width: 160px;">
+								<button type="button" onclick="changeDetail(this)" class="width-20 pull-center btn btn-sm btn-success u-btn-register" style="background: green; margin-top: 15px;min-width: 160px; max-width: 160px;">
 									<span class="bigger-110">Change Password</span> 
 									<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
 								</button>

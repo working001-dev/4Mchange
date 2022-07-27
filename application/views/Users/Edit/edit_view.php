@@ -15,7 +15,7 @@
                     <form>
                         <fieldset>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="userName">Username</label>
                                     <span class="block input-icon input-icon-right">
                                         <input type="text" class="form-control" placeholder="Username" name="userName" value="<?= $this->session->user ?>" readonly />
@@ -23,23 +23,23 @@
                                     </span>
                                 </label>
 
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="firstName">First Name</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="text" class="form-control" placeholder="First Name" name="firstName" />
+                                        <input type="text" class="form-control" placeholder="First Name" name="firstName" vali="true" vali--message="Please input first name for update user." add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-address-card-o"></i>
                                     </span>
                                 </label>
 
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="lastName">Last Name</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="text" class="form-control" placeholder="Last Name" name="lastName" />
+                                        <input type="text" class="form-control" placeholder="Last Name" name="lastName" vali="true" vali--message="Please input last name for update user." add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-address-card-o"></i>
                                     </span>
                                 </label>
 
-                                <label class="block clearfix">
+                                <label class="block clearfix form-group">
                                     <label for="email">Email</label>
                                     <span class="block input-icon input-icon-right">
                                         <input type="text" class="form-control" placeholder="Email" name="email" />
@@ -47,26 +47,27 @@
                                     </span>
                                 </label>
 
-                                <label class="block clearfix">
-                                    <label for="email">Gender</label>
-                                    <span class="block input-icon input-icon-right">
-                                        <div class="radio">
-                                            <label>
-                                                <input  type="radio" class="ace" name="gender" value="1">
-                                                <span class="lbl"> Male <i class="fa fa-male" aria-hidden="true"></i></span>
+                                <label class="block clearfix form-group">
+                                    <label for="userGender">Gender</label>  
+                                        <div class="group--form--radio">
+                                            <label class="group--radio">
+                                                <input type="radio" class="ace" name="userGender" gen-flag = "1" value="male">
+                                                <div class="check"></div>
+                                                <label for="userGender"> Male</label>  			
                                             </label>
-                                            <label>
-                                                <input   type="radio" class="ace" name="gender" value="2">
-                                                <span class="lbl"> Female<i class="fa fa-female" aria-hidden="true"></i></span>
-                                            </label>                                            
-                                        </div> 
+                                            <label class="group--radio">
+                                                <input type="radio" class="ace" name="userGender" gen-flag = "2" value="female">
+                                                <div class="check"></div>
+                                                <label for="userGender"> Female</label>  			
+                                            </label>
+                                        </div>
                                     </span> 
                                 </label> 
  
                             </div>
                             <!-- <div class="space-24"></div> -->
                             <div class="u-sticky col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
-                                <button type="button" class="width-20 pull-center btn btn-sm btn-success u-btn-register" style="background: green; margin-top: 15px;min-width: 160px; max-width: 160px;">
+                                <button type="button" class="width-20 pull-center btn btn-sm btn-success u-btn-register" onclick="changeDetail(this)" style="background: green; margin-top: 15px;min-width: 160px; max-width: 160px;">
                                     <span class="bigger-110">Save Change</span>
                                     <i class="ace-icon fa fa-floppy-o icon-on-right"></i>
                                 </button>

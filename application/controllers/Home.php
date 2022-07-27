@@ -43,6 +43,7 @@ class Home extends CI_Controller {
 					"groupMenu" => $this->umd->getting_group_menu($info[0]->roleId),
 					"menu" => $this->umd->getting_menu($info[0]->roleId)
 				); 
+				$this->umd->updating_LastDateTime($info[0]->userLoginId);
 				echo json_encode( array("status" => "200", "message" => "success!", "info"=>$this->session->info) );				
 			}else echo json_encode( array("status" => "403", "message" => "not permission accress!") );
 

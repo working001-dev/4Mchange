@@ -27,7 +27,7 @@ class Users extends CI_Controller {
 		 
  
 	}
-
+	#region Get Page View
 	public function add()
 	{
 		if( !is_null($this->input->post('content')) ){
@@ -98,12 +98,103 @@ class Users extends CI_Controller {
 			}
 		} 
 	}
+	#endregion
+	
+
 	public function infoMember()
 	{
 		echo json_encode($this->session->info);
 	}
+
+	#region For page Add user
+	public function settingUserLogin(){
+		echo json_encode($this->umd->setting_user_login( array( $this->input->post('ins')) ) );	
+	} 
+	#endregion
+
+	#region For page Manage User
+
+	public function gettingMemberList(){
+		echo json_encode($this->umd->getting_user_list());
+	}
+	public function updatingUserActive(){
+		$id = $this->input->post('loginId');
+		$status = $this->input->post('active');
+		$results = json_decode(json_encode($this->session->info["info"]), true); 
+		echo json_encode( $this->umd->updating_user_acitve($id, $status, $results[0]["userLoginId"]) );
+	}
+	#endregion
+
+	#region For page Edit Profile
+	public function updatingUserLogin(){
+		echo json_encode($this->umd->updating_user_login($this->input->post('upd'), $this->input->post('loginId') ) );	
+	} 
+	#endregion
+
+	#region For page Change Password
+	public function checkPassWord(){
+		echo json_encode($this->umd->chacking_user_pass($this->input->post('us'), $this->input->post('ps')));	
+	} 
+	public function updatingNewPassword(){
+		$update = $this->input->post('update');  
+		echo json_encode( $this->umd->updating_new_pass($update) );
+	}
+	#endregion
+
+	#region For page Manage Group Permission
+	public function gettingMenu(){
+		$rst = $this->umd->getting_menu($this->input->get('roleId'));
+		if(!empty($rst) && $this->input->get('roleId') != 0){
+			echo json_encode($rst);
+		} else {
+			echo json_encode($this->umd->getting_menu_master());
+		} 
+	}
+	public function settingRoleMenu(){
+		$parm = $this->input->post('ins');
+		if($parm["roleMenuId"] != 0 ) $this->umd->deleting_role_menu(array("roleMenuId" => $parm["roleMenuId"]));
+
+		return $this->umd->setting_role_menu(array("roleId" => $parm["roleId"], "groupMenuId" => $parm["groupMenuId"], "menuId" => $parm["menuId"]));
+	}	
+	public function deletingRoleMenu(){ 
+		$parm = $this->input->post('ins');
+		return $this->umd->deleting_role_menu(array("roleMenuId" => $parm["roleMenuId"]));
+	}	
+	#endregion
+	
+	#region For page Permission
+	public function gettingRole(){
+		$id = $this->input->get('id') ?? 0; 
+		$ignoreAcive = (int)$this->input->get("ign") ?? 0;
+		echo json_encode($this->umd->getting_role($id, (int)$ignoreAcive));
+	}
+	public function settingRole(){
+		echo json_encode($this->umd->setting_role( array( $this->input->post('ins')) ) );	
+	}
+	public function updatingRoleActive(){
+		$id = $this->input->post('id');
+		$status = $this->input->post('active');
+		$results = json_decode(json_encode($this->session->info["info"]), true); 
+		echo json_encode( $this->umd->updating_role_acitve($id, $status, $results[0]["userLoginId"]) );
+	}
+	public function updatingRoleDeleted(){
+		$id = $this->input->post('id'); 
+		$results = json_decode(json_encode($this->session->info["info"]), true); 
+		echo json_encode( $this->umd->updating_role_deleted($id, $results[0]["userLoginId"]) );
+	}
+	public function updatingRoleData(){
+		$id = $this->input->post('id'); 
+		$val = $this->input->post("values");
+		$results = json_decode(json_encode($this->session->info["info"]), true); 
+		echo json_encode( $this->umd->updating_role_data( $id, $results[0]["userLoginId"], $val) );
+	}
+	#endregion
+	
+	#region For page Permission Group
 	public function gettingRoleGroup(){
-		echo json_encode($this->umd->getting_role_group());
+		$id = $this->input->get('id') ?? 0; 
+		$ignoreAcive = (int)$this->input->get("ign") ?? 0;
+		echo json_encode($this->umd->getting_role_group($id, (int)$ignoreAcive));
 	}
 	public function settingRoleGroup(){
 		echo json_encode($this->umd->setting_role_group( array( $this->input->post('ins')) ) );	
@@ -125,4 +216,5 @@ class Users extends CI_Controller {
 		$results = json_decode(json_encode($this->session->info["info"]), true); 
 		echo json_encode( $this->umd->updating_role_group_data( $id, $results[0]["userLoginId"], $val) );
 	}
+	#endregion
 }

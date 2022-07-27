@@ -11,7 +11,7 @@
     src: url("../../fonts/Sarabun/Sarabun-Thin.ttf") format("truetype");
 } 
 body{
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', 'Sarabun', sans-serif;
     overflow: hidden !important;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -426,12 +426,12 @@ button[data-toggle="dropdown"]{
     flex-wrap: nowrap;
     box-sizing: border-box;
     padding: 0px 12px !important;
-    border-bottom: 1px solid #16394d;
+    border-bottom: 1px solid #adb2b6;
     color: #fff;
     padding-top: 2px !important;
     padding-bottom: 2px !important;
     color: #101010;
-    box-shadow: 0px 1px 0px 0px #16394d;
+    box-shadow: 0px 1px 0px 0px #b3bfc6ab;
     /* color: #2679B5; */
 
 }
@@ -441,7 +441,7 @@ button[data-toggle="dropdown"]{
 
 }
 .widget-headers .input-icon>input {
-    border: 2px solid #16394d;
+    border: 2px solid #b3bfc6ab;
     padding: 3px 14px 3px 40px;
     border-radius: 20px !important;
     /* padding-top: 2px !important; */
@@ -449,6 +449,7 @@ button[data-toggle="dropdown"]{
 .input-icon>.ace-icon-permission { 
     position: absolute; 
     left: 10px; 
+    color: #b3bfc6ab;
 }
 .widget-headers h4{
     letter-spacing: 2px !important;
@@ -461,7 +462,7 @@ button[data-toggle="dropdown"]{
 } /* the new scrollbar will have a flat appearance with the set background color */
 
 .customscroll::-webkit-scrollbar-thumb {
-    background-color: rgba(235, 233, 248, 0.712); 
+    background-color: rgba(235, 233, 248, 0.323); 
 } /* this will style the thumb, ignoring the track */
 
 /* .customscroll::-webkit-scrollbar-button {
@@ -473,4 +474,16 @@ button[data-toggle="dropdown"]{
 } if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
 .customscroll::-webkit-scrollbar-thumb:hover {
     background: rgba(137, 137, 137, 0.704); 
+}
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.vali {
+    background: red;
+    padding: 2px 5px;
+    color: white;
+    font-size: 10px !important;
+    margin-left: 8px;
 }

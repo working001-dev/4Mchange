@@ -28,7 +28,8 @@
 }
 .modal-change-add{
     padding: 2vh 2vw !important;
-    background-image: linear-gradient(180deg, black, #3e3e3e7a, #3e3e3e44) !important;
+    /* background-image: linear-gradient(180deg, black, #3e3e3e7a, #3e3e3e44) !important; */
+    background-color: #afafaf;
 }
 .modal-change-add-header{
     display: flex;

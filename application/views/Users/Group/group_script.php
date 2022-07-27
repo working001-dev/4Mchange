@@ -3,7 +3,7 @@
 
 <script type="text/javascript" local-section="true">
     var roleTable = undefined;
-    var validateCheck = ($t) => ( $($t).toArray().filter( f => $(f).val() ) );
+    var validateCheck = ($t) => ( $($t).toArray().filter( f => $(f).val() == '' ) );
     var __headerGroup = [
         { title:"GROUP ID"},
         { title:"GROUP NAME"},
@@ -27,7 +27,7 @@
         $("#create--new").on("click",async function(){
             debugger;
             var checkValidate = validateCheck("[vali=true]");
-            if( !checkValidate[0] ){
+            if( checkValidate[0] ){
                 checkValidate?.forEach( e => {
                     let mess = $(e).attr("vali--message");
                     let findLabel = $(e).closest(".form-group").find("label")
@@ -108,6 +108,7 @@
                 let rowData = roleTable.row(rowAction).data();       
                 $("input[name=groupPermission]").val(rowData[1]);
                 $("textarea[name=description]").val(rowData[2]);  
+                
                 
                 $("#create--new").addClass("dnone-btn");
                 $("#update--new").removeClass("dnone-btn");

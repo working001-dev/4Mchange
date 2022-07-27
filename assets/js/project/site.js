@@ -11,7 +11,7 @@ const Toast = Swal.mixin({
 })
 var _UrlProject = typeof __u ? `${window.location.origin}/${window.location.pathname.slice(1).split("/")[0]}/` : b64_to_utf8(__u);
 
-var MemberInfo = JSON.parse(localStorage?.info || "{}");
+var MemberInfo = getStorage("info");
 var GroupMenu = JSON.parse(localStorage?.groupMenu || "{}");
 var Menu = JSON.parse(localStorage?.menu || "{}");
 var ActivedMenu = JSON.parse(localStorage?.actived || "{}");
@@ -173,4 +173,10 @@ function utf8_to_b64( str ) {
 
 function b64_to_utf8( str ) {
   return decodeURIComponent(escape(window.atob( str )));
+}
+function setStorage(key, $_d){
+  localStorage.setItem(key, JSON.stringify($_d));
+}
+function getStorage(key){
+  return JSON.parse(localStorage[key] || "{}");
 }

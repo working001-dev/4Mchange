@@ -16,96 +16,79 @@
 					<form>
 					    <fieldset> 
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                <label class="block clearfix">
-                                    <label for="u-userName">Username</label>
+                                <label class="block clearfix form-group">
+                                    <label for="userLoginName">Username</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="text" class="form-control" placeholder="Username" name="u-userName"/>
+                                        <input type="text" class="form-control" placeholder="Username" name="userLoginName" vali="true" vali--message="Please input username for create user." add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-user"></i>
                                     </span>
                                 </label>
-                                <label class="block clearfix ">
-                                    <label for="u-firstName">First Name</label>
+                                <label class="block clearfix form-group">
+                                    <label for="firstName">First Name</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="email" class="form-control" placeholder="First name" name="u-firstName" />
+                                        <input type="email" class="form-control" placeholder="First name" name="firstName" vali="true" vali--message="Please input First name for create user." add--new="user"  autocomplete="off"/>
                                         <i class="ace-icon fa fa-address-card-o"></i>
                                     </span>
                                 </label>
-                                <label class="block clearfix ">
-                                    <label for="u-lastName">Last Name</label>
+                                <label class="block clearfix form-group">
+                                    <label for="lastName">Last Name</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="email" class="form-control" placeholder="Last name" name="u-lastName" />
+                                        <input type="email" class="form-control" placeholder="Last name" name="lastName" vali="true" vali--message="Please input Last name for create user." add--new="user"  autocomplete="off"/>
                                         <i class="ace-icon fa fa-address-card-o"></i>
                                     </span> 
                                 </label>  
-                                
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-md-0">
-                                <label class="block clearfix">
-                                    <label for="role">User permission</label>
-                                    <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="role"></select> 
-                                </label>
-                                <label class="block clearfix">
-                                    <label for="role">User group</label>
-                                    <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="userGroup"></select> 
-                                </label>                                
-                                <label class="block clearfix">
-                                    <label for="role">User action</label>
-                                    <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="roleAction"></select> 
-                                </label>
-
-                                <!-- <div class="u-content">
-                                    <div class="u-box">
-                                        <div style="flex:10%;"><img class="" src="assets/images/avatars/take-a-photo.png" style="width:160px;  height: 160px; "/></div>
-                                        <div class="clearfix" style="flex:60%;">
-                                            <label for="role">User action</label>
-                                            <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="role"></select> 
-                                            <div class="u-action-info">
-                                                <span class="fa fa-exclamation-circle"></span>
-                                                <div>
-                                                    <pre class="upre"></pre>     
-                                                </div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>                                   -->
-                            </div>
-
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label class="block clearfix col-lg-6">
-                                    <label for="u-email">Email</label>
+                                <label class="block clearfix form-group">
+                                    <label for="userLoginPass">Password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="email" class="form-control" placeholder="Email" name="u-email" />
-                                        <i class="ace-icon fa fa-envelope"></i>
-                                    </span>
-                                </label>
-                                <label class="block clearfix col-lg-6" for="u-gender">
-                                    <label for="#">Gender</label>
-                                    <span class="flex">
-                                        <input type="button" class="form-control btn-switch" name="u-gender" gen-flag = "1" value="Male"/>
-                                        <input type="button" class="form-control btn-switch" name="u-gender" gen-flag = "2" value="Female"/>
-                                        <i class="i-show-gender fa fa-venus-mars"></i>
-                                    </span>
-                                </label>                                   
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                <label class="block clearfix col-lg-6">
-                                    <label for="u-passWord">Password</label>
-                                    <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="Password" name="u-passWord"/>
+                                        <input type="password" class="form-control" placeholder="Password" name="userLoginPass" vali="true" vali--message="Please input Password for create user." add--new="user" autocomplete="off"/>
                                         <i class="ace-icon fa fa-lock"></i>
                                     </span>
-                                </label>
-
-                                <label class="block clearfix col-lg-6">
+                                </label> 
+                                <label class="block clearfix form-group">
                                     <label for="u-repassWord">Repeat password</label>
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" class="form-control" placeholder="Repeat password"  name="u-repassWord" />
+                                        <input type="password" class="form-control" placeholder="Repeat password"  name="u-repassWord" vali="true" vali--message="Please Confirm password for create user." autocomplete="off"/>
                                         <i class="ace-icon fa fa-retweet"></i>
                                     </span>
                                 </label>                                  
                             </div>
-							<!-- <div class="space-24"></div> -->
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 p-md-0">
+                                <label class="block clearfix form-group">
+                                    <label for="role">User group</label>
+                                    <select class="selectpicker show-menu-arrow" title="please select Permission group"  data-width="100%" name="roleGroupId" vali="true" vali--message="Please choose User Group for create user." add--new="user"></select> 
+                                </label>  
+                                <label class="block clearfix form-group">
+                                    <label for="role">User permission</label>
+                                    <select class="selectpicker show-menu-arrow" title="please select Permission"  data-width="100%" name="roleId" vali="true" vali--message="Please choose User Permission for create user." add--new="user"></select> 
+                                </label>
+                              
+                                <label class="block clearfix form-group">
+                                    <label for="role">User action</label>
+                                    <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="action">
+                                        <option value="admin">Admin</option>
+                                        <option value="supperapprove">Supper Approve</option>
+                                        <option value="approve">Review Approve</option>
+                                        <option value="qc">Insprect Approve</option>
+                                        <option value="issue">Issuer</option>
+                                    </select> 
+                                </label> 
+                                <label class="block clearfix form-group">
+                                    <label for="email">Email</label>
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="email" class="form-control" placeholder="Email" name="email" add--new="user"/>
+                                        <i class="ace-icon fa fa-envelope"></i>
+                                    </span>
+                                </label>
+                                <label class="block clearfix form-group" for="userGender">
+                                    <label for="#">Gender</label>
+                                    <span class="flex">
+                                        <input type="button" class="form-control btn-switch" name="userGender" gen-flag = "1" value="male" vali--message="Please Choose Gender for create user." autocomplete="off"/>
+                                        <input type="button" class="form-control btn-switch" name="userGender" gen-flag = "2" value="female" />
+                                        <i class="i-show-gender fa fa-venus-mars"></i>
+                                    </span>
+                                </label>  
+                            </div> 
 
 							<div class="u-sticky col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<button type="reset" class="width-25 pull-left btn btn-sm u-btn-reset" style="background: #333;">
@@ -113,7 +96,7 @@
 									<span class="bigger-110">Reset</span>
 								</button>
 
-								<button type="button" class="width-25 pull-right btn btn-sm btn-success u-btn-register" style="background: green;">
+								<button type="button" class="width-25 pull-right btn btn-sm btn-success u-btn-register" id="btn--adduser">
 									<span class="bigger-110">Register</span>
 
 									<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
