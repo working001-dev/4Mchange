@@ -66,11 +66,11 @@
                                 <label class="block clearfix form-group">
                                     <label for="role">User action</label>
                                     <select class="selectpicker show-menu-arrow" title="please select user action"  data-width="100%" name="action">
-                                        <option value="admin">Admin</option>
-                                        <option value="supperapprove">Supper Approve</option>
-                                        <option value="approve">Review Approve</option>
-                                        <option value="qc">Insprect Approve</option>
-                                        <option value="issue">Issuer</option>
+                                        <option value="99" img-value="admin">Admin</option>
+                                        <option value="3" img-value="supperapprove">Supper Approve</option>
+                                        <option value="1" img-value="approve">Review Approve</option>
+                                        <option value="2" img-value="qc">Insprect Approve</option>
+                                        <option value="0" img-value="issue">Issuer</option>
                                     </select> 
                                 </label> 
                                 <label class="block clearfix form-group">

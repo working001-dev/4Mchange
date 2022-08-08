@@ -13,6 +13,7 @@
 body{
     font-family: 'Quicksand', 'Sarabun', sans-serif;
     overflow: hidden !important;
+    font-size: 1rem;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: "Quicksand",sans-serif;
@@ -143,7 +144,27 @@ button.btn.dropdown-toggle:focus:hover
     /* background: white !important; */
     border-color: #b5b5b5 !important;
 }
-
+li>a.dropdown-toggle{
+    display: flex;
+    align-items: center;    
+}
+.tooltip.right .tooltip-arrow {
+    top:50% !important;
+}
+.tooltip-inner {
+    min-width: 150px !important; 
+}
+.nav-list>li .submenu>li>a { 
+    padding: 10px 0 10px 37px; 
+}
+.txt-alt{
+    background: #b23a3a;
+    padding: 2px 6px 4px;
+    color: white;
+    border-radius: 10px;
+    font-size: 10px !important; 
+    margin-left: 5px;
+}
 @media (min-width: 1200px){
     label[class*=col], .p-md-0{
         padding-left: 0 !important;
@@ -486,4 +507,48 @@ button[data-toggle="dropdown"]{
     color: white;
     font-size: 10px !important;
     margin-left: 8px;
+}
+.icon-animated-bell {
+    display: inline-block;
+    -moz-animation: ringing 2s ease 1s infinite;
+    -webkit-animation: ringing 2s ease 1s infinite;
+    -o-animation: ringing 2s ease 1s;
+    -ms-animation: ringing 2s ease 1s;
+    animation: ringing 2s ease 1s infinite;
+    -moz-transform-origin: 50% 0;
+    -webkit-transform-origin: 50% 0;
+    -o-transform-origin: 50% 0;
+    -ms-transform-origin: 50% 0;
+    transform-origin: 50% 0;
+}
+.icon-animated-vertical {
+    display: inline-block;
+    -moz-animation: vertical 2s ease 2s infinite;
+    -webkit-animation: vertical 2s ease 2s infinite;
+    -o-animation: vertical 2s ease 2s infinite;
+    -ms-animation: vertical 2s ease 2s infinite;
+    animation: vertical 2s ease 2s infinite;
+}
+.block--group{
+    position: relative;
+}
+.block--group.blocked .block--action{
+    display: block;
+}
+.block--action{
+    position: absolute;
+    background: #e8e8e8b8;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: none;
+    cursor: no-drop;
+}
+.swal2-popup { 
+    font-size: 1.6rem;
+}
+.tooltip-error{
+    color: rgb(167, 31, 31);
 }

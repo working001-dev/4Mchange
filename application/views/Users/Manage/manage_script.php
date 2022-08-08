@@ -146,14 +146,15 @@
                 $(`input[name=userGender][gen-flag=${rowData.userGender}]`).click();
                 $("select[name=roleGroupId]").val(rowData.roleGroupId).selectpicker('render');
                 $("select[name=roleId]").val(rowData.roleId).selectpicker('render');
-                $("select[name=action]").val(rowData.userImg.replace(`${strGender}_`, "")).selectpicker('render');
+                $("select[name=action]").val(rowData.userActionId).selectpicker('render');
 
                 $("#update--new").attr("id-ref", id);
                 console.log(rowData)
                 $("#modal--box").modal("show");
                 break;
             case "update" :
-                let _action = $("select[name=action]").val();
+                let _actionId  = $("select[name=action]").val();
+                let _actionImg = $("select[name=action]>option:selected").attr("img-value");
                 let _gender = $("input[type=button][name=userGender].btn-selected");
                 let _pas = $("input[name=userLoginPass]");
                 let _par = {};
@@ -161,7 +162,8 @@
                 _par = Object.assign(_par, {
                     fullName:`${_par.firstName} ${_par.lastName}`, 
                     userGender : _gender.attr("gen-flag"), 
-                    userImg : `${_gender.val()}_${_action}` 
+                    userImg : `${_gender.val()}_${_actionImg}`,
+                    userActionId:_actionId
                 });
                 _par = _pas.val() != "" ? Object.assign(_par, {userLoginPass:CryptoJS.MD5(_pas.val()).toString()}) : _par;
                 console.log(_par);

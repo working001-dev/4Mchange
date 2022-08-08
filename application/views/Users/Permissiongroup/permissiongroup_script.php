@@ -90,26 +90,32 @@
                     </a> 
                 </li>
             `);
-            settingMenuList(gId, menuData);  
-            $("#treeMenu a[menu--select]").on('click', function (event) {
-                // debugger;
-                event.preventDefault();
-                $(this).closest(".list-group-items").toggleClass("menu--close"); 
-            });
-            $('#treeMenu input[mId]').on('click', async function () {
-                // debugger; 
-                let chk = $(this);
-                let roleId = $("#treeMenu").attr("roleId");
-                let roleMenuId = chk.attr("rId");
-                let menuId = chk.attr("mId");
-                let groupId = chk.closest(".list-group-items").attr("gm");
-                let setPar = { roleId:roleId, groupMenuId:groupId, menuId:menuId, roleMenuId:roleMenuId };
-                if( chk[0].checked ){
-                    settingRoleMenu(setPar);
-                }else  deletingRoleMenu(setPar); 
-                checkSelectMenu(groupData);
-            });
+            settingMenuList(gId, menuData);
         }
+          
+        $("#treeMenu a[menu--select]").on('click', function (event) {
+            debugger;
+            // event.preventDefault();
+            if( $(this).closest(".list-group-items").hasClass("menu--close") ){
+                $(this).closest(".list-group-items").removeClass("menu--close")
+            }else{
+                $(this).closest(".list-group-items").addClass("menu--close")   
+            }
+            // $(this).closest(".list-group-items").toggleClass("menu--close"); 
+        });
+        $('#treeMenu input[mId]').on('click', async function () {
+            // debugger; 
+            let chk = $(this);
+            let roleId = $("#treeMenu").attr("roleId");
+            let roleMenuId = chk.attr("rId");
+            let menuId = chk.attr("mId");
+            let groupId = chk.closest(".list-group-items").attr("gm");
+            let setPar = { roleId:roleId, groupMenuId:groupId, menuId:menuId, roleMenuId:roleMenuId };
+            if( chk[0].checked ){
+                settingRoleMenu(setPar);
+            }else  deletingRoleMenu(setPar); 
+            checkSelectMenu(groupData);
+        }); 
     }
     function settingMenuList(groupId, menuData){
         let _menu = menuData.filter( f => f.groupMenuId == groupId );

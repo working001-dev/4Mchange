@@ -61,15 +61,17 @@
                 } 
             }else{ 
                 
-                let _action = $("select[name=action]").val();
+                let _actionId  = $("select[name=action]").val();
+                let _actionImg = $("select[name=action]>option:selected").attr("img-value");
                 let _gender = $("input[type=button][name=userGender].btn-selected");
                 let _par = {};
                 $("[add--new]").toArray().map( m => _par[$(m).attr("name")] = $(m).val()  ) ;
                 _par = Object.assign(_par, {
                     fullName:`${_par.firstName} ${_par.lastName}`, 
                     userGender : _gender.attr("gen-flag"), 
-                    userImg : `${_gender.val()}_${_action}`,
-                    userLoginPass: CryptoJS.MD5(_par.userLoginPass).toString()
+                    userImg : `${_gender.val()}_${_actionImg}`,
+                    userLoginPass: CryptoJS.MD5(_par.userLoginPass).toString(),
+                    userActionId:_actionId
                 });
                 console.log(_par);
 

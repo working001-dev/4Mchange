@@ -20,7 +20,14 @@ var setGroupMenu = (g, active) => (
   `<li class="${active}" id="g___${g.groupMenuId}">
     <a href="#" class="dropdown-toggle">
         <i class="menu-icon ${g?.icon}"></i>
-        <span class="menu-text">${g.groupMenuName?.toUpperCase()}</span>
+        <span class="menu-text">
+        ${g.groupMenuName?.toUpperCase()}
+        ${CaseWaitAction.length > 0 && g.groupMenuName == "4m change" 
+          ?`<span class="badge badge-transparent tooltip-error" data-rel="tooltip" data-placement="right" title="${CaseWaitAction.length} Wait action cases">
+              <i class="ace-icon fa fa-bell icon-animated-bell"></i>
+            </span>`
+          :""}
+        </span>
         <b class="arrow fa fa-angle-down"></b>
     </a>
     <b class="arrow"></b>
@@ -31,7 +38,7 @@ var setMenu = (m, active) => (
   `<li class="${active}" groupMenuId=${m.groupMenuId} roleMenuId=${m.roleMenuId} >
       <a href="${_UrlProject}${m.menuLink}">
           <i class="menu-icon fa fa-caret-right"></i>
-          ${m.menuName}
+          <span>${m.menuName}   ${CaseWaitAction.length > 0 && m.menuName == "Manage Case" ? `<small class="txt-alt">${CaseWaitAction.length}</small>` : ""}</span>
       </a> 
       <b class="arrow"></b>
   </li>`
@@ -53,6 +60,7 @@ var GenarateMenu = () => {
             _l.append(`<ul class="submenu"></ul>`);
             _menu.forEach( m => { _l.find("ul.submenu").append(setMenu(m, m.roleMenuId == ActivedMenu?.roleMenuId ? "active" : "")); });
         }
+        if(CaseWaitAction.length > 0 && g.groupMenuName == "4m change" ) $('[data-rel=tooltip]').tooltip();
     });    
   }catch(e){
     console.log(e)
@@ -105,7 +113,14 @@ var PostRequest = async (u, s) => {
     LoadingPage.find(".wait-load-page").addClass("page-error");
   });
 };
-
+var GettingCase = async ()=>{
+  let caseInfo = await $.get(`${_UrlProject}changes/getting_case`, {roleGroupId:MemberInfo[0]?.roleGroupId, userActionId:MemberInfo[0]?.userActionId})
+  .fail(function() {
+    Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); 
+    LoadingPage.find(".wait-load-page").addClass("page-error");
+  }); 
+  return caseInfo;
+}
 
 
 $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
@@ -135,15 +150,19 @@ $(document).on("click", "#sidebar-4m .nav.nav-list a", async function(event){
       eval($("script[local-section=reeval]").html());
       window.history.replaceState("object or string", "Title", `${_UrlProject}#/${alink.text()}`);
     }else return false;    
-  }catch(e){
-    console.log(e)
-    await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
+  }catch{
+    //console.log(e)
+    Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
+    throw "Error request";
     //setTimeout( () => { location.href = `${_UrlProject}home/logout` }, 3000 );
   }
 
-})
+});
+
+var CaseWaitAction = [];
 window.onload = async function(){
   try{
+    CaseWaitAction = await GettingCase();
     GenarateMenu();
     await GenarateBodypage(ActivedMenu);
     GeneateNavUserInfo();
@@ -151,10 +170,12 @@ window.onload = async function(){
     GenarateHeadPage(ActivedMenu); 
     setTimeout(()=>LoadingPage.hide(280), 1000);
     //$(".nav.ace-nav").slideDown("slow");
+    
     $(".nav.ace-nav").show("slide", { direction: "right" }, 200);
-  }catch(e){
-    console.log(e)
-    await Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' }); 
+  }catch{
+     
+    Toast.fire({ icon: 'error', title: 'Error generate page please contact admin.' });
+    LoadingPage.find(".wait-load-page").addClass("page-error"); 
     //setTimeout( () => { location.href = `${_UrlProject}home/logout` }, 3000 );
   }
     

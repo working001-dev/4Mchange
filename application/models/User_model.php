@@ -25,11 +25,13 @@
             u.userImg, 
             u.userGender,
             u.roleGroupId,
-            g.roleGroupName
+            g.roleGroupName,
+            u.userActionId,
+            ( select a.userActionName from tbuser_action a where u.userActionId = a.userActionId limit 1 ) userActionName
             ");
             $this->db->from('tbuser_login u');
             $this->db->join('tbrole r', 'u.roleId = r.roleId');
-            $this->db->join('tbrole_group g', 'u.roleGroupId = g.roleGroupId');  
+            $this->db->join('tbrole_group g', 'u.roleGroupId = g.roleGroupId'); 
             $this->db->where('u.userLoginName', $_u);
             $this->db->where('u.userLoginPass', $_p);
             $this->db->where('u.isActive', 1);
@@ -94,7 +96,8 @@
             u.email,
             u.isActive,
             u.roleGroupId,
-            u.roleId
+            u.roleId,
+            u.userActionId
             ");
             $this->db->from('tbuser_login u');
             $this->db->join('tbrole r', 'u.roleId = r.roleId');
@@ -171,11 +174,11 @@
         public function getting_menu_master()
         { 
             $this->db->distinct();
-            $this->db->select("r.groupMenuId, g.groupMenuName, g.icon, r.menuId, m.menuName, '0' isPer");
-            $this->db->from('tbrole_menu r');
-            $this->db->join('tbgroup_menu g', 'r.groupMenuId = g.groupMenuId'); 
-            $this->db->join('tbmenu m', 'r.menuId = m.menuId'); 
+            $this->db->select("m.groupMenuId, g.groupMenuName, g.icon, m.menuId, m.menuName, '0' isPer");
+            $this->db->from('tbmenu m');
+            $this->db->join('tbgroup_menu g', 'm.groupMenuId = g.groupMenuId'); 
             $this->db->where('m.isActive', 1);
+            $this->db->order_by('g.groupMenuId ASC, m.menuId ASC');
             $query = $this->db->get();
             return $query->result();
         }        

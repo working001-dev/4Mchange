@@ -19,9 +19,9 @@
 
 		<link rel="stylesheet" href="<?=base_url()?>assets/libs/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css" />
 		<link rel="stylesheet" href="<?=base_url()?>assets/libs/select2/css/select2.min.css" /> 
-		<link rel="stylesheet" href="<?=base_url()?>assets/libs/sweetalert/sweetalert2.min.css" />	
+		<link rel="stylesheet" href="<?=base_url()?>assets/libs/sweetalert/sweetalert2.min.css" />	 
 		<link rel="stylesheet" href="<?=base_url()?>assets/libs/daterangepicker-master/daterangepicker.css" />	 	
-
+ 
 		<link rel="stylesheet" href="<?=base_url()?>assets/css/project/site.css" />
 		<link style-section />
 		<!-- <script src="assets/js/ace-extra.min.js"></script>  -->
@@ -59,10 +59,10 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script> 
-		<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>  
+		<script src="<?=base_url()?>assets/js/jquery-2.1.4.min.js"></script>  
 		<script src="<?=base_url()?>assets/js/jquery-ui.min.js"></script> 
-		<script src="<?=base_url()?>assets/libs/sweetalert/sweetalert2.all.min.js"></script>
+		<script src="<?=base_url()?>assets/js/bootstrap.min.js"></script>  
+		<script src="<?=base_url()?>assets/libs/sweetalert/sweetalert2.all.min.js"></script> 
 		<script src="<?=base_url()?>assets/libs/daterangepicker-master/moment.min.js"></script>
 		<script src="<?=base_url()?>assets/libs/daterangepicker-master/daterangepicker.js"></script>
 		<script src="<?=base_url()?>assets/libs/bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js"></script>
