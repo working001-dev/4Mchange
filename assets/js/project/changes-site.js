@@ -47,3 +47,34 @@ function removeFileExtension(f){
 function getFileExtension(f){
     return f.split('.').pop();
 }
+function getIconForStatus(s){
+    switch(s){
+        case "Request": return 'fa-plus-circle'; break;
+        case "Approved": return 'fa-check-circle'; break;
+        case "Inspected": return 'fa-check-circle'; break;
+        case "Closed": return 'fa-dot-circle-o'; break;
+        case "Inspected OK!": return 'fa-check-circle'; break;
+        case "Confirm Following": return 'fa-check-circle'; break;
+        case "Inspected NG!": return 'fa-times-circle'; break;
+        case "Cancel Inspect!": return 'fa-times-circle'; break;
+        case "Cancel Following!": return 'fa-times-circle'; break;
+        case "Reject 4M change": return 'fa-times-circle'; break;
+        case "Reject Process": return 'fa-times-circle'; break;
+        case "OK Continue": return 'fa-chevron-circle-right'; break;
+        case "NO Production": return 'fa-ban'; break;
+       
+        default: return 'fa-clock-o'; break;
+    }
+}
+function getActionStep(a){
+    //console.log(a);
+    if(a.includes("Pending")){
+        return "no--action";
+    }else if(a.includes("OK") || a.includes("Confirm")){
+        return "ok--action";
+    }else if(a == "Inspected NG!" || a == "NO Production" || a.includes("Reject") || a.includes("Cancel")  ){
+        return "ng--action";
+    }else if(a.includes("Follow")  ){
+        return "fw--action";        
+    }else return "";
+}

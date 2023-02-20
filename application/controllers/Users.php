@@ -32,9 +32,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body" : $this->load->view('users/add/add_view'); break;
-				case "script" : $this->load->view('users/add/add_script'); break;
-				case "style" : $this->load->view('users/add/add_style'); break;
+				case "body" : $this->load->view('Users/Add/add_view'); break;
+				case "script" : $this->load->view('Users/Add/add_script'); break;
+				case "style" : $this->load->view('Users/Add/add_style'); break;
 			}
 		} 
 	}
@@ -42,9 +42,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('users/manage/manage_view'); break;
-				case "script" : $this->load->view('users/manage/manage_script'); break;
-				case "style" : $this->load->view('users/manage/manage_style'); break;
+				case "body"   : $this->load->view('Users/Manage/manage_view'); break;
+				case "script" : $this->load->view('Users/Manage/manage_script'); break;
+				case "style" : $this->load->view('Users/Manage/manage_style'); break;
 			}
 		} 
 	}
@@ -52,9 +52,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('users/permission/permission_view'); break;
-				case "script" : $this->load->view('users/permission/permission_script'); break;
-				case "style" : $this->load->view('users/permission/permission_style'); break;
+				case "body"   : $this->load->view('Users/Permission/permission_view'); break;
+				case "script" : $this->load->view('Users/Permission/permission_script'); break;
+				case "style" : $this->load->view('Users/Permission/permission_style'); break;
 			}
 		} 
 	}
@@ -62,9 +62,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('users/permissiongroup/permissiongroup_view'); break;
-				case "script" : $this->load->view('users/permissiongroup/permissiongroup_script'); break;
-				case "style" : $this->load->view('users/permissiongroup/permissiongroup_style'); break;
+				case "body"   : $this->load->view('Users/Permissiongroup/permissiongroup_view'); break;
+				case "script" : $this->load->view('Users/Permissiongroup/permissiongroup_script'); break;
+				case "style" : $this->load->view('Users/Permissiongroup/permissiongroup_style'); break;
 			}
 		} 
 	}
@@ -72,9 +72,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('users/group/group_view'); break;
-				case "script" : $this->load->view('users/group/group_script'); break;
-				case "style" : $this->load->view('users/group/group_style'); break;
+				case "body"   : $this->load->view('Users/Group/group_view'); break;
+				case "script" : $this->load->view('Users/Group/group_script'); break;
+				case "style" : $this->load->view('Users/Group/group_style'); break;
 			}
 		} 
 	}
@@ -82,9 +82,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('users/changepass/changepass_view'); break;
-				case "script" : $this->load->view('users/changepass/changepass_script'); break;
-				case "style" : $this->load->view('users/changepass/changepass_style'); break;
+				case "body"   : $this->load->view('Users/Changepass/changepass_view'); break;
+				case "script" : $this->load->view('Users/Changepass/changepass_script'); break;
+				case "style" : $this->load->view('Users/Changepass/changepass_style'); break;
 			}
 		} 
 	}
@@ -92,9 +92,9 @@ class Users extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('users/edit/edit_view'); break;
-				case "script" : $this->load->view('users/edit/edit_script'); break;
-				case "style" : $this->load->view('users/edit/edit_style'); break;
+				case "body"   : $this->load->view('Users/Edit/edit_view'); break;
+				case "script" : $this->load->view('Users/Edit/edit_script'); break;
+				case "style" : $this->load->view('Users/Edit/edit_style'); break;
 			}
 		} 
 	}

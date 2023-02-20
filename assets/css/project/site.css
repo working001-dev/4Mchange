@@ -475,6 +475,9 @@ button[data-toggle="dropdown"]{
 .widget-headers h4{
     letter-spacing: 2px !important;
 }
+.customscroll{
+    overflow: auto;
+}
 .customscroll::-webkit-scrollbar {
     width: 8px;
 } /* this targets the default scrollbar (compulsory) */

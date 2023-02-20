@@ -57,6 +57,24 @@
                 $("+span", this).css({background: "#fff",color: "black"}); 
             } 
         }); 
+
+        $("input[ckUsed]").on("change", function(){
+            let isCheck = $("input[name=inp-follow]:checked")?.val() && $("input[name=inp-follow-juds]:checked")?.val();
+            if( $("input[name=inp-follow-juds]:checked")?.val() == "2"){
+                isCheck = isCheck && $("input[name=inp-error-action]:checked")?.val();
+                let chkOTH = $("input[name=inp-error-action]:checked").toArray()?.filter( f => $(f).val() == 4)[0];
+                if(chkOTH){
+                    $('.container-row .block--group textarea[name=inp-error-oth]').prop("disabled", false); 
+                }else{
+                    $('.container-row .block--group textarea[name=inp-error-oth]').prop("disabled", true); 
+                }
+                $(".modal-Following-footer button.actioned").prop("disabled", !isCheck);
+            }else{
+                $(".modal-Following-footer button.actioned").prop("disabled", !isCheck);                
+            }
+
+        });
+
         $("button.btn-attach").on("click", function(){
             $(this).closest("label.attach-component").find("input[attach-request]").click();
         });
@@ -75,22 +93,17 @@
        // console.log(_c);
     }
     async function modalLoad(_m, changeId){ 
-        
+        showActionEvent();
         let _appInfo = await settingStep(changeId);
-        if( caseAction[0]?.statusId == 2 ){
-            $(".btn--approve").hide();
-            $(".btn--reject").hide();
-            $(".btn--inspcet").show();
-        }else if( caseAction[0]?.statusId == 1 ){
-            $(".btn--approve").show();
-            $(".btn--reject").show();
-            $(".btn--inspcet").hide();
-        }else{
-            $(".btn--approve").hide();
-            $(".btn--reject").hide();
-            $(".btn--inspcet").hide();            
-        }
-        $('.input-daterange').datepicker({autoclose:true, format: 'yyyy/mm/dd'});
+        
+        $('.input-daterange').datepicker({autoclose:true, format: 'yyyy/mm/dd', startDate: "dateToday",
+            icons: {
+            time: "fa fa-clock-o",
+            date: "fa fa-calendar",
+            up: "fa fa-arrow-up",
+            down: "fa fa-arrow-down"
+            }
+        });
 
         await ( () => new Promise( (r,j) => { $("#modal--action .progress-bar").css("width", "20%"); setTimeout( () => { r("done.") }, 80) } ) )();
         let _changeDetail = await settingChangeDetail(changeId);
@@ -100,6 +113,7 @@
         let _attachFile = await settingAttachFile(changeId);
         await ( () => new Promise( (r,j) => { $("#modal--action .progress-bar").css("width", "80%"); setTimeout( () => { r("done.") }, 80) } ) )();
         let _inspection = await settingInspcetion(changeId);
+        let _quality = await settingQuality(changeId);
         await ( () => new Promise( (r,j) => { $("#modal--action .progress-bar").css("width", "100%"); setTimeout( () => { r("done.") },80) } ) )();
         $(".progress-status").text('getting done.');
         setTimeout( () => { $(_m).removeClass("wait-loadding"); }, 80);
@@ -117,7 +131,13 @@
             $("#modal--Inspection").find(".title--Inspection").html(`<strong>Inspection for 4M Change number - ${_4mNumber}</strong>`);
             $("#modal--Inspection").modal("show");
         });  
-        
+        $(".review--quality", _m).on("click", function(){ 
+            inpcIndex = 0;
+            let _4mNumber = $("[sp-name=fourm_number]").text() || " - ";
+            $("#modal--Quality").attr("for-change", changeId);
+            $("#modal--Quality").find(".title--Quality").html(`<strong>Quality Inspection for 4M Change number - ${_4mNumber}</strong>`);
+            $("#modal--Quality").modal("show");
+        }); 
     }
     async function settingTableCase(){
         let _c = await gettingCase();
@@ -199,7 +219,7 @@
                     <td>${_ap?.step || "-"}</td>
                     <td>${_ap?.approveName || "-"}</td>
                     <td>${_ap?.action || "-"}</td>
-                    <td>${_ap?.comment || "-"}</td>
+                    <td><pre>${_ap?.comment || "-"}</pre></td>
                     <td>${_ap?.approveDateTime || "-"}</td>
                     <td>${_ap?.user || "-"}</td>
                 </tr>`;
@@ -216,8 +236,9 @@
         return new Promise( async (_r,_j)=>{
             let _document =  await gettingDocumentInfo(_c);
             $("#modal--fileAttach .modal-fileAttach-body").html('');
+            $("#modal--Quality .modal-Quality-body .attach--quality").html('');
             for( let _dc of _document){
-                if( _dc.txt != "SWP"){
+                if( !(["SWP", "MSR", "MTH"].includes( _dc.txt )) ){
                     let strDoc = `
                     <div class="box--attach-file flex flex-row">
                         <span class="req-title-attach flex">${_dc.documentGroupName}</span> 
@@ -227,11 +248,21 @@
                         </a>
                     </div> `;
                     $("#modal--fileAttach .modal-fileAttach-body").append(strDoc);                    
-                }else{
+                }else if( "SWP" == _dc.txt ){
                     $("#insp--img").attr("src", `<?=base_url()?>${_dc.filePath}`);
                     $("a.view--image").attr("href", `<?=base_url()?>${_dc.filePath}`);
                     $("a.view--image").attr("target", `<?=base_url()?>${_dc.filePath}`);
                     // setImageInspect("insp--can", `<?=base_url()?>${_dc.filePath}`);
+                }else{
+                    let strDoc = `
+                    <div class="box--attach-file flex flex-row">
+                        <span class="req-title-attach flex">${_dc.documentGroupName}</span> 
+                        <a href="<?=base_url()?>${_dc.filePath}" target="<?=base_url()?>${_dc.filePath}">
+                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                            ${_dc.fileName}
+                        </a>
+                    </div> `;
+                    $("#modal--Quality .modal-Quality-body .attach--quality").append(strDoc);  
                 }
             }
             setTimeout( ()=>{  
@@ -239,7 +270,7 @@
                 _r("done.");
             }, 80)
         }); 
-    }    
+    }        
     function settingInspcetion(_c){ 
         return new Promise( async (_r,_j)=>{
             let _inspection =  await gettingInspectionInfo(_c);
@@ -259,6 +290,33 @@
             }, 80)
         }); 
     }
+    function settingQuality(_c){ 
+        return new Promise( async (_r,_j)=>{
+            let _inspection =  await gettingQuality(_c);
+            if(_inspection[0]){
+                $("#modal--Quality #table--inspecction tbody").html('');
+                for( let _ip of _inspection){ 
+                    let strInp = `
+                    <tr>
+                        <td>${_ip?.inspectionLocation || "-"}</td>
+                        <td>${_ip?.inspectionControl || "-"}</td>
+                        <td><i class="fa ${_ip?.inspectionControlResult == 1 ? "fa-check-circle" : "fa-times-circle"}" aria-hidden="true"></i></td> 
+                    </tr>`;
+                    $("#modal--Quality #table--inspecction tbody").append(strInp);  
+                }
+                setTimeout( ()=>{ 
+                    $("span[sp-name=qc-inspect]").closest(".txt--group").show(); 
+                    $(".progress-status").text('getting 4m quality')
+                    _r("done.");
+                }, 80)                
+            }else{
+                 
+                $("span[sp-name=qc-inspect]").closest(".txt--group").hide();
+               _r("done.");  
+            } 
+
+        }); 
+    }    
     function setttinStampResult(_c){
         if( _c == "OK"){
             $(".status--stamp img").attr("src", "<?=base_url()?>assets/images/results/ok_noback.png");
@@ -326,15 +384,17 @@
         let _4mNumber = caseAction[0]?.fourm_number;
         if(isAction=="approve"){
             $("#modal--ActionEvent").removeClass("action--reject").addClass(`action--approve`);
+            
         }else{
             $("#modal--ActionEvent").removeClass("action--approve").addClass(`action--reject`);
         }
-        
+        $("#modal--ActionEvent .modal-footer button[action]").attr("action", isAction);
         $("#modal--ActionEvent").attr("for-change", caseAction[0]?.changeDetailId);
         $("#modal--ActionEvent").find(".title--ActionEvent").html(`<strong>Approval</strong> : 4M Change number - ${_4mNumber}`);
         $("#modal--ActionEvent").modal("show");
     };   
     async function approveEvent(e){
+        let isAction = $(e).attr("action");
         let _m = $("#modal--ActionEvent");
         let _comment = $("[name=req-description]", _m).val();
         let _parm = {
@@ -345,7 +405,7 @@
             userLogin:MemberInfo[0]?.userLoginId,
             userActionId:MemberInfo[0]?.userActionId
         }
-        let _ap = await $.post("<?=base_url()?>changes/setting_actionApprove", {approve :_parm});
+        let _ap = await $.post("<?=base_url()?>changes/setting_actionApprove", {approve :_parm, action:isAction});
         await Swal.fire( `4M Number ${caseAction[0]?.fourm_number}`, 'Approved', 'success' );
         location.reload();
     }
@@ -358,38 +418,103 @@
         $("#modal--ActionInspec").find(".title--ActionInspec").html(`<strong>Quality Control Inspection</strong> : 4M Change number - ${_4mNumber}`);
         $("#modal--ActionInspec").modal("show");
     } 
-    async function inspectEvent(e){
+    async function clickActionConfirmInspec(e){
+    
         let _4mNumber = caseAction[0]?.fourm_number;
         $("#modal--QualityConfirm").find(".title--QualityConfirm").html(`<strong> การอนุมัติการเริ่มผลิต </strong> : 4M Change number - ${_4mNumber}`);
         $("#modal--QualityConfirm").modal("show");
-        console.log(dataInspection)
+        //console.log(dataInspection)
+    }    
+    async function clickFollowingEvent(e){
+        let _4mNumber = caseAction[0]?.fourm_number;
+        $("#modal--Following").find(".title--Following").html(`<strong> การติดตามผล การควบคุม </strong> : 4M Change number - ${_4mNumber}`);
+        $("#modal--Following").modal("show");
     } 
-
-    async function approveJudgment(e){
+    async function approveinspectEvent(e){
         let changeId = caseAction[0]?.changeDetailId;
-        $("#modal--QualityConfirm .progress-status").text('Saving the process starting..');
-        $("#modal--QualityConfirm").addClass("wait-loadding");
+        $("#modal--ActionInspec .progress-status").text('Saving the process starting..');
+        $("#modal--ActionInspec").addClass("wait-loadding");
         try{
-            $("#modal--QualityConfirm .progress-status").text('Saving the Inspection..');
+            $("#modal--ActionInspec .progress-status").text('Saving the Inspection..');
             await settingInspection(changeId);
-            await ( () => new Promise( (r,j) => { $("#modal--QualityConfirm .progress-bar").css("width", "20%"); setTimeout( () => { r("done.") }, 80) } ) )();
-            $("#modal--QualityConfirm .progress-status").text('Saving the Document..');
+            await ( () => new Promise( (r,j) => { $("#modal--ActionInspec .progress-bar").css("width", "20%"); setTimeout( () => { r("done.") }, 80) } ) )();
+            $("#modal--ActionInspec .progress-status").text('Saving the Document..');
             await uploadDocument(changeId);
-            await ( () => new Promise( (r,j) => { $("#modal--QualityConfirm .progress-bar").css("width", "75%"); setTimeout( () => { r("done.") }, 80) } ) )();
-            $("#modal--QualityConfirm .progress-status").text('Saving the Confirmation..');
-            await settingComfirmation(changeId);
-            await ( () => new Promise( (r,j) => { $("#modal--QualityConfirm .progress-bar").css("width", "100%"); setTimeout( () => { r("done.") }, 80) } ) )();
+            await ( () => new Promise( (r,j) => { $("#modal--ActionInspec .progress-bar").css("width", "75%"); setTimeout( () => { r("done.") }, 80) } ) )();
+            $("#modal--ActionInspec .progress-status").text('Saving the Confirmation..');
+            await settingConfirmation(changeId);
+            await ( () => new Promise( (r,j) => { $("#modal--ActionInspec .progress-bar").css("width", "100%"); setTimeout( () => { r("done.") }, 80) } ) )();
             $(".progress-status").text('getting done.'); 
             await Swal.fire( `4M Number ${caseAction[0]?.fourm_number}`, 'Inspected', 'success' );
-            setTimeout( () => { $("#modal--QualityConfirm").removeClass("wait-loadding"); }, 80);  
+            setTimeout( () => { $("#modal--ActionInspec").removeClass("wait-loadding"); }, 80);  
             location.reload();             
         }catch{ 
-            $("#modal--QualityConfirm .progress-bar").css("width", "0%");
-            $("#modal--QualityConfirm .progress-status").text('Saving the process error.');
+            $("#modal--ActionInspec .progress-bar").css("width", "0%");
+            $("#modal--ActionInspec .progress-status").text('Saving the process error.');
             await Swal.fire( `Saving the process error`, 'Error process', 'error' );
-            $("#modal--QualityConfirm").removeClass("wait-loadding");            
-        }
-   
+            $("#modal--ActionInspec").removeClass("wait-loadding");            
+        }        
+        // let _4mNumber = caseAction[0]?.fourm_number;
+        // $("#modal--QualityConfirm").find(".title--QualityConfirm").html(`<strong> การอนุมัติการเริ่มผลิต </strong> : 4M Change number - ${_4mNumber}`);
+        // $("#modal--QualityConfirm").modal("show");
+        // console.log(dataInspection)
+    }  
+    async function approveJudgment(e){
+        let changeId = caseAction[0]?.changeDetailId;
+        let statusName = $("#modal--QualityConfirm input[for-status]:checked").attr("for-status");
+        let statusId = JSON.parse(await gettingStatusId(statusName, 1));
+        let comment = $("textarea[name=req-condition-des]").val();
+        let dateStartTime = moment(new Date).format("YYYY-MM-DD 00:00:00");
+        let dateEndTime = moment($("input[name=end").val()).format("YYYY-MM-DD 23:59:59");
+
+        let upd = { 
+            qualityJudgment:statusName == "Approved" ? "OK" : statusName == "Rejected" ? "NG" : null,
+            updateDateTime:moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+            updateBy:MemberInfo[0]?.userLoginId,
+            statusId:statusId
+        }; 
+        let inpRes = await $.post("<?=base_url()?>/changes/setting_qualityComfirmation", 
+        {
+            qcJudgment :upd, 
+            changeDetailId:changeId, 
+            stName:statusName,
+            comment:comment,
+            followStartDateTime:dateStartTime,
+            followEndDateTime:dateEndTime
+        });
+      
+        await Swal.fire( `4M Number ${caseAction[0]?.fourm_number}`, 'Confirmed', 'success' );
+        location.reload();
+    }
+    async function approveFollow(e){  
+        let statusName = $("input[name=inp-follow-juds]:checked").attr("for-status");
+        let comment = await gettingFollowingSTR(statusName);
+        if(comment){
+            let changeId = caseAction[0]?.changeDetailId;
+           
+            let statusId = JSON.parse(await gettingStatusId(statusName, 1)); 
+            let dateTime = moment($("input[name=end").val()).format("YYYY-MM-DD 00:00:00");
+            let upd = { 
+                qualityJudgment:statusName == "Approved" ? "OK" : statusName == "Rejected" ? "NG" : null,
+                updateDateTime:moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+                updateBy:MemberInfo[0]?.userLoginId,
+                statusId:statusId
+            }; 
+            let inpRes = await $.post("<?=base_url()?>/changes/setting_followingComfirmation", 
+            {
+                qcJudgment :upd, 
+                changeDetailId:changeId, 
+                stName:statusName,
+                comment:comment
+            })
+            .fail( async (e)=>{
+                await Swal.fire( `4M Number ${caseAction[0]?.fourm_number} error ${e.status}`, 'Error process', 'error' ); 
+                throw e.responseText;         
+            })
+        
+            await Swal.fire( `4M Number ${caseAction[0]?.fourm_number}`, 'Confirmed', 'success' );
+            location.reload();            
+        } 
     }
     function getClassForStatus(s){
         switch(s){
@@ -399,30 +524,7 @@
             case "4": return 'label-danger'; break;
             default: return 'label-purple'; break;
         }
-    }
-    function getIconForStatus(s){
-        switch(s){
-            case "Request": return 'fa-plus-circle'; break;
-            case "Approved": return 'fa-check-circle'; break;
-            case "Inspected": return 'fa-check-circle'; break;
-            case "Closed": return 'fa-dot-circle-o'; break;
-            case "Inspected OK!": return 'fa-check-circle'; break;
-            case "Inspected NG!": return 'fa-times-circle'; break;
-            case "OK Continue": return 'fa-chevron-circle-right'; break;
-            case "NO Production": return 'fa-ban'; break;
-            default: return 'fa-clock-o'; break;
-        }
-    }
-    function getActionStep(a){
-        console.log(a);
-        if(a.includes("Pending")){
-            return "no--action";
-        }else if(a == "Inspected OK!" || a == "OK Continue"){
-            return "ok--action";
-        }else if(a == "Inspected NG!" || a == "NO Production"){
-            return "ng--action";
-        }else return "";
-    }
+    } 
     function addReview($this, e){
         $("tbody", $this).append($("template[for-site=add-button--intable").html());
         $("#modal--ActionInspec .tbox")[0].scrollTo(0,$("#modal--ActionInspec .tbox")[0].scrollHeight);
@@ -465,21 +567,37 @@
         switch(seld){
             case "1":
                 $('.input-daterange input').closest(".container-row").find(".block--group").addClass("blocked");
-                $('.input-daterange input').prop("disabled", true);
+                $('.input-daterange input[name=end]').prop("disabled", true);
                 $('#modal--QualityConfirm textarea[name=req-condition-des]').prop("disabled", true); 
                 break;
             case "2":
                 $('.input-daterange input').closest(".container-row").find(".block--group").removeClass("blocked");
-                $('.input-daterange input').prop("disabled", false);
+                $('.input-daterange input[name=end]').prop("disabled", false);
                 $('#modal--QualityConfirm textarea[name=req-condition-des]').prop("disabled", false); 
                 break;
             case "3":
                 $('.input-daterange input').closest(".container-row").find(".block--group").addClass("blocked");
-                $('.input-daterange input').prop("disabled", true);
+                $('.input-daterange input[name=end]').prop("disabled", true);
                 $('#modal--QualityConfirm textarea[name=req-condition-des]').prop("disabled", true); 
                 break;
             default: break;
         }
+    }
+    function selectJudment(e){
+        let seld = $(e).val()
+        let pLabel = $(e).closest("label");
+        
+        switch(seld){
+            case "1":  
+                $('.container-row .block--group').addClass("blocked");
+                $('.container-row .block--group  textarea[name=inp-error-oth]').prop("disabled", true); 
+                break;
+            case "2": 
+                $('.container-row .block--group').removeClass("blocked"); 
+                // $('.container-row .block--group textarea[name=inp-error-oth]').prop("disabled", false); 
+                break; 
+            default: break;
+        }        
     }
     function uploadDocument(changeId){
         return new Promise( (r, j) => {
@@ -536,20 +654,20 @@
         
         return inpRes;
     } 
-    async function settingComfirmation(changeId){
+    async function settingConfirmation(changeId){
         // debugger;
-        let statusName = $("input[name=inp-confirm]:checked").attr("for-sataus");
+        let statusName = caseAction[0]?.statusName;
         let statusId = JSON.parse(await gettingStatusId(statusName, 1));
         let upd = { 
-            qualityJudgment:$(".btn-result.clicked").attr("res"),
+            qualityJudgment:$("#modal--ActionInspec .btn-result.clicked").attr("res"),
             updateDateTime:moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-            updateBy:MemberInfo[0]?.userLoginId,
-            statusId:statusId
+            updateBy:MemberInfo[0]?.userLoginId 
         }; 
-        let inpRes = await $.post("<?=base_url()?>/changes/setting_qualityComfirmation", {qcJudgment :upd, changeDetailId:changeId, stName:statusName});
+        let inpRes = await $.post("<?=base_url()?>/changes/setting_actionInspectApprove", {qcJudgment :upd, changeDetailId:changeId, stName:statusName});
         
         return inpRes;
-    }          
+    } 
+
     async function gettingApproveInfo(changeDetailId){
         let _a = await $.get("<?=base_url()?>changes/getting_approve", {"changeDetailId":changeDetailId});
         return _a;
@@ -569,5 +687,68 @@
     async function gettingStatusId(statusName, forTb){
         let inpRes =  await $.get("<?=base_url()?>/changes/gettingStatusId", {statusName :statusName, tFlg:forTb}) ;
         return inpRes;
+    }
+    async function gettingQuality(changeDetailId){
+        let _c = await $.get("<?=base_url()?>changes/getting_qualityinspection", {"changeDetailId":changeDetailId});
+        return _c;
+    }   
+    function gettingFollowingSTR(judmentFollow){ 
+        return new Promise( async (resolve,reject)=>{
+            let activity = $("input[name=inp-follow]:checked").toArray();
+            let m = activity.map( f => { return $("+span.tree-item-name span.tree-label", f).text() });
+            let actvStr = `การติดตามผล การควบคุม 4M Changes\r\n\t- ${m.join("\r\n\t- ")}\r\n\r\n`;
+            //let judmentFollow = $("input[name=inp-follow-juds]:checked").attr("for-status");
+            if(judmentFollow == "Approved"){
+                actvStr += `การสิ้นสุดการควบคุม 4M Changes\r\n\t- อนุมัติการสิ้นสุดการควบคุม`;
+                resolve(actvStr)
+            }else if(judmentFollow == "Rejected"){
+                let acError = $("input[name=inp-error-action]:checked").toArray();
+                let chkOTH = acError?.filter( f => $(f).val() == 4)[0];
+                let oth = $('.container-row .block--group textarea[name=inp-error-oth]');
+                if(oth.val() || !chkOTH){
+                    let e = acError.map( f => { return $("+span.tree-item-name span.tree-label", f).text() });
+                    let o = oth.val().split("\n")
+                    actvStr += `การสิ้นสุดการควบคุม 4M Changes\r\n\t- พบความผิดปกติในการควบคุม 4M\r\n\t\t- ${e.join("\r\n\t\t- ")}${o[0]? `\r\n\t\t\t- ${o.join("\r\n\t\t\t- ")}`: ""}`;
+                    resolve(actvStr);
+                }else{
+                    await Swal.fire( `Please input data`, 'Error empty input', 'error' );
+                    oth.focus();
+                    resolve(null); 
+                } 
+            }else resolve(null);
+        });
+    }
+    function showActionEvent(){
+        if( caseAction[0]?.statusId == 2 ){
+                $(".btn--approve").hide();
+                $(".btn--reject").hide();
+                $(".btn--confirm").hide();
+                $(".btn--following").hide();
+                $(".btn--inspcet").show();
+            }else if( caseAction[0]?.statusId == 1 ){
+                $(".btn--approve").show();
+                $(".btn--reject").show();
+                $(".btn--following").hide();
+                $(".btn--confirm").hide();
+                $(".btn--inspcet").hide();
+            }else if( caseAction[0]?.statusId == 14 ){
+                $(".btn--approve").hide();
+                $(".btn--reject").hide();
+                $(".btn--following").hide();
+                $(".btn--confirm").show();
+                $(".btn--inspcet").hide();
+            }else if( caseAction[0]?.statusId == 12 ){
+                $(".btn--approve").hide();
+                $(".btn--reject").hide();
+                $(".btn--following").show();
+                $(".btn--confirm").hide();
+                $(".btn--inspcet").hide();
+            }else{
+                $(".btn--approve").hide();
+                $(".btn--reject").hide();
+                $(".btn--inspcet").hide(); 
+                $(".btn--confirm").hide(); 
+                $(".btn--following").hide();          
+            }
     }
 </script>

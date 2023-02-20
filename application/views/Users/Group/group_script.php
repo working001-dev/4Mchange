@@ -51,7 +51,7 @@
             } 
         });
         $("#update--new").on("click",async function(){
-            settingEdit(this, $(this).attr("id"), "update");       
+            settingEdit(this, $(this).attr("id-ref"), "update");       
         });
     }); 
 
@@ -110,9 +110,11 @@
                 $("textarea[name=description]").val(rowData[2]);  
                 
                 
-                $("#create--new").addClass("dnone-btn");
-                $("#update--new").removeClass("dnone-btn");
-                $("#update--new").attr("id", id);
+                // $("#create--new").addClass("dnone-btn");
+                // $("#update--new").removeClass("dnone-btn");
+                $("#create--new").hide();
+                $("#update--new").show();
+                $("#update--new").attr("id-ref", id);
                 $(".per-click-add").click();
                 break;
             case "update" :
@@ -126,8 +128,10 @@
                     roleTable.cell( $(`#roleList tbody tr[id=${id}]>td:nth-child(2)`) ).data(gupPermission).draw(false);
                     roleTable.cell( $(`#roleList tbody tr[id=${id}]>td:nth-child(3)`) ).data(desPermistion).draw(false);   
                     $("[add--new]").val('');
-                    $("#create--new").removeClass("dnone-btn");
-                    $("#update--new").addClass("dnone-btn");  
+                    // $("#create--new").removeClass("dnone-btn");
+                    // $("#update--new").addClass("dnone-btn");  
+                    $("#create--new").show();
+                    $("#update--new").hide();
                     $(".per-click-add").click();     
                     Toast.fire({ icon: 'success', title: 'update data done.' });          
                 }
@@ -167,8 +171,10 @@
         if( $(this).find("i").hasClass("fa-times-circle") ){
             $(this).html( `Click for add group <i class="fa fa-plus-circle" aria-hidden="true"></i>`);
             $("[add--new]").val('');
-            $("#create--new").removeClass("dnone-btn");
-            $("#update--new").addClass("dnone-btn");
+            // $("#create--new").removeClass("dnone-btn");
+            // $("#update--new").addClass("dnone-btn");
+            $("#create--new").show();
+            $("#update--new").hide();
         }else{
             $(this).html(`<i class="fa fa-times-circle" aria-hidden="true"></i> Click for close panel`);
         }

@@ -3,11 +3,18 @@
     #tb-wait--action{
         width: 100%;
     }
+    #tb-wait--action thead tr th{
+        z-index: 3;
+        position: sticky;
+        top: 0px;
+        background-color: #fff;
+    }
     #tb-wait--action thead tr th,
     #tb-wait--action tbody tr td
     {
         white-space: nowrap !important;
         min-width: 100px !important;
+        vertical-align: middle;
     }
     #tb-wait--action thead tr>th:nth-child(2),
     #tb-wait--action tbody tr>td:nth-child(2)
@@ -51,7 +58,7 @@
         margin: 0px;
     }
     #modal--action .modal-content {
-        padding: 14px 2vw;
+        padding: 4px 2vw;
         background: #00000005;
         border: none;
     }
@@ -219,7 +226,29 @@
         border-bottom: 20px solid #ad3131;
         border-left: 14px solid aliceblue;
         border-right: 14px solid #ad3131;
-    }             
+    }   
+    
+    #modal--action .box--status .box--step.fw--action .step--title:after{  
+        border-top: 20px solid #ebab1b;
+        border-bottom: 20px solid #ebab1b;
+        border-left: 14px solid aliceblue;
+        border-right: 14px solid #ebab1b;
+    }     
+    #modal--action .box--status .box--step.fw--action .step--title{
+        background-color: #ebab1b;
+    }
+    #modal--action .box--status .box--step.fw--action+.box--step .step--title:before{  
+        border-top: 20px solid aliceblue;
+        border-bottom: 20px solid aliceblue;
+        border-left: 14px solid #ebab1b;
+        border-right: 14px solid aliceblue;
+    }    
+    #modal--action .box--status .box--step.fw--action .step--title:after{  
+        border-top: 20px solid #ebab1b;
+        border-bottom: 20px solid #ebab1b;
+        border-left: 14px solid aliceblue;
+        border-right: 14px solid #ebab1b;
+    }    
     .step--title i{
         font-size: 32px;
         margin-right: 14px;
@@ -277,21 +306,44 @@
         padding: 3px 0px;
     }
     .box--history{
+        margin-top: 5px;
         display: flex;
         justify-content: flex-end;
-        padding: 5px 8px;
+        padding: 0px 8px 5px;
         border-bottom: 1px solid #dee8f1;
         max-width: 100%;
         overflow: auto;
-        min-height: 20vh;
-        max-height: 20vh;
+        min-height: 28vh;
+        max-height: 28vh;
     }
     #table--history{
         width: 100%;
     }
+    #table--history thead{
+        position: sticky;
+        top: 0;         
+    }
     #table--history thead tr{
         background-image: none;
-        background-color: #e0edff; 
+        background-color: #e0edff;
+
+        position: relative;
+    }
+    #table--history thead>tr th::after,
+    #table--history thead>tr th::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+    #table--history thead>tr th::before {
+        top: 0;
+        border-top: 2px solid #F1F1F1;
+        /* margin-top: -0.5px; */
+    }  
+    #table--history thead>tr th::after {
+        bottom: 0;
+        border-bottom: 1px solid #F1F1F1; 
     }
     #table--history tbody tr:nth-child(even){
         background-color: #eff2fb;
@@ -313,6 +365,13 @@
     #table--history thead tr th:nth-child(4){
         min-width: 200px;
     }
+    #table--history pre{
+        background: #ff000000 !important;
+        border: none !important;
+        font-size: 11px !important;
+        padding: 0px !important;
+        font-family: 'Quicksand', 'Sarabun', sans-serif;
+    }
     /* #tb-wait--action thead>tr th:nth-child(1),
     #tb-wait--action thead>tr th:nth-child(3),
     #tb-wait--action thead>tr th:nth-child(4),
@@ -325,7 +384,7 @@
     #modal--fileAttach, #modal--Inspection{
         max-height: 100%;
         overflow: auto;
-    }
+    } 
     #modal--fileAttach .modal-content,
     #modal--Inspection .modal-content,
     #modal--Quality .modal-content,
@@ -347,7 +406,7 @@
     }
     #modal--Inspection .modal-content,
     #modal--Quality .modal-content{
-        padding: 5px 10vw;
+        padding: 30px 10vw;
     }
     #modal--ActionEvent .modal-content,
     #modal--ActionInspec .modal-content{
@@ -447,6 +506,7 @@
     .table>thead:first-child>tr:first-child>th {
         border-top: 0;
         white-space: nowrap;
+        line-height: 1;
     }    
     .modal-body {
         position: relative;
@@ -535,7 +595,7 @@
     .status--stamp{
         display: flex;
         position: absolute;
-        top: 0px;
+        top: 150px;
         right: 0px;
         /* width: 100%; */
         justify-content: flex-end;

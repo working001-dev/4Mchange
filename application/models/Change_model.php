@@ -72,7 +72,7 @@
 
         public function getting_document_for_approve(){
             $this->db->select("g.documentGroupId gid, g.documentGroupName gname, g.documentGroupText gtext");
-            $this->db->from('tbdocumentGroup g');  
+            $this->db->from('tbdocumentgroup g');  
             $this->db->join('tbdocumenttype t', 'g.documentTypeId = t.documentTypeId');
             $this->db->where('g.isActive', 1); 
             $this->db->where('t.documentTypeName', 'เอกสารแนบเพื่อการอนุมัติ'); 
@@ -90,7 +90,7 @@
             $seq = $this->gettingNextSequence();
             $data[0]["fourm_number"]  = $seq["new_fourm_number"];
             $data[0]["fourm_sequence"]  = $seq["new_sequence"];
-            $this->db->insert_batch('tbChangeDetail', $data);
+            $this->db->insert_batch('tbchangedetail', $data);
             $chageDetailId = $this->db->insert_id();
             $this->setting_new_approve($chageDetailId);
             return array( "changeDetailId" => $chageDetailId, "fourm_number" => $data[0]["fourm_number"] );
@@ -182,10 +182,12 @@
 
         public function gettingNextSequence(){
             $dateRun = date('Ymd');
+            $yearRun = date('Y');
             $prefix = "4M{$dateRun}";
+            $prefixYear = "4M{$yearRun}";
             $this->db->select("fourm_sequence");
             $this->db->from('tbchangedetail');  
-            $this->db->like('fourm_number', $prefix, 'after');
+            $this->db->like('fourm_number', $prefixYear, 'after');
             $this->db->order_by("fourm_number", "desc");
             $this->db->limit(1);
             $query = $this->db->get();
@@ -207,19 +209,40 @@
             // exit;
             return $query->result()[0];       
         }
-    
-        public function gettingAwaitInspection($changeDetailId){
+        public function gettingAwaitInspect($changeDetailId){
             $this->db->select("approveId, approveStepId, (approveSeq + 1) stepSeq");
             $this->db->from('tbapprove');  
             $this->db->where('changeDetailId', $changeDetailId); 
             $this->db->where('statusId', 11);   
+            $this->db->limit(1);
+            // var_dump($this->db->last_query());
+            // exit;
+            $query = $this->db->get();
+
+            return $query->result()[0];       
+        }    
+        public function gettingAwaitInspection($changeDetailId){
+            $this->db->select("approveId, approveStepId, (approveSeq + 1) stepSeq");
+            $this->db->from('tbapprove');  
+            $this->db->where('changeDetailId', $changeDetailId); 
+            $this->db->where('statusId', 15);   
             $this->db->limit(1);
             $query = $this->db->get();
             // var_dump($this->db->last_query());
             // exit;
             return $query->result()[0];       
         }        
-
+        public function gettingAwaitFollowing($changeDetailId){
+            $this->db->select("approveId, approveStepId, (approveSeq + 1) stepSeq");
+            $this->db->from('tbapprove');  
+            $this->db->where('changeDetailId', $changeDetailId); 
+            $this->db->where('statusId', 13);   
+            $this->db->limit(1);
+            $query = $this->db->get();
+            // var_dump($this->db->last_query());
+            // exit;
+            return $query->result()[0];       
+        }   
         public function findCuaseId($typ, $txt ){
             $this->db->select("c.changeCuaseId");
             $this->db->from('tbchangecuase c');  
@@ -248,7 +271,7 @@
         #endregion
         
         #region For Manage case
-        public function gettingCase($action, $group){
+        public function gettingCase($action, $group, $roleId){
             $isAction = $this->checkingActionCase($action);
             $this->db->select("
             d.changeDetailId,
@@ -256,6 +279,7 @@
             d.description, 
             (select concat( u.firstName, ' ', left(u.lastName, 1), '.' )  from tbuser_login u where u.userLoginId = d.createBy limit 1 ) requestBy,
             DATE_FORMAT(d.createDateTime, '%Y-%m-%d %H:%i:%s') requestDate,
+            DATE_FORMAT(d.updateDateTime, '%Y-%m-%d %H:%i:%s') lastActionDate,
             s.statusName,
             d.statusId
             ");
@@ -263,9 +287,12 @@
             $this->db->join('tbstatus s', 'd.statusId = s.statusId');
             $this->db->where('d.isActive', 1);  
             $this->db->where('s.statusTable', 'tbchangedetail');  
-            // $this->db->where('s.statusName', 'Pending Approval');  
-            if($action == 2){  
-                $this->db->where('d.statusId', 2);                
+            // $this->db->where('s.statusName', 'Pending Approval'); 
+            if($action == 2 && ( $group == 2 && $roleId == 3)){
+                // $this->db->where('d.statusId', 14);
+                $this->db->where_in('d.statusId', array(2,14,12));
+            }else if($action == 2){  
+                $this->db->where('d.statusId', 2);   
             }else{
                 $this->db->where('d.changeDetailGroupId', 0);     
             }
@@ -277,6 +304,7 @@
             d.description, 
             (select concat( u.firstName, ' ', left(u.lastName, 1), '.' )  from tbuser_login u where u.userLoginId = d.createBy limit 1 ) requestBy,
             DATE_FORMAT(d.createDateTime, '%Y-%m-%d %H:%i:%s') requestDate,
+            DATE_FORMAT(d.updateDateTime, '%Y-%m-%d %H:%i:%s') lastActionDate,
             s.statusName,
             d.statusId
             ");
@@ -286,9 +314,8 @@
             $this->db->where('s.statusTable', 'tbchangedetail');  
             // $this->db->where('s.statusName', 'Pending Approval'); 
             if($action != 99){
-                $this->db->where('d.changeDetailGroupId', $group); 
-                $this->db->where_in('d.statusId', $isAction);
-                                
+                $this->db->where('d.changeDetailGroupId', $group);
+                $this->db->where_in('d.statusId', (!empty($isAction) ? $isAction : array(0) ) ); 
             }
             $this->db->where_not_in('d.statusId', array(3,4));
             $query2 = $this->db->get_compiled_select();
@@ -306,6 +333,7 @@
             d.description, 
             (select concat( u.firstName, ' ', left(u.lastName, 1), '.' )  from tbuser_login u where u.userLoginId = d.createBy limit 1 ) requestBy,
             DATE_FORMAT(d.createDateTime, '%Y-%m-%d %H:%i:%s') requestDate,
+            DATE_FORMAT(d.updateDateTime, '%Y-%m-%d %H:%i:%s') lastActionDate,
             s.statusName,
             d.statusId
             ");
@@ -363,7 +391,7 @@
                 select count(1) 
                 from tbdocument cm 
                 inner join tbdocumentgroup dg on cm.documentGroupId = dg.documentGroupId
-                where cm.changeDetailId = 1 and dg.documentTypeId not in (4, 5)
+                where cm.changeDetailId = d.changeDetailId and dg.documentTypeId not in (4, 5)
             ) countAttachFile 
             ");
             $this->db->from('tbchangedetail d'); 
@@ -500,17 +528,148 @@
                 $this->db->trans_commit();
             }
         } 
-        
-        public function setting_quality_judgment($q, $changeDetailId, $statusName){
+        public function setting_reject_process($app){
+            $dateTime = date('Y-m-d H:i:s');
+            $data = array(); 
+            $upd = array();
+            $Reject = $this->gettingStatusId("tbchangedetail", "Rejected");
+            $ApprReject = $this->gettingStatusId("tbapprove", "Rejected");
+            $Closed = $this->gettingStatusId("tbapprove", "Closed");
+            $changeDetailId = $app["changeDetailId"]; 
+            $comment = $app["comment"];
+            $userLogin = $app["userLogin"]; 
+            $changeReject = array(
+                "updateDateTime" => $dateTime,
+                "updateBy" => $userLogin,
+                "statusId" => $Reject->statusId
+            );
+            $awaitingApproval = $this->gettingAwaitApprove($changeDetailId);
+            array_push($data,array(
+                "approveSeq" => $awaitingApproval->stepSeq,
+                "approveStepId" => 100,
+                "statusId" => $Closed->statusId, 
+                "approveDateTime" => $dateTime,
+                "approveBy" => $userLogin,
+                "comment" => "ยกเลิกเอกสาร 4M Change",
+                "approveName" => "Reject 4M change",
+                "changeDetailId" => $changeDetailId
+            ));
+            $upd = array(
+                "statusId" => $ApprReject->statusId, 
+                "comment" => $comment, 
+                "approveName" => 'Reject Process', 
+                "approveDateTime" => $dateTime, 
+                "approveBy" => $userLogin 
+            );
+            $this->db->trans_begin();
+
+            $this->db->where('changeDetailId', $changeDetailId);
+            $this->db->update('tbchangedetail', $changeReject);
+             
+            $this->db->where('changeDetailId', $changeDetailId);
+            $this->db->where('approveId', $awaitingApproval->approveId);
+            $this->db->update('tbapprove', $upd);
+
+            $this->db->insert_batch('tbapprove', $data);
+            // $this->db->query('AND YET ANOTHER QUERY...');
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+            }
+            else
+            {
+                $this->db->trans_commit();
+            }              
+        } 
+        public function setting_approve_inspect($app, $changeDetailId, $currentStatusName){
+            $dateTime = date('Y-m-d H:i:s');
+            $qcJudgment = $app["qualityJudgment"];
+            $userLogin = $app["updateBy"];   
+            $comment = "Quality inspector result {$qcJudgment}"; 
+            $awaitingInspect = $this->gettingAwaitInspect($changeDetailId); 
+            if($qcJudgment == "OK"){
+                $awaitingConfirm = $this->gettingStatusId("tbapprove", "Awaiting Inspection Confirm");
+                $nextChangeDetailStatus =$this->checkingNextChangeStatus($currentStatusName); 
+                $app["statusId"] = strval($nextChangeDetailStatus);
+                 
+
+                $approveNextStep = $this->gettingApproveStep($awaitingInspect->approveStepId);
+                $Approved = $this->gettingStatusId("tbapprove", "Approved");
+                $data = array(
+                    array(
+                    "approveSeq" => $awaitingInspect->stepSeq,
+                    "approveStepId" => $approveNextStep->approveStepNext,
+                    "statusId" => $awaitingConfirm->statusId, 
+                    "approveDateTime" => null,
+                    "approveBy" => null,
+                    "comment" => null,
+                    "approveName" => "Pending Inspection",
+                    "changeDetailId" => $changeDetailId
+                ));  
+                $upd = array(
+                    "statusId" => $Approved->statusId, 
+                    "comment" => $comment, 
+                    "approveName" => 'Confirm Inspected', 
+                    "approveDateTime" => $dateTime, 
+                    "approveBy" => $userLogin 
+                ); 
+
+            }else{
+                $Closed = $this->gettingStatusId("tbapprove", "Closed"); 
+                $Reject = $this->gettingStatusId("tbchangedetail", "Rejected");
+                $ApprReject = $this->gettingStatusId("tbapprove", "Rejected");
+                
+                $data = array(
+                    array(
+                    "approveSeq" => $awaitingInspect->stepSeq,
+                    "approveStepId" => 100,
+                    "statusId" => $Closed->statusId, 
+                    "approveDateTime" => $dateTime,
+                    "approveBy" => $userLogin,
+                    "comment" => "ผลการตรวจสอบ ไม่ผ่าน!",
+                    "approveName" => "NO Production",
+                    "changeDetailId" => $changeDetailId
+                ));
+                $upd = array(
+                    "statusId" => $ApprReject->statusId, 
+                    "comment" => $comment, 
+                    "approveName" => 'Confirm Inspected', 
+                    "approveDateTime" => $dateTime, 
+                    "approveBy" => $userLogin 
+                ); 
+                $app["statusId"] = strval($Reject->statusId);
+            }  
+
+            $this->db->trans_begin();
+
+            $this->db->where('changeDetailId', $changeDetailId);
+            $this->db->update('tbchangedetail', $app);
+             
+            $this->db->where('changeDetailId', $changeDetailId);
+            $this->db->where('approveId', $awaitingInspect->approveId);
+            $this->db->update('tbapprove', $upd);
+
+            $this->db->insert_batch('tbapprove', $data);
+            // $this->db->query('AND YET ANOTHER QUERY...');
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+            }
+            else
+            {
+                $this->db->trans_commit();
+            }  
+        }                
+        public function setting_quality_judgment($app, $changeDetailId, $statusName){
             $dateTime = date('Y-m-d H:i:s');
             $data = array(); 
             $upd = array();
             $awaitingApproval = $this->gettingAwaitInspection($changeDetailId);
              
                
-            $userLogin = $q["updateBy"]; 
-            $qcJudgment = $q["qualityJudgment"];
-            $comment = "Quality inspector result {$qcJudgment}";        
+            $userLogin = $app["updateBy"];       
             switch( $statusName ){
                 case "Approved" :
                     $Closed = $this->gettingStatusId("tbapprove", "Closed");
@@ -527,7 +686,7 @@
                     ));
                     $upd = array(
                         "statusId" => $Approved->statusId, 
-                        "comment" => $comment, 
+                        "comment" => "Confirm inspect", 
                         "approveName" => 'Inspected OK!', 
                         "approveDateTime" => $dateTime, 
                         "approveBy" => $userLogin 
@@ -548,28 +707,35 @@
                     ));
                     $upd = array(
                         "statusId" => $Approved->statusId, 
-                        "comment" => $comment, 
-                        "approveName" => 'Inspected NG!', 
+                        "comment" => "Cancel inspect", 
+                        "approveName" => 'Cancel Inspect!', 
                         "approveDateTime" => $dateTime, 
                         "approveBy" => $userLogin 
                     );                    
                     break;
                 case "Following":
+                    $comment = $this->input->post("comment");
+                    $followStartDateTime = $this->input->post("followStartDateTime");
+                    $followEndDateTime = $this->input->post("followEndDateTime");
+
                     $Follow = $this->gettingStatusId("tbapprove", "Following and Monitor");
                     $Approved = $this->gettingStatusId("tbapprove", "Approved");
+                    $app["followStartDateTime"] = $followStartDateTime;
+                    $app["followEndDateTime"] = $followEndDateTime;
+
                     array_push($data,array(
                         "approveSeq" => $awaitingApproval->stepSeq,
                         "approveStepId" => 101,
                         "statusId" => $Follow->statusId, 
-                        "approveDateTime" => $dateTime,
-                        "approveBy" => $userLogin,
-                        "comment" => "ให้มีการผลิตได้ โดยมีเงื่อนไข",
-                        "approveName" => "Closed",
+                        "approveDateTime" => null,
+                        "approveBy" => null,
+                        "comment" => null,
+                        "approveName" => "Following control",
                         "changeDetailId" => $changeDetailId
                     ));
                     $upd = array(
                         "statusId" => $Approved->statusId, 
-                        "comment" => $comment, 
+                        "comment" => $comment ?? "Following result", 
                         "approveName" => 'Inspected', 
                         "approveDateTime" => $dateTime, 
                         "approveBy" => $userLogin 
@@ -581,7 +747,7 @@
             $this->db->trans_begin();
 
             $this->db->where('changeDetailId', $changeDetailId);
-            $this->db->update('tbchangedetail', $q);
+            $this->db->update('tbchangedetail', $app);
              
             $this->db->where('changeDetailId', $changeDetailId);
             $this->db->where('approveId', $awaitingApproval->approveId);
@@ -593,13 +759,92 @@
             if ($this->db->trans_status() === FALSE)
             {
                 $this->db->trans_rollback();
+                return 0;
             }
             else
             {
                 $this->db->trans_commit();
+                return 1;
+            }  
+        }
+        public function setting_following_confirm($app, $changeDetailId, $statusName, $comment){
+            $dateTime = date('Y-m-d H:i:s');
+            $data = array(); 
+            $upd = array();
+            $awaitingApproval = $this->gettingAwaitFollowing($changeDetailId);
+             
+               
+            $userLogin = $app["updateBy"];       
+            switch( $statusName ){
+                case "Approved" :
+                    $Closed = $this->gettingStatusId("tbapprove", "Closed");
+                    $Approved = $this->gettingStatusId("tbapprove", "Approved");
+                    array_push($data,array(
+                        "approveSeq" => $awaitingApproval->stepSeq,
+                        "approveStepId" => 99,
+                        "statusId" => $Closed->statusId, 
+                        "approveDateTime" => $dateTime,
+                        "approveBy" => $userLogin,
+                        "comment" => "ให้มีการผลิตได้ตามปกติ",
+                        "approveName" => "OK Continue",
+                        "changeDetailId" => $changeDetailId
+                    ));
+                    $upd = array(
+                        "statusId" => $Approved->statusId, 
+                        "comment" => $comment, 
+                        "approveName" => 'Confirm Following', 
+                        "approveDateTime" => $dateTime, 
+                        "approveBy" => $userLogin 
+                    );                    
+                    break;
+                case "Rejected":
+                    $Closed = $this->gettingStatusId("tbapprove", "Closed");
+                    $Approved = $this->gettingStatusId("tbapprove", "Approved");
+                    array_push($data,array(
+                        "approveSeq" => $awaitingApproval->stepSeq,
+                        "approveStepId" => 100,
+                        "statusId" => $Closed->statusId, 
+                        "approveDateTime" => $dateTime,
+                        "approveBy" => $userLogin,
+                        "comment" => "ห้ามผลิต",
+                        "approveName" => "NO Production",
+                        "changeDetailId" => $changeDetailId
+                    ));
+                    $upd = array(
+                        "statusId" => $Approved->statusId, 
+                        "comment" => $comment, 
+                        "approveName" => 'Cancel Following!', 
+                        "approveDateTime" => $dateTime, 
+                        "approveBy" => $userLogin 
+                    );                    
+                    break;
+                default: break;
+            }
+ 
+            $this->db->trans_begin();
+
+            $this->db->where('changeDetailId', $changeDetailId);
+            $this->db->update('tbchangedetail', $app);
+             
+            $this->db->where('changeDetailId', $changeDetailId);
+            $this->db->where('approveId', $awaitingApproval->approveId);
+            $this->db->update('tbapprove', $upd);
+
+            $this->db->insert_batch('tbapprove', $data);
+            // $this->db->query('AND YET ANOTHER QUERY...');
+
+            if ($this->db->trans_status() === FALSE)
+            {
+                $this->db->trans_rollback();
+                return 0;
+            }
+            else
+            {
+                $this->db->trans_commit();
+                return 1;
             }            
 
-        }
+        }        
         #endregion
 
         #region For Checking and Condition Process
@@ -608,8 +853,8 @@
             $statusNext = 0;
             switch ($curr) {
                 case "Pending Approval": $statusNext = ($this->gettingStatusId("tbchangedetail", "Pending QC review"))->statusId;  break;
-                case "Pending QC review": $statusNext = ($this->gettingStatusId("tbchangedetail", "Approved"))->statusId; break;
-                case "3": $statusNext = ($this->gettingStatusId("tbchangedetail", "Pending QC review"))->statusId; break; 
+                case "Pending QC review": $statusNext = ($this->gettingStatusId("tbchangedetail", "Pending QC confirm"))->statusId; break;
+                case "Pending QC confirm": $statusNext = ($this->gettingStatusId("tbchangedetail", "Approved"))->statusId; break; 
                 default:
                   $statusNext = ($this->gettingStatusId("tbchangedetail", "Closed"))->statusId;
               }
@@ -694,7 +939,26 @@
             $this->db->where('l.statusTable', 'tbchangedetail');  
             $query = $this->db->get();
             return $query->result();
-        }                      
+        }   
+        public function findCaseData($where){
+            $where = !empty($where) ? "and {$where}" : "";
+            $query = $this->db->query("
+            select 
+            d.changeDetailId,
+            d.fourm_number, 
+            d.description, 
+            (select concat( u.firstName, ' ', left(u.lastName, 1), '.' )  from tbuser_login u where u.userLoginId = d.createBy limit 1 ) requestBy,
+            DATE_FORMAT(d.createDateTime, '%Y-%m-%d %H:%i:%s') requestDate,
+            DATE_FORMAT(d.updateDateTime, '%Y-%m-%d %H:%i:%s') lastActionDate,
+            s.statusName,
+            d.statusId
+            from tbchangedetail d
+            inner join tbstatus s on d.statusId = s.statusId
+            where d.isActive = 1
+            {$where} 
+            ");
+            return $query->result();
+        }                   
         #endregion
         // public function update_entry()
         // {

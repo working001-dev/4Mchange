@@ -26,10 +26,10 @@ class Home extends CI_Controller {
 	{
 		 
 		if(!is_null($this->session->user)){
-			$data["content"] = "home/home_view";
-			$data["styles"]  = "home/home_style.css";
-			$data["scripts"] = "home/home_script";
-			$this->load->view('home/home_views', $data); 	
+			$data["content"] = "Hme/home_view";
+			$data["styles"]  = "Home/home_style.css";
+			$data["scripts"] = "Home/home_script";
+			$this->load->view('Home/home_views', $data); 	
 			return;
 		} 
 
@@ -48,7 +48,7 @@ class Home extends CI_Controller {
 			}else echo json_encode( array("status" => "403", "message" => "not permission accress!") );
 
 		}else{
-			$this->load->view('login/login');	
+			$this->load->view('Login/login');	
 		} 
 	}
 

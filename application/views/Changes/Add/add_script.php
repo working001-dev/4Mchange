@@ -148,7 +148,7 @@
         let changeCuaseId = await findChangeCuase(causeType, reqCause);
         let productionId = await findProductionFromLine(reqLineId);
         let changeinfo = {
-            "changeTypeId" :causeType,
+            "changeTypeId" :changeType,
             "changeCuaseId" : changeCuaseId,
             "description" : requestDetail,
             "fourm_number" : documentNo,

@@ -1,4 +1,7 @@
 <link rel="stylesheet" href="<?= base_url() ?>assets/css/project/changes-site.css" />
+<link rel="stylesheet" href="<?= base_url() ?>assets/css/bootstrap-datepicker3.min.css" />
+<link rel="stylesheet" href="<?= base_url() ?>assets/css/daterangepicker.min.css" />
+
 <style>
     #tb-wait--action{
         width: 100%;
@@ -50,7 +53,7 @@
         margin: 0px;
     }
     #modal--action .modal-content {
-        padding: 14px 2vw;
+        padding: 4px 2vw;
         background: #00000005;
         border: none;
     }
@@ -218,7 +221,29 @@
         border-bottom: 20px solid #ad3131;
         border-left: 14px solid aliceblue;
         border-right: 14px solid #ad3131;
-    }             
+    }
+
+    #modal--action .box--status .box--step.fw--action .step--title:after{  
+        border-top: 20px solid #ebab1b;
+        border-bottom: 20px solid #ebab1b;
+        border-left: 14px solid aliceblue;
+        border-right: 14px solid #ebab1b;
+    }     
+    #modal--action .box--status .box--step.fw--action .step--title{
+        background-color: #ebab1b;
+    }
+    #modal--action .box--status .box--step.fw--action+.box--step .step--title:before{  
+        border-top: 20px solid aliceblue;
+        border-bottom: 20px solid aliceblue;
+        border-left: 14px solid #ebab1b;
+        border-right: 14px solid aliceblue;
+    }    
+    #modal--action .box--status .box--step.fw--action .step--title:after{  
+        border-top: 20px solid #ebab1b;
+        border-bottom: 20px solid #ebab1b;
+        border-left: 14px solid aliceblue;
+        border-right: 14px solid #ebab1b;
+    }                  
     .step--title i{
         font-size: 32px;
         margin-right: 14px;
@@ -276,22 +301,46 @@
         padding: 3px 0px;
     }
     .box--history{
+        margin-top: 5px;
         display: flex;
         justify-content: flex-end;
-        padding: 5px 8px;
+        padding: 0px 8px 5px;
         border-bottom: 1px solid #dee8f1;
         max-width: 100%;
         overflow: auto;
-        min-height: 20vh;
-        max-height: 20vh;
+        min-height: 28vh;
+        max-height: 28vh;
     }
     #table--history{
         width: 100%;
     }
+    #table--history thead{
+        position: sticky;
+        top: 0;         
+    }
     #table--history thead tr{
         background-image: none;
-        background-color: #e0edff; 
+        background-color: #e0edff;
+
+        position: relative;
     }
+    #table--history>tr th::after,
+    #table--history>tr th::before{
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+    #table--history>tr th::before {
+        top: 0;
+        border-top: 2px solid #F1F1F1;
+        /* margin-top: -0.5px; */
+    }  
+    #table--history>tr th::after {
+        bottom: 0;
+        border-bottom: 1px solid #F1F1F1; 
+    } 
+
     #table--history tbody tr:nth-child(even){
         background-color: #eff2fb;
     }
@@ -312,6 +361,13 @@
     #table--history thead tr th:nth-child(4){
         min-width: 200px;
     }
+    #table--history pre{
+        background: #ff000000 !important;
+        border: none !important;
+        font-size: 11px !important;
+        padding: 0px !important;
+        font-family: 'Quicksand', 'Sarabun', sans-serif;
+    }
     /* #tb-wait--action thead>tr th:nth-child(1),
     #tb-wait--action thead>tr th:nth-child(3),
     #tb-wait--action thead>tr th:nth-child(4),
@@ -327,22 +383,29 @@
     }
     #modal--fileAttach .modal-content,
     #modal--Inspection .modal-content,
+    #modal--Quality .modal-content,
     #modal--ActionEvent .modal-content,
-    #modal--ActionInspec .modal-content{
+    #modal--ActionInspec .modal-content,
+    #modal--Following .modal-content{
         background: #00000000;
     }
     #modal--fileAttach .modal-box,
     #modal--Inspection .modal-box,
     #modal--ActionEvent .modal-box,
-    #modal--ActionInspec .modal-box{
+    #modal--ActionInspec .modal-box,
+    #modal--Quality .modal-box,
+    #modal--Following .modal-box{
         background-color: #fff;
     }
 
-    #modal--Inspection .modal-dialog{
+    #modal--Inspection .modal-dialog,
+    #modal--Quality .modal-dialog{
         margin-top: 2px;
     }
-    #modal--Inspection .modal-content{
-        padding: 5px 10vw;
+    #modal--Inspection .modal-content,
+    #modal--Quality .modal-content,
+    #modal--Following .modal-content{
+        padding: 30px 10vw;
     }
     #modal--ActionEvent .modal-content,
     #modal--ActionInspec .modal-content{
@@ -492,13 +555,13 @@
         text-align: center;
         font-size: 24px;
     }
-    .modal-QualityConfirm-body .req-input{
+    .inp-check .req-input{
         padding-left: 20px;
     }
-    .modal-QualityConfirm-body label>input[type=checkbox], .modal-QualityConfirm-body label>input[type=radio]{
+    .inp-check label>input[type=checkbox], .inp-check label>input[type=radio]{
         display: none;
     }
-    .modal-QualityConfirm-body label>span.tree-item-name>i {
+    .inp-check label>span.tree-item-name>i {
         height: 20px;
         width: 20px;
         border: 2px solid #090909;
@@ -510,27 +573,27 @@
         justify-content: center;
         margin-right: 12px;
     }
-    .modal-QualityConfirm-body label{
+    .inp-check label{
         cursor: pointer;
     }
-    .modal-QualityConfirm-body label>span{
+    .inp-check label>span{
         display: flex;
         align-items: center;
     }
-    .modal-QualityConfirm-body label>span.tree-item-name>i:before {
+    .inp-check label>span.tree-item-name>i:before {
         content: "\f00d";
     }
-    .modal-QualityConfirm-body label>input:checked + span.tree-item-name>i{
+    .inp-check label>input:checked + span.tree-item-name>i{
         color: #ffffff;  
         background-color:#090909;
     }
-    .modal-QualityConfirm-body label>input:checked + span.tree-item-name>i:before{
+    .inp-check label>input:checked + span.tree-item-name>i:before{
         content: "\f00c"    
     }
     .status--stamp{
         display: flex;
         position: absolute;
-        top: 0px;
+        top: 150px;
         right: 0px;
         /* width: 100%; */
         justify-content: flex-end;
@@ -538,6 +601,22 @@
     }
     .status--stamp img{
         width: 180px;
+    }
+    .title-inbox{
+        width: 100%;
+        padding: 1px;
+        background: black;
+        position: relative;    
+    }
+    .title-inbox>span{
+        display: block;
+        position: absolute;
+        background: white;
+        top: -12px;
+        left: 0;
+        font-size: 16px;
+        font-weight: 600;
+        padding-right: 12px;
     }
     @media (max-width: 1120px){
         .modal-row {

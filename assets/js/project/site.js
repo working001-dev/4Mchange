@@ -114,7 +114,12 @@ var PostRequest = async (u, s) => {
   });
 };
 var GettingCase = async ()=>{
-  let caseInfo = await $.get(`${_UrlProject}changes/getting_case`, {roleGroupId:MemberInfo[0]?.roleGroupId, userActionId:MemberInfo[0]?.userActionId})
+  let caseInfo = await $.get(`${_UrlProject}changes/getting_case`, 
+  {
+    roleGroupId:MemberInfo[0]?.roleGroupId, 
+    userActionId:MemberInfo[0]?.userActionId,
+    roleId:MemberInfo[0]?.roleId
+  })
   .fail(function() {
     Toast.fire({ icon: 'error', title: 'Error request please contact admin.' }); 
     LoadingPage.find(".wait-load-page").addClass("page-error");

@@ -36,6 +36,10 @@
 				</div>
 				<div class="modal-body modal-action-body">
 					<div class="box--action">
+						<button type="button" class="btn btn-white btn-sm btn--confirm" onclick="clickActionConfirmInspec(this)" action="confirm">
+							<i class="fa fa fa-check-circle" aria-hidden="true"></i>
+							Confirm Inspect
+						</button>
 						<button type="button" class="btn btn-white btn-sm btn--inspcet" onclick="clickActionInspec(this)" action="inspcet">
 							<i class="fa fa fa-eye" aria-hidden="true"></i>
 							Inspcet
@@ -47,6 +51,10 @@
 						<button type="button" class="btn btn-white btn-sm btn--reject" onclick="clickActionEvent(this)" action="reject">
 							<i class="fa fa-times-circle" aria-hidden="true"></i>
 							Reject
+						</button>
+						<button type="button" class="btn btn-warning btn-sm btn--following" onclick="clickFollowingEvent(this)" action="follow">
+							<i class="fa fa-hourglass-start" aria-hidden="true"></i>
+							Confirm Following
 						</button>
 					</div>
 					<div class="box--status customscroll"> </div>
@@ -104,6 +112,13 @@
 									<i class="ace-icon fa fa-search icon-animated-vertical"></i> 
 									<a href="#" class="text-primary review--inspect" >Click to review inspection</a>
 								</span>
+							</div>	
+							<div class="txt--group">
+								<span>Quality Inspection Result</span>
+								<span sp-name="qc-inspect">
+									<i class="ace-icon fa fa-search icon-animated-vertical"></i> 
+									<a href="#" class="text-primary review--quality" >Click to review inspection</a>
+								</span>
 							</div>							
 						</div>
 					</div>
@@ -136,9 +151,9 @@
 					</div>
 					<span class="progress-status">Wait Create 4M Change</span>		
 				</div>
-				<div class="status--stamp" style="display:none;">
+				<!-- <div class="status--stamp" style="display:none;">
 					<img src="<?=base_url()?>assets/images/results/ok.png" alt="">
-				</div>
+				</div> -->
 			</div> 
 		</div>
 	</div> 
@@ -236,7 +251,7 @@
 				</div>
 				<div class="modal-footer modal-ActionEvent-footer justify-end">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="approveEvent(this)">Submit</button>
+					<button type="button" class="btn btn-primary" onclick="approveEvent(this)" action>Submit</button>
 				</div> 
 			</div> 
 		</div>
@@ -336,8 +351,14 @@
 				</div>
 				<div class="modal-footer modal-ActionInspec-footer justify-end">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary btn-submit" onclick="inspectEvent(this)" disabled>Submit</button>
+					<button type="button" class="btn btn-primary btn-submit" onclick="approveinspectEvent(this)" disabled>Submit</button>
 				</div> 
+				<div class="wait--create">
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-blue" style="width: 0%"></div>
+					</div>
+					<span class="progress-status">Wait Create 4M Change</span>		
+				</div>
 			</div> 
 		</div>
 	</div> 
@@ -352,10 +373,10 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body modal-QualityConfirm-body">
+				<div class="modal-body modal-QualityConfirm-body inp-check">
 					<div class="container-row flex flex-column">
 						<label>
-							<input type="radio" for-sataus="Approved" name="inp-confirm" value="1" onchange="selectCondition(this)">
+							<input type="radio" for-status="Approved" name="inp-confirm" value="1" onchange="selectCondition(this)">
 							<span class="tree-item-name flex">
 								<i class="icon-item ace-icon fa fa-times"></i>
 								<span class="tree-label">ให้มีการผลิตได้ตามปกติ</span>
@@ -364,7 +385,7 @@
 					</div>						 
 					<div class="container-row flex flex-column">
 						<label>
-							<input type="radio" for-sataus="Following" name="inp-confirm" value="2" onchange="selectCondition(this)">
+							<input type="radio" for-status="Following" name="inp-confirm" value="2" onchange="selectCondition(this)">
 							<span class="tree-item-name flex">
 								<i class="icon-item ace-icon fa fa-times"></i>
 								<span class="tree-label">ให้มีการผลิตได้ โดยมีเงื่อนไขดังนี้(ต้องติดตามผล)</span>
@@ -390,7 +411,7 @@
 					</div>
 					<div class="container-row flex flex-column">
 						<label>
-							<input type="radio" for-sataus="Rejected" name="inp-confirm" value="3" onchange="selectCondition(this)">
+							<input type="radio" for-status="Rejected" name="inp-confirm" value="3" onchange="selectCondition(this)">
 							<span class="tree-item-name flex">
 								<i class="icon-item ace-icon fa fa-times"></i>
 								<span class="tree-label">ห้ามผลิต</span>
@@ -401,6 +422,176 @@
 				<div class="modal-footer modal-QualityConfirm-footer justify-end">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="button" class="btn btn-primary" onclick="approveJudgment(this)">Submit</button>
+				</div> 
+				<div class="wait--create">
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-blue" style="width: 0%"></div>
+					</div>
+					<span class="progress-status">Wait Create 4M Change</span>		
+				</div>
+
+			</div> 
+		</div>
+	</div> 
+</div>
+<div class="modal fade modal-Quality customscroll" id="modal--Quality" role="dialog" aria-labelledby="modal--QualityLabel" aria-hidden="true" data-backdrop="false">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-box">
+				<div class="modal-header modal-Quality-header">
+					<span class="title--Quality"></span> 
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body modal-Quality-body">
+					<div class="container-row flex flex-column attach--quality"></div>
+					<div class="container-row flex ">
+						<div class="req-input flex flex-column width-100">
+							<span class="req-title flex">ตรวจสอบจุดเปลี่ยนแปลง</span>
+							<table class="table table-striped table-bordered table-hover table-input" id="table--inspecction">
+								<thead>
+									<tr>
+										<th>จุดตรวจสอบ</th>
+										<th>ค่าควบคุม ±</th>
+										<th>ผลการตรวจวัด</th>
+									</tr>
+								</thead>
+								<tbody> </tbody>
+								<tfoot>
+									<tr>
+										<th>จุดตรวจสอบ</th>
+										<th>ค่าควบคุม ±</th>
+										<th>ผลการตรวจวัด</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div> 
+					</div>	
+				</div>
+				<div class="modal-footer modal-Quality-footer justify-end">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> 
+				</div> 
+				<div class="wait--create">
+					<div class="progress progress-striped active">
+						<div class="progress-bar progress-bar-blue" style="width: 0%"></div>
+					</div>
+					<span class="progress-status">Wait Create 4M Change</span>		
+				</div>
+
+			</div> 
+		</div>
+	</div> 
+</div>
+<div class="modal fade modal-Following customscroll" id="modal--Following" role="dialog" aria-labelledby="modal--FollowingLabel" aria-hidden="true" data-backdrop="false">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-box">
+				<div class="modal-header modal-Following-header">
+					<span class="title--Following"></span> 
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body modal-Following-body inp-check">
+					<div class="container-row flex flex-column">
+						<label>
+							<input type="checkbox" name="inp-follow" value="1" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label">ปฏิบัติตามเงื่อนไขควบคุมพิเศษ ได้อย่างครบถ้วน</span>
+							</span> 
+						</label>
+						<label>
+							<input type="checkbox" name="inp-follow" value="2" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label">มีการชี้บ่งการเปลี่ยนแปลงได้ครบถ้วน (Tag)</span>
+							</span> 
+						</label> 
+						<label>
+							<input type="checkbox" name="inp-follow" value="3" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label">สุ่มตรวจสอบชิ้นงานดี ได้ผล OK</span>
+							</span> 
+						</label> 
+						<label>
+							<input type="checkbox" name="inp-follow" value="4" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label">อัตราของเสียอยู่ในเกณฑ์ที่ยอมรับได้</span>
+							</span> 
+						</label> 
+						<label>
+							<input type="checkbox" name="inp-follow" value="5" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label">มีการจัดการของเสียที่เกิดขึ้นได้อย่างถูกต้อง</span>
+							</span> 
+						</label> 																								 
+					</div>						 
+					<div class="container-row flex flex-column" style="min-height: 20px;">
+						<div class="title-inbox">
+							<span>การสิ้นสุดการควบคุม 4M Changes</span>
+						</div> 
+					</div>
+					<div class="container-row flex flex-column">
+						<label>
+							<input type="radio" for-status="Approved" name="inp-follow-juds" value="1" onchange="selectJudment(this)" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label"><i class="fa fa-check text-success" aria-hidden="true" style="margin-right: 10px;"></i>อนุมัติการสิ้นสุดการควบคุม</span>
+							</span> 
+						</label> 
+						<label>
+							<input type="radio" for-status="Rejected" name="inp-follow-juds" value="2" onchange="selectJudment(this)" ckUsed>
+							<span class="tree-item-name flex">
+								<i class="icon-item ace-icon fa fa-times"></i>
+								<span class="tree-label"><i class="fa fa-times text-danger" aria-hidden="true" style="margin-right: 10px;"></i>พบความผิดปกติในการควบคุม 4M</span>
+							</span> 
+						</label> 
+						<div class="block--group condition--group blocked">
+							<div class="container-row flex flex-column" style="padding-left: 28px;">
+								<label>
+									<input type="checkbox" name="inp-error-action" value="1" ckUsed>
+									<span class="tree-item-name flex">
+										<i class="icon-item ace-icon fa fa-times"></i>
+										<span class="tree-label">เริ่มกระบวนการ 4M ใหม่</span>
+									</span> 
+								</label>
+								<label>
+									<input type="checkbox" name="inp-error-action" value="2" ckUsed>
+									<span class="tree-item-name flex">
+										<i class="icon-item ace-icon fa fa-times"></i>
+										<span class="tree-label">ออกใบแจ้งการจัดการปัญหาคุณภาพ QMW</span>
+									</span> 
+								</label> 
+								<label>
+									<input type="checkbox" name="inp-error-action" value="3" ckUsed>
+									<span class="tree-item-name flex">
+										<i class="icon-item ace-icon fa fa-times"></i>
+										<span class="tree-label">8D Analysis</span>
+									</span> 
+								</label> 
+								<label>
+									<input type="checkbox" name="inp-error-action" value="4" ckUsed>
+									<span class="tree-item-name flex">
+										<i class="icon-item ace-icon fa fa-times"></i>
+										<span class="tree-label">อื่นๆ</span>
+									</span> 
+								</label> 
+								<div class="flex flex-column width-100"> 
+									<textarea class="input-sm form-control" name="inp-error-oth" disabled style="max-width:100%;"></textarea>
+								</div>																 
+							</div>
+							<div class="block--action"></div>							
+						</div>  
+					</div>										
+				</div>
+				<div class="modal-footer modal-Following-footer justify-end">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary actioned" onclick="approveFollow(this)" disabled>Submit</button>
 				</div> 
 				<div class="wait--create">
 					<div class="progress progress-striped active">

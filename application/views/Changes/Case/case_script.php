@@ -8,6 +8,7 @@
         { title:"Detail"},
         { title:"Request By"},
         { title:"Request Date"},
+        { title:"Last Action Date"}, 
         { title:"Status"},
         { title:"Action"}        
     ];
@@ -17,7 +18,7 @@
     var dataInspection = [];
     var inpcIndex = 0;
     $(document).ready(function(){
-       
+        
         pageLoad();
         $('[data-rel=tooltip]').tooltip();
         //Toast.fire({ icon: 'success', title: 'login success na na!' })
@@ -37,16 +38,13 @@
             //debugger;
             $(this).toggleClass("fil--click");
             if($(this).hasClass("fil--click")){
-                $(".panl--search").show("slide", { direction: "left" }, 100);
+                $(".panl--search").show("slide", { direction: "left" }, 40);
             }else{
-                $(".panl--search").hide("slide", { direction: "left" }, 100)
+                $(".panl--search").hide("slide", { direction: "left" }, 40)
             }
         });
 
         searchReset();
-
- 
- 
     });		
     async function pageLoad(){
         settingTableCase();
@@ -75,20 +73,28 @@
        // console.log(_c);
     }
     async function modalLoad(_m, changeId){ 
-        
+       
         let _appInfo = await settingStep(changeId);
         if( caseAction[0]?.statusId == 2 ){
             $(".btn--approve").hide();
             $(".btn--reject").hide();
+            $(".btn--confirm").hide();
             $(".btn--inspcet").show();
         }else if( caseAction[0]?.statusId == 1 ){
             $(".btn--approve").show();
             $(".btn--reject").show();
+            $(".btn--confirm").hide();
+            $(".btn--inspcet").hide();
+        }else if( caseAction[0]?.statusId == 14 ){
+            $(".btn--approve").hide();
+            $(".btn--reject").hide();
+            $(".btn--confirm").show();
             $(".btn--inspcet").hide();
         }else{
             $(".btn--approve").hide();
             $(".btn--reject").hide();
-            $(".btn--inspcet").hide();            
+            $(".btn--inspcet").hide(); 
+            $(".btn--confirm").hide();           
         }
         $('.input-daterange').datepicker({autoclose:true, format: 'yyyy/mm/dd'});
 
@@ -128,12 +134,12 @@
             $("#modal--Quality").modal("show");
         });         
     }
-    async function settingTableCase(){
+    async function settingTableCase(){ 
         let _c = await gettingCase();
         let ignoreSorting = _actionHeader.map( (m, i) => ( ["Action", "Status"].includes(m.title) ? i : -1) ).filter( f => f != -1 );
         let configTb = { 
             lengthMenu: [ [10,50, 100,-1], [10,50, 100,'All']],
-            order: [[3, 'desc']],
+            order: [[4, 'desc']],
             columnDefs: [ {'targets': ignoreSorting, 'orderable': false, }], 
             createdRow : actionRow 
         }
@@ -163,6 +169,8 @@
                     </div>
                 </div>`;
                 $("#modal--action .box--status").append(strStaus);
+
+                setttinStampResult((_ap?.action == "Closed") ? "CN" : "NO")
             }
             setTimeout( ()=>{  
                 $(".progress-status").text('getting 4m process approve')
@@ -173,7 +181,8 @@
     function settingChangeDetail(_c){ 
         return new Promise( async (_r,_j)=>{ 
             let _cahngeInfo = await gettingDetailInfo(_c);
-            setttinStampResult(_cahngeInfo[0]?.qualityJudgment);
+            let isClosed = ["Rejected", "Approved"].includes(caseAction[0]?.statusName)
+             if(_cahngeInfo[0]?.qualityJudgment && isClosed) setttinStampResult(_cahngeInfo[0]?.qualityJudgment);
             for( let _v of _cahngeInfo){
                 for (const [key, value] of Object.entries(_v)) {
                     switch(key){
@@ -208,7 +217,7 @@
                     <td>${_ap?.step || "-"}</td>
                     <td>${_ap?.approveName || "-"}</td>
                     <td>${_ap?.action || "-"}</td>
-                    <td>${_ap?.comment || "-"}</td>
+                    <td><pre>${_ap?.comment || "-"}</pre></td>
                     <td>${_ap?.approveDateTime || "-"}</td>
                     <td>${_ap?.user || "-"}</td>
                 </tr>`;
@@ -271,7 +280,7 @@
                     <td>${_ip?.inspectionControl || "-"}</td>
                     <td><i class="fa ${_ip?.inspectionControlResult == 1 ? "fa-check-circle" : "fa-times-circle"}" aria-hidden="true"></i></td> 
                 </tr>`;
-                $("#table--inspecction tbody").append(strInp);  
+                $("#modal--Inspection #table--inspecction tbody").append(strInp);  
             }
             setTimeout( ()=>{  
                 $(".progress-status").text('getting 4m inspection')
@@ -282,20 +291,28 @@
     function settingQuality(_c){ 
         return new Promise( async (_r,_j)=>{
             let _inspection =  await gettingQuality(_c);
-            $("#modal--Quality #table--inspecction tbody").html('');
-            for( let _ip of _inspection){ 
-                let strInp = `
-                <tr>
-                    <td>${_ip?.inspectionLocation || "-"}</td>
-                    <td>${_ip?.inspectionControl || "-"}</td>
-                    <td><i class="fa ${_ip?.inspectionControlResult == 1 ? "fa-check-circle" : "fa-times-circle"}" aria-hidden="true"></i></td> 
-                </tr>`;
-                $("#modal--Quality #table--inspecction tbody").append(strInp);  
-            }
-            setTimeout( ()=>{  
-                $(".progress-status").text('getting 4m quality')
-                _r("done.");
-            }, 80)
+            if(_inspection[0]){
+                $("#modal--Quality #table--inspecction tbody").html('');
+                for( let _ip of _inspection){ 
+                    let strInp = `
+                    <tr>
+                        <td>${_ip?.inspectionLocation || "-"}</td>
+                        <td>${_ip?.inspectionControl || "-"}</td>
+                        <td><i class="fa ${_ip?.inspectionControlResult == 1 ? "fa-check-circle" : "fa-times-circle"}" aria-hidden="true"></i></td> 
+                    </tr>`;
+                    $("#modal--Quality #table--inspecction tbody").append(strInp);  
+                }
+                setTimeout( ()=>{ 
+                    $("span[sp-name=qc-inspect]").closest(".txt--group").show(); 
+                    $(".progress-status").text('getting 4m quality')
+                    _r("done.");
+                }, 80)                
+            }else{
+                 
+                $("span[sp-name=qc-inspect]").closest(".txt--group").hide();
+               _r("done.");  
+            } 
+
         }); 
     }    
     function setttinStampResult(_c){
@@ -305,12 +322,25 @@
         }else if( _c == "NG"){
             $(".status--stamp img").attr("src", "<?=base_url()?>assets/images/results/ng_noback.png");
             $(".status--stamp").show();
+        }else if( _c == "CN"){
+            $(".status--stamp img").attr("src", "<?=base_url()?>assets/images/results/cn_noback.png");
+            $(".status--stamp").show();
         }else{
             $(".status--stamp").hide();
         }
     } 
     async function gettingCase(){
-        caseInfo = await $.get("<?=base_url()?>/changes/getCase", {roleGroupId:MemberInfo[0]?.roleGroupId, userActionId:MemberInfo[0]?.userActionId});
+        caseInfo = await $.get("<?=base_url()?>/changes/getCase", 
+        {
+            roleGroupId:MemberInfo[0]?.roleGroupId, 
+            userActionId:MemberInfo[0]?.userActionId,
+            roleId:MemberInfo[0]?.roleId
+        });
+        let rowInfo = caseInfo.map( m => setRowTable(m));
+        return rowInfo;
+    }
+    async function queryCase(con){
+        caseInfo = await $.post("<?=base_url()?>/changes/getQueryCase", {where:con});
         let rowInfo = caseInfo.map( m => setRowTable(m));
         return rowInfo;
     }
@@ -320,6 +350,7 @@
             m.description,
             m.requestBy,
             m.requestDate,
+            m.lastActionDate,
             `<span class="label ${getClassForStatus(m.statusId)} label-white middle">${m.statusName}</span>`,
             `<td>
 				<div class="btn-group"> 
@@ -369,16 +400,26 @@
         });
         $('input[name=date-range-picker]').val('');
     }
-    function searchFourm(){
+    async function searchFourm(){
         let condi = []
         $("[sel-for]").each(function( index ) {
             let value = $( this ).val();
             let key = $( this ).attr("sel-for");
             if( value != null && value != "all"){
-                condi.push( `${key} = '${value}'` );
+                condi.push( `d.${key} = '${value}'` );
             } 
         });
-        console.log(condi.join(" and "))
+        let con = condi.join(" and ");
+        let _c = await queryCase(con);
+        let ignoreSorting = _actionHeader.map( (m, i) => ( ["Action", "Status"].includes(m.title) ? i : -1) ).filter( f => f != -1 );
+        let configTb = { 
+            lengthMenu: [ [10,50, 100,-1], [10,50, 100,'All']],
+            order: [[3, 'desc']],
+            columnDefs: [ {'targets': ignoreSorting, 'orderable': false, }], 
+            createdRow : actionRow 
+        }
+        waitActionTable = settingWaitActionTable("#tb-wait--action", _actionHeader, _c, configTb);
+        $(".btn--filter").click();
     }
     function getClassForStatus(s){
         switch(s){
@@ -389,29 +430,7 @@
             default: return 'label-purple'; break;
         }
     }
-    function getIconForStatus(s){
-        switch(s){
-            case "Request": return 'fa-plus-circle'; break;
-            case "Approved": return 'fa-check-circle'; break;
-            case "Inspected": return 'fa-check-circle'; break;
-            case "Closed": return 'fa-dot-circle-o'; break;
-            case "Inspected OK!": return 'fa-check-circle'; break;
-            case "Inspected NG!": return 'fa-times-circle'; break;
-            case "OK Continue": return 'fa-chevron-circle-right'; break;
-            case "NO Production": return 'fa-ban'; break;
-            default: return 'fa-clock-o'; break;
-        }
-    }
-    function getActionStep(a){
-        console.log(a);
-        if(a.includes("Pending")){
-            return "no--action";
-        }else if(a == "Inspected OK!" || a == "OK Continue"){
-            return "ok--action";
-        }else if(a == "Inspected NG!" || a == "NO Production"){
-            return "ng--action";
-        }else return "";
-    }
+ 
     async function gettingDataMaster(u, t){ 
         let res = await $.get(u, {q:"All", t:t})
                     .fail( e => { Toast.fire({ icon: 'error', title: 'error getting data!' }); console.log(e) });  

@@ -32,9 +32,9 @@ class Changes extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body" : $this->load->view('changes/add/add_view'); break;
-				case "script" : $this->load->view('changes/add/add_script'); break;
-				case "style" : $this->load->view('changes/add/add_style'); break;
+				case "body" : $this->load->view('Changes/Add/add_view'); break;
+				case "script" : $this->load->view('Changes/Add/add_script'); break;
+				case "style" : $this->load->view('Changes/Add/add_style'); break;
 			}
 		} 
 	}
@@ -42,9 +42,9 @@ class Changes extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('changes/manage/manage_view'); break;
-				case "script" : $this->load->view('changes/manage/manage_script'); break;
-				case "style"  : $this->load->view('changes/manage/manage_style'); break;
+				case "body"   : $this->load->view('Changes/Manage/manage_view'); break;
+				case "script" : $this->load->view('Changes/Manage/manage_script'); break;
+				case "style"  : $this->load->view('Changes/Manage/manage_style'); break;
 			}
 		} 
 	}
@@ -53,9 +53,9 @@ class Changes extends CI_Controller {
 	{
 		if( !is_null($this->input->post('content')) ){
 			switch($this->input->post('content')){
-				case "body"   : $this->load->view('changes/case/case_view'); break;
-				case "script" : $this->load->view('changes/case/case_script'); break;
-				case "style" : $this->load->view('changes/case/case_style'); break;
+				case "body"   : $this->load->view('Changes/Case/case_view'); break;
+				case "script" : $this->load->view('Changes/Case/case_script'); break;
+				case "style" : $this->load->view('Changes/Case/case_style'); break;
 			}
 		} 
 	}
@@ -128,7 +128,7 @@ class Changes extends CI_Controller {
 		}		
 		$this->load->library('upload');
         $config['upload_path'] = $filepath;  // โฟลเดอร์ ตำแหน่งเดียวกับ root ของโปรเจ็ค
-        $config['allowed_types'] = 'gif|jpg|png'; // ปรเเภทไฟล์ 
+        $config['allowed_types'] = 'gif|jpg|png|xlsx|xls|csv|pdf|docx|doc'; // ปรเเภทไฟล์ 
         $config['max_size'] = '0';  // ขนาดไฟล์ (kb)  0 คือไม่จำกัด ขึ้นกับกำหนดใน php.ini ปกติไม่เกิน 2MB
         $config['max_width'] = '1024';  // ความกว้างรูปไม่เกิน
         $config['max_height'] = '768'; // ความสูงรูปไม่เกิน
@@ -163,7 +163,8 @@ class Changes extends CI_Controller {
 		header('Content-Type: application/json'); 
 		$groupId = $this->input->get("roleGroupId");
 		$userActionId = $this->input->get("userActionId");
-		echo json_encode($this->chn->gettingCase($userActionId,$groupId ));  
+		$roleId = $this->input->get("roleId");
+		echo json_encode($this->chn->gettingCase($userActionId,$groupId,$roleId));  
 	}	
 	public function getting_change_detail(){ 
 		header('Content-Type: application/json'); 
@@ -194,15 +195,36 @@ class Changes extends CI_Controller {
         // $comment = $this->input->post("comment");
         // $userLogin = $this->input->post("userLoginId");
         // $userActionId = $this->input->post("userActionId");
-		$approve = $this->input->post("approve"); 
-		$this->chn->setting_approve_process($approve);
+		$approve = $this->input->post("approve");
+		$action = $this->input->post("action");  
+		if($action == "approve"){
+			$this->chn->setting_approve_process($approve);			
+		}else{
+			$this->chn->setting_reject_process($approve);
+		}
+		echo json_encode("done");
+
 
 	}
+	public function setting_actionInspectApprove(){
+		$qc = $this->input->post("qcJudgment"); 
+		$cd = $this->input->post("changeDetailId"); 
+		$st = $this->input->post("stName");
+		echo json_encode($this->chn->setting_approve_inspect($qc, $cd, $st));	
+		exit;	
+	}	
 	public function setting_qualityComfirmation(){
 		$qc = $this->input->post("qcJudgment"); 
 		$cd = $this->input->post("changeDetailId"); 
 		$st = $this->input->post("stName");
 		$this->chn->setting_quality_judgment($qc, $cd, $st);		
+	}
+	public function setting_followingComfirmation(){
+		$qc = $this->input->post("qcJudgment"); 
+		$cd = $this->input->post("changeDetailId"); 
+		$st = $this->input->post("stName");
+		$ct = $this->input->post("comment");
+		$this->chn->setting_following_confirm($qc, $cd, $st, $ct);		
 	}
 	#endregion
 
@@ -226,6 +248,11 @@ class Changes extends CI_Controller {
 			case "g": echo json_encode($this->chn->findGroup($_q)); exit; break;
 			default : echo null; exit; break;
 		}
+	}
+	public function getQueryCase(){
+		header('Content-Type: application/json');
+		$_w = $this->input->post("where");
+		echo json_encode($this->chn->findCaseData($_w)); exit;
 	}
 	#endregion
 

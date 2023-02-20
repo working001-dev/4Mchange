@@ -85,7 +85,7 @@
 					</button>
 				</div>
 				<div class="modal-body modal-action-body">
-					<div class="box--action">
+					<!-- <div class="box--action">
 						<button type="button" class="btn btn-white btn-sm btn--inspcet" onclick="clickActionInspec(this)" action="inspcet">
 							<i class="fa fa fa-eye" aria-hidden="true"></i>
 							Inspcet
@@ -98,7 +98,7 @@
 							<i class="fa fa-times-circle" aria-hidden="true"></i>
 							Reject
 						</button>
-					</div>
+					</div> -->
 					<div class="box--status customscroll"> </div>
 					<div class="box--detail">
 						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -157,7 +157,7 @@
 							</div>	
 							<div class="txt--group">
 								<span>Quality Inspection Result</span>
-								<span sp-name="inspect">
+								<span sp-name="qc-inspect">
 									<i class="ace-icon fa fa-search icon-animated-vertical"></i> 
 									<a href="#" class="text-primary review--quality" >Click to review inspection</a>
 								</span>
